@@ -1,20 +1,19 @@
 # Use the official Ollama image
 FROM ollama/ollama:latest
 
-# Install Python and FastAPI
-RUN apk add --no-cache python3 py3-pip && \
-    pip3 install fastapi uvicorn
+# Install Python
+RUN apt update && apt install -y python3-pip
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Set up the application
 WORKDIR /app
 COPY . .
 
-# Preload Llama3.2 during build
-RUN ollama pull llama3.2
+RUN chmod +x ./entrypoint.sh
 
-# Expose ports
-EXPOSE 8000  # FastAPI
-EXPOSE 11434 # Ollama
+# Start the FastAPI server
+ENTRYPOINT ["/app/entrypoint.sh"]
 
-# Start both Ollama and FastAPI
-CMD sh -c "ollama serve & uvicorn app.main:app --host 0.0.0.0 --port 8000"
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

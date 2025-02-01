@@ -12,7 +12,8 @@ def format_input(code: str, rubric: str) -> str:
     Rubric:
     {rubric}
 
-    Provide a grade and detailed feedback.
+    Provide a grade and detailed feedback. Give the grade at the last line and prefix it with "Grade:".
+    Grades can only be from A to F.
     """
 
 def format_output(model_response: str) -> str:

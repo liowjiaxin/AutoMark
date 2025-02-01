@@ -3,7 +3,7 @@ services:
     image: nginx:alpine
     container_name: web_server
     ports:
-      - "80:80"
+      - "8080:8080"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./frontend:/usr/share/nginx/html
@@ -24,7 +24,7 @@ services:
       - frontend-network
     depends_on:
       - db
-      - ai-model
+      - grader
     restart: unless-stopped
 
   # grader:
@@ -59,7 +59,9 @@ services:
       resources:
         reservations:
           devices:
-            - capabilities: [gpu]  # Enable GPU support
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]  # Enable GPU support
     networks:
       - backend-network
 
