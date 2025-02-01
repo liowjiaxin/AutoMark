@@ -13,7 +13,10 @@ class GradingRequest(BaseModel):
 @app.post("/grade")
 async def grade_submission(request: GradingRequest):
     # Format input for Llama3.2
-    prompt = format_input(request.code, request.rubric)
+    # prompt = format_input(request.code, request.rubric)
+    prompt = request.code
+
+    print("Prompt:", prompt)
     
     # Send to Ollama
     try:
@@ -24,12 +27,16 @@ async def grade_submission(request: GradingRequest):
                     "model": "llama3.2",
                     "prompt": prompt,
                     "stream": False
-                }
+                },
+                headers={"Content-Type": "application/json"},
+                timeout=None
             )
     except Exception as e:
         return {
             "grade": "AI grading server not ready yet."
         }
+    
+    print(response.json())
     
     # Format output for the client
     result = format_output(response.json()["response"])

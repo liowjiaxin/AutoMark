@@ -27,7 +27,8 @@ async def grade_code(req: GradeCodeRequest, session: Session = Depends(get_sessi
         async with httpx.AsyncClient() as client:
             response = await client.post(
                 f"{os.getenv('GRADER_URL')}/grade",
-                json={"code": req.code}
+                json={"code": req.code},
+                timeout=None
             )
         grade = response.json()['grade']
     except Exception as e:

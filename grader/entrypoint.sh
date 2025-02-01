@@ -8,7 +8,7 @@ pid=$!
 # Pause for Ollama to start.
 sleep 5
 
-# Pull the Llama3.2 model in the background.
-ollama pull llama3.2 &
+# Pull the Llama3.2 model
+ollama pull llama3.2
 
 exec "$@"
