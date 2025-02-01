@@ -27,17 +27,41 @@ services:
       - ai-model
     restart: unless-stopped
 
+  # grader:
+  #   build: ./grader
+  #   container_name: grader
+  #   ports:
+  #     - "8001:8001"
+  #   volumes:
+  #     - ./fine-tuned-model:/app/fine-tuned-model
+  #   environment:
+  #     - MODEL_PATH=/app/fine-tuned-model
+  #   networks:
+  #     - backend-network
+  #   deploy:
+  #     resources:
+  #       devices:
+  #         - driver: nvidia
+  #           count: 1
+  #           capabilities: [gpu]
+
   grader:
-    build: ./grader
+    build: ./grader  # Path to the directory containing Dockerfile
     container_name: grader
-    env_file: .env.docker
-    ports:
-      - "8001:8001"
+    # ports:
+      # - "8000:8000"  # FastAPI REST API
+      # - "11434:11434"  # Ollama API
     volumes:
-      - ./grader:/app
+      - ollama_data:/root/.ollama  # Persistent storage for Ollama models
+    environment:
+      - OLLAMA_MODEL=llama3.2  # Default model to use
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]  # Enable GPU support
     networks:
       - backend-network
-    restart: unless-stopped
 
   db:
     image: mysql:8.0
@@ -54,6 +78,7 @@ services:
       retries: 10
 volumes:
   db_data:
+  ollama_data:
 
 networks:
   frontend-network:
