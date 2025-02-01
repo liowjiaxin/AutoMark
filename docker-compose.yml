@@ -1,0 +1,62 @@
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: web_server
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./frontend:/usr/share/nginx/html
+    networks:
+      - frontend-network
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    container_name: backend
+    env_file: .env.docker
+    volumes:
+      - ./backend:/app
+    networks:
+      - backend-network
+      - frontend-network
+    depends_on:
+      - db
+      - ai-model
+    restart: unless-stopped
+
+  grader:
+    build: ./grader
+    container_name: grader
+    env_file: .env.docker
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./grader:/app
+    networks:
+      - backend-network
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    container_name: db
+    env_file: .env.docker
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - backend-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+volumes:
+  db_data:
+
+networks:
+  frontend-network:
+    driver: bridge
+  backend-network:
+    driver: bridge
