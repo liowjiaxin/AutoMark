@@ -5,6 +5,7 @@ from db.database import engine, create_db_and_tables
 from db.models import Submission
 from pydantic import BaseModel
 
+# On startup and on shutdown
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     create_db_and_tables()
@@ -12,6 +13,10 @@ async def lifespan(app: FastAPI):
     engine.dispose()
 
 app = FastAPI(lifespan=lifespan)
+
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
 
 # Dependency
 def get_session():

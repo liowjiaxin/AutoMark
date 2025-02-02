@@ -10,7 +10,8 @@ services:
     networks:
       - frontend-network
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
     restart: unless-stopped
 
   backend:
@@ -23,6 +24,11 @@ services:
     depends_on:
       - db
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   db:
     image: mysql:8.0
