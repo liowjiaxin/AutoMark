@@ -1,6 +1,7 @@
 document.getElementById('submit-btn').addEventListener('click', async () => {
     const code = document.getElementById('code-input').value;
     const rubrics = document.getElementById('rubrics').value;
+    const studentId = document.getElementById('student-id').value;
     const response = await fetch('/api/grade', {
         method: 'POST',
         headers: {
@@ -8,7 +9,8 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
         },
         body: JSON.stringify({
             code,
-            rubrics
+            rubrics,
+            student_id: studentId
         })
     });
     const result = await response.json();
