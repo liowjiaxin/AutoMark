@@ -1,16 +1,17 @@
 from fastapi import FastAPI, Depends
+from contextlib import asynccontextmanager
 from sqlmodel import Session
-from database import engine, create_db_and_tables
-from models import Submission
+from db.database import engine, create_db_and_tables
+from db.models import Submission
 from pydantic import BaseModel
-import httpx
-import os
 
-app = FastAPI()
-
-@app.on_event("startup")
-def on_startup():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
     create_db_and_tables()
+    yield
+    engine.dispose()
+
+app = FastAPI(lifespan=lifespan)
 
 # Dependency
 def get_session():
@@ -24,16 +25,10 @@ class GradeCodeRequest(BaseModel):
 async def grade_code(req: GradeCodeRequest, session: Session = Depends(get_session)):
     # Call AI model
     try:
-        async with httpx.AsyncClient() as client:
-            response = await client.post(
-                f"{os.getenv('GRADER_URL')}/grade",
-                json={"code": req.code},
-                timeout=None
-            )
-        grade = response.json()['grade']
+        # TODO: call gemini model
+        pass
     except Exception as e:
-        print(e)
-        grade = "TEST"
+        return {"error": str(e)}
     
     # Save to database
     submission = Submission(code=req.code, grade=grade)
