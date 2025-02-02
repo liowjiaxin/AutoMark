@@ -17,12 +17,15 @@ services:
   backend:
     build: ./backend
     container_name: backend
-    env_file: .env.docker
+    env_file:
+      - .env.docker
+      - .env.local
     networks:
       - backend-network
       - frontend-network
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]

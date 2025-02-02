@@ -9,8 +9,7 @@ AI model (plan) to use FastAPI to expose API to backend
 
 Preprocessing student code (metadata for llm):
   1. unzip
-  2. check duplication rate and where
-  3. check comments density
+  2. 
   4. check code style (cases consistency, tab spaces consistency)?
 
 LLM Prompt:

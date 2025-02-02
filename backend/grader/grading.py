@@ -1,4 +1,4 @@
-from model import chain
+from grader.model import StyleAnalyserLLM, GraderLLM
 from dataclasses import dataclass
 
 """
@@ -7,7 +7,6 @@ Pipeline:
 1. Preprocessing
 	- Compute lines of code
 	- Compute number of files
-	- Detect duplicated lines with algorithm into the duplicated code + occurrences
 	- Setup environment to compile and run the code
 2. Code style analysing
 	- Pass extracted metadata to the code style analyser
@@ -15,7 +14,7 @@ Pipeline:
 3. Grading
 	- Get all the metadata and the code style analysis
 	- Fit into the grading prompt template with the original code, rubris, and metadata
-	- Get the grade and comments from LLM
+	- Get the grade and feedback from LLM
 	- Return to frontend
 
 # Can consider making a progress bar
@@ -26,16 +25,35 @@ class Metadata:
 	lines_of_code: int
 	number_of_files: int
 	duplicated_lines: dict[str, int] # map from duplicated lines to occurrences
+	comments_quality_feedback: str
+	code_coverage_feedback: str
+	modularity: float
 	compilation_output: str
+	program_output: str
 
 
+# TODO: do preprocessing
 class Preprocessor:
 	pass
 
 
 class Grader:
 	def __init__(self):
-		self.chain = chain
+		self.style_analyzer_llm = StyleAnalyserLLM()
+		self.grader_llm = GraderLLM()
 
-	def grade(self, code: str, rubrics: str, metadata: Metadata) -> str:
-		return self.chain(code)
+	def _preprocess(self, code: str) -> Metadata:
+		pass
+
+	def grade(self, code: str, rubrics: str) -> tuple[str, str]:
+		'''
+			Pass in student's code, rubrics.
+			Return grade, feedback
+		'''
+		result = self.grader_llm.invoke({
+			"code": code,
+			"rubrics": rubrics
+		})
+
+		feedback, grade = result.content.split("===SPLITTER===")
+		return grade.strip(), feedback.strip()
