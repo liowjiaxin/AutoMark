@@ -1,10 +1,117 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow-y: auto;
 }
 
-#code-input {
+.container {
+    width: 90%;
+    max-width: 1000px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 15px;
+    max-height: 90vh; /* Prevents overflow */
+    overflow-y: auto; /* Enables scrolling inside container */
+}
+
+.header {
+    grid-column: span 2;
+    background: #4a90e2;
+    color: white;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.left-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.box {
+    background: #add8e6;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.upload-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.results-section {
+    background: #d3f4d1;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.submit-section {
+    grid-column: span 1.5;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    background: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: #218838;
+}
+
+.dropzone {
     width: 100%;
-    height: 200px;
+    padding: 20px;
+    border: 2px dashed #007bff;
+    border-radius: 10px;
+    background: #f8f9fa;
+    cursor: pointer;
+}
+
+/* Dropdown and Input Styling */
+.custom-dropdown, .input-group {
+    width: 100%;
     margin-bottom: 10px;
+}
+
+.custom-dropdown select, .input-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    background: #f8f9fa;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.custom-dropdown label, .input-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group textarea::placeholder {
+    color: #888;
+    font-style: italic;
 }

@@ -5,8 +5,8 @@ from datetime import datetime
 class Submission(SQLModel, table=True):
     id: int = Field(default=None, primary_key=True)
     student_id: str = Field(sa_column=String)
-    code: str = Field(sa_column=Column(Text))  # Use Column(Text) to store long text
-    rubrics: str = Field(sa_column=Column(Text))
+    code_zip_path: str = Field(sa_column=String)
+    marking_scheme_path: Optional[str] = Field(sa_column=String)
     feedback: Optional[str] = Field(sa_column=Column(Text))
-    grade: str = Field(default='C')  # Fixed default assignment
+    grade: str = Field(default='C')
     created_at: datetime = Field(default_factory=datetime.utcnow)

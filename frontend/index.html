@@ -1,18 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>AutoMarker</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated Marking</title>
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS -->
+    <script defer src="script.js"></script>
 </head>
 <body>
-    <div id="app">
-        <h1>AutoMarker</h1>
-        <textarea id="code-input"></textarea>
-        <textarea id="rubrics"></textarea>
-        <input type="text" id="student-id"></input>
-        <button id="submit-btn">Submit</button>
-        <div id="result"></div>
-    </div>
-    <script src="script.js"></script>
+    <div class="container">
+        <div class="header">Automated Marking</div>
+        <div class="left-section">
+            <div class="box">
+                <h3>Settings</h3>
+                <div class="custom-dropdown">
+                    <label for="language">Select Language:</label>
+                    <select id="language">
+                        <option>Python</option>
+                        <option>C</option>
+                        <option>Java</option>
+                        <option>C++</option>
+                        <option>C#</option>
+                    </select>
+                </div>
+                <div class="custom-dropdown">
+                    <label for="compiler">Choose Compiler:</label>
+                    <select id="compiler">
+                        <option>GCC</option>
+                        <option>Clang</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="commands">Commands:</label>
+                    <textarea id="commands" placeholder="e.g., gcc program.c -o program.out\n./program.out"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="student-id">Student ID:</label>
+                    <input type="text" id="student-id" placeholder="Enter student ID">
+                </div>
+
+                <input type="hidden" id="marking-scheme-filename" value="">
+                <input type="hidden" id="student-answer-zip-filename" value="">
+            </div>
+            <div class="box">
+                <div class="box upload-section">
+                    <h3>Upload Marking Scheme</h3>
+                    <form action="/upload/uploadfile" class="dropzone" id="marking-scheme-dropzone"></form>
+                </div>
+                <div class="box upload-section">
+                    <h3>Upload Student’s Answer</h3>
+                    <form action="/upload/uploadfile" class="dropzone" id="student-answer-dropzone"></form>
+                </div>
+            </div>
+        </div>
+        <div class="results-section">
+            <h3>Results</h3>
+            <div id="result"></div>
+        </div>
+        <div class="submit-section">
+            <button type="button" id="submit-assignment">Submit</button>
+        </div>
+    </div>    
 </body>
 </html>

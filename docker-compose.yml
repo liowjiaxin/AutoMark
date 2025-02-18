@@ -23,6 +23,8 @@ services:
     networks:
       - backend-network
       - frontend-network
+    volumes:
+      - ./backend/uploaded_files:/app/uploaded_files
     depends_on:
       db:
         condition: service_healthy
