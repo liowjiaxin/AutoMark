@@ -63,7 +63,7 @@ class Grader:
 
     def grade(
         self, code_files: list, language, rubrics: str, code_run_output: str = ""
-    ) -> tuple[str, str]:
+    ) -> tuple[int, str]:
         metadata, code = self._preprocess(code_files, language)
         result = self.grader_llm.invoke({
             "code": code,

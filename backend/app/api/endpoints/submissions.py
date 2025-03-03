@@ -6,13 +6,13 @@ import json
 import asyncio
 
 from api.models.requests import GradeCodeRequest, RunCodeRequest
-from db.models import Submission
+from db.models import Submission, CodeRunResult
 from api.dependencies import get_db, get_grader
 from core.utils import (
     save_upload_file,
     extract_zip_file,
     read_file_content,
-    cleanup_temp_files,
+    cleanup_extracted_files,
 )
 from grader.grading import Grader
 from code_runner.runner import execute_code_isolated
@@ -34,14 +34,21 @@ async def upload_file(file: UploadFile = File(...)):
 
 
 async def run_code_stream(req: RunCodeRequest, session: Session):
-    # for output in execute_code_isolated(req.language, req.version, )
-    # TODO: run the code by calling the code runner
-    # TODO: stream/yield the output to frontend with SSE
-    # TODO: add timeout time limit
-    # TODO: send a code "GRADE_CODE_FIN" to frontend when code finish running
-    # TODO: save code run result to db (using file storage, and store file path in db)
-    # TODO: send the code run id to frontend
-    yield f"data: {json.dumps({'output': 'asdf'})}\n\n"
+    code_files, extract_path = extract_zip_file(req.code_zip_filename)
+    code_run_output = ""
+    for output in execute_code_isolated(
+        req.language, req.version, extract_path, req.commands
+    ):
+        code_run_output += output
+        yield f"data: {json.dumps({'output': output})}\n\n"
+
+    code_run_result = CodeRunResult(output=code_run_output)
+    session.add(code_run_result)
+    session.commit()
+    session.refresh(code_run_result)
+
+    cleanup_extracted_files(extract_path)
+    yield f"data: {json.dumps({'state': 'RUN_CODE_FIN', 'code_run_id': code_run_result.id})}\n\n"
 
 
 @api_router.post("/run_code")
@@ -63,7 +70,7 @@ async def grade_code(
             raise HTTPException(status_code=400, detail="Empty code zip file path")
 
         # Extract and read code files
-        code_files = extract_zip_file(req.code_zip_filename)
+        code_files, extract_path = extract_zip_file(req.code_zip_filename)
 
         # Get marking scheme if provided
         marking_scheme = ""
@@ -76,7 +83,7 @@ async def grade_code(
         # if yes then pass the code run result to grader
 
         # Grade the code
-        grade, feedback = grader.grade(code_files, req.language, marking_scheme)
+        marks, feedback = grader.grade(code_files, req.language, marking_scheme)
 
         # Save to database
         file_location = os.path.join("uploaded_files", req.code_zip_filename)
@@ -84,7 +91,7 @@ async def grade_code(
             student_id=req.student_id,
             code_zip_path=file_location,
             marking_scheme_path=marking_scheme_path,
-            grade=grade,
+            marks=marks,
             feedback=feedback,
         )
 
@@ -92,11 +99,9 @@ async def grade_code(
         session.commit()
         session.refresh(submission)
 
+        cleanup_extracted_files(extract_path)
         return {"grade": submission.grade, "feedback": submission.feedback}
     except HTTPException as e:
         raise e
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-    finally:
-        # Clean up temporary files
-        cleanup_temp_files(req.code_zip_filename)

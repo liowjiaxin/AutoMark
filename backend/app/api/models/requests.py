@@ -7,14 +7,13 @@ class GradeCodeRequest(BaseModel):
     marking_scheme_filename: Optional[str] = None
     student_id: str
     language: str
-    compiler: str
-    commands: Optional[str] = None
     code_run_result_id: Optional[str] = None
 
 
 class RunCodeRequest(BaseModel):
+    code_zip_filename: str
     language: str
-    compiler: str
-    commands: Optional[str] = None
+    version: Optional[str] = None
+    commands: list[str]
     # stdin_input: str
     # timeout: int = 5  # seconds
