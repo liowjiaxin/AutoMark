@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, UploadFile, File, HTTPException
 from sqlmodel import Session
 import os
 
-from api.models.requests import GradeCodeRequest
+from api.models.requests import GradeCodeRequest, RunCodeRequest
 from db.models import Submission
 from api.dependencies import get_db, get_grader
 from core.utils import (
@@ -25,6 +25,16 @@ async def upload_file(file: UploadFile = File(...)):
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/run_code")
+async def run_code(req: RunCodeRequest):
+    # TODO: unzip and run the code by calling the code runner
+    # TODO: stream the stdout and stderr to frontend with websocket
+    # TODO: add timeout time limit
+    # TODO: send a code "ATMK_RUN_CODE_FIN" to frontend when code finish running
+    # TODO: save code run result to db (using file storage, and store file path in db)
+    pass
 
 
 @router.post("/grade")

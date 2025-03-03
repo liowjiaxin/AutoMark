@@ -9,3 +9,8 @@ class GradeCodeRequest(BaseModel):
     language: str
     compiler: str
     commands: Optional[str] = None
+
+
+class RunCodeRequest(BaseModel):
+    # TODO: complete RunCodeRequest
+    pass
