@@ -7,6 +7,8 @@ client = docker.from_env()
 
 SUPPORTED_PYTHON_VERSIONS = ["3.9", "3.10", "3.11", "3.12", "3.13"]
 
+# TODO: get code folder path, copy/mount to temp container and run with custom commands
+
 
 def run_code(language: str, version: str, code_dir_path: Path, run_commands: list[str]):
     """
