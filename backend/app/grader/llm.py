@@ -33,13 +33,13 @@ You are a code style analyst for programming assignments. Your task is to evalua
 Please return your response as a JSON object with the following keys:
 - `"comments_quality_feedback"`: string
 - `"code_coverage_feedback"`: string
-- `"modularity"`: float
+- `"modularity_score"`: float
 
 Example:
 {
   "comments_quality_feedback": "The comments are clear but could be more descriptive in critical sections.",
   "code_coverage_feedback": "Some edge cases are not covered, and additional tests are recommended.",
-  "modularity": 0.75
+  "modularity_score": 0.75
 }
 """
 
@@ -57,16 +57,14 @@ You are an expert grader for programming assignments. Using all available data, 
 {rubrics}
 
 - **Style Analysis Results:**
-  - **Comments Quality Feedback:** <INSERT COMMENTS_QUALITY_FEEDBACK>
-  - **Code Coverage Feedback:** <INSERT CODE_COVERAGE_FEEDBACK>
-  - **Modularity Score:** <INSERT MODULARITY>
+  - **Comments Quality Feedback:** {comments_quality_feedback}
+  - **Code Coverage Feedback:** {code_coverage_feedback}
+  - **Modularity Score:** {modularity_score}
 
 - **Additional Metadata:**
   - **Lines of Code:** {lines_of_code}
   - **Number of Files:** {num_files}
-  - **Duplicated Lines:** {dup_lines}
-  - **Compilation Output:** {compilation_output}
-  - **Program Output:** <program_output>
+  - **Program Output (optional):** {code_run_output}
 
 **Instructions:**
 1. Review the original code, rubrics, style analysis, and additional metadata.
@@ -76,13 +74,13 @@ You are an expert grader for programming assignments. Using all available data, 
 
 **Output Format:**
 Return your evaluation as a JSON object with the following keys:
-- `"final_grade"`: number
-- `"detailed_feedback"`: string
+- `"marks"`: number
+- `"feedback"`: string
 
 Example:
 {
-  "final_grade": 85,
-  "detailed_feedback": "The code is well-organized with clear comments. However, some edge cases in testing are missing and modularity could be improved by refactoring repeated code segments."
+  "marks": 85,
+  "feedback": "The code is well-organized with clear comments. However, some edge cases in testing are missing and modularity could be improved by refactoring repeated code segments."
 }
 """
 

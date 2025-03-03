@@ -19,7 +19,7 @@ def save_upload_file(upload_file: UploadFile) -> str:
 
 
 def extract_zip_file(filename: str) -> list:
-    """Extract zip file and return list of file contents"""
+    """Extract zip file and return list of files"""
     file_location = os.path.join(settings.FILE_UPLOAD_DIR, filename)
 
     if not os.path.exists(file_location):
@@ -30,15 +30,8 @@ def extract_zip_file(filename: str) -> list:
         with zipfile.ZipFile(file_location, "r") as zip_ref:
             zip_ref.extractall(settings.TEMP_EXTRACT_DIR)
 
-        # Read the extracted files
         extracted_files = os.listdir(settings.TEMP_EXTRACT_DIR)
-        files_content = []
-
-        for filename in extracted_files:
-            file_path = os.path.join(settings.TEMP_EXTRACT_DIR, filename)
-            with open(file_path, "r") as file:
-                files_content.append(file.read())
-        return files_content
+        return extracted_files
     except Exception:
         raise HTTPException(status_code=500, detail="Error unzipping files")
 

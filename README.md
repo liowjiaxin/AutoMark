@@ -11,6 +11,6 @@
 2. Input code run commands (e.g. `python main.py`), and a timeout duration
 3. Input student ID
 4. Upload marking scheme and student code zip file
-5. Click Run Code and wait for the result (or timeout), get the code run result id
-6. Click Grade (will upload everything including the code run result id)
+5. (Optionally) Click Run Code and wait for the result (or timeout), get the code run result id
+6. Click Grade
 7. Show the grade and feedback

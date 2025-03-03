@@ -9,8 +9,12 @@ class GradeCodeRequest(BaseModel):
     language: str
     compiler: str
     commands: Optional[str] = None
+    code_run_result_id: Optional[str] = None
 
 
 class RunCodeRequest(BaseModel):
-    # TODO: complete RunCodeRequest
-    pass
+    language: str
+    compiler: str
+    commands: Optional[str] = None
+    # stdin_input: str
+    # timeout: int = 5  # seconds
