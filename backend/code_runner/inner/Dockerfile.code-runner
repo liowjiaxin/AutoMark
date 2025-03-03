@@ -1,0 +1,30 @@
+FROM ubuntu:22.04
+
+RUN apt update && apt install -y \
+  curl git build-essential libssl-dev zlib1g-dev \
+  libbz2-dev libreadline-dev libsqlite3-dev \
+  wget llvm libncurses5-dev xz-utils tk-dev \
+  libffi-dev liblzma-dev python3-pip sudo \
+  clang cmake maven gradle openjdk-17-jdk
+
+# Create a non-root user
+RUN useradd -m -s /bin/bash sandboxuser
+
+# Set working directory
+WORKDIR /sandbox
+
+# Switch to non-root user
+USER sandboxuser
+
+# Install Pyenv (inside the non-root user's home directory)
+ENV PYENV_ROOT="/home/sandboxuser/.pyenv"
+ENV PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH"
+
+RUN git clone https://github.com/pyenv/pyenv.git $PYENV_ROOT && \
+  echo 'eval "$(pyenv init --path)"' >> ~/.bashrc
+
+# Install some default Python versions
+RUN bash -c "source ~/.bashrc && pyenv install 3.9.18 && pyenv install 3.10.13 && pyenv install 3.11.6"
+
+# Default command, override if needed
+CMD ["/bin/bash"]

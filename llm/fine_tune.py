@@ -1,1 +1,0 @@
-# TODO: fine tune model with Simon's dataset

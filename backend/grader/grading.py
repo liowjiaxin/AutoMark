@@ -7,7 +7,7 @@ Pipeline:
 1. Preprocessing
 	- Compute lines of code
 	- Compute number of files
-	- Setup environment to compile and run the code
+	- Setup environment to compile and run the code (stream the code run output)
 2. Code style analysing
 	- Pass extracted metadata to the code style analyser
 	- Ask LLM to assess comment quality, code coverage, and modularity
@@ -16,11 +16,7 @@ Pipeline:
 	- Fit into the grading prompt template with the original code, rubris, and metadata
 	- Get the grade and feedback from LLM
 	- Return to frontend
-
-# Can consider making a progress bar
 """
-
-# TODO: add a code-runner service to run DinD, stream stdout and stderr with gRPC
 
 
 @dataclass
@@ -57,4 +53,3 @@ class Grader:
 
         feedback, grade = result.content.split("===SPLITTER===")
         return grade.strip(), feedback.strip()
-
