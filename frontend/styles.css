@@ -1,32 +1,185 @@
+:root[data-theme="light"] {
+  --text-50: #f0f6ef;
+  --text-100: #e2edde;
+  --text-200: #c5dbbd;
+  --text-300: #a7c99c;
+  --text-400: #8ab77b;
+  --text-500: #6da45b;
+  --text-600: #578448;
+  --text-700: #416336;
+  --text-800: #2c4224;
+  --text-900: #162112;
+  --text-950: #0b1009;
+
+  --background-50: #f0f6ef;
+  --background-100: #e2ecdf;
+  --background-200: #c4d9bf;
+  --background-300: #a7c69f;
+  --background-400: #89b47e;
+  --background-500: #6ca15e;
+  --background-600: #56814b;
+  --background-700: #416039;
+  --background-800: #2b4026;
+  --background-900: #162013;
+  --background-950: #0b1009;
+
+  --primary-50: #f0f6ef;
+  --primary-100: #e1ecdf;
+  --primary-200: #c3dabe;
+  --primary-300: #a5c79e;
+  --primary-400: #88b57d;
+  --primary-500: #6aa25d;
+  --primary-600: #55824a;
+  --primary-700: #3f6138;
+  --primary-800: #2a4125;
+  --primary-900: #152013;
+  --primary-950: #0b1009;
+
+  --secondary-50: #eff6f5;
+  --secondary-100: #dfeceb;
+  --secondary-200: #bedad7;
+  --secondary-300: #9ec7c4;
+  --secondary-400: #7db5b0;
+  --secondary-500: #5da29c;
+  --secondary-600: #4a827d;
+  --secondary-700: #38615e;
+  --secondary-800: #25413e;
+  --secondary-900: #13201f;
+  --secondary-950: #091010;
+
+  --accent-50: #eff3f6;
+  --accent-100: #dfe7ec;
+  --accent-200: #becfda;
+  --accent-300: #9eb7c7;
+  --accent-400: #7d9fb5;
+  --accent-500: #5d86a2;
+  --accent-600: #4a6c82;
+  --accent-700: #385161;
+  --accent-800: #253641;
+  --accent-900: #131b20;
+  --accent-950: #090d10;
+}
+
+:root[data-theme="dark"] {
+  --text-50: #0a1109;
+  --text-100: #142211;
+  --text-200: #294422;
+  --text-300: #3d6633;
+  --text-400: #528844;
+  --text-500: #66aa55;
+  --text-600: #85bb77;
+  --text-700: #a3cc99;
+  --text-800: #c2ddbb;
+  --text-900: #e0eedd;
+  --text-950: #f0f6ee;
+
+  --background-50: #0b100a;
+  --background-100: #162013;
+  --background-200: #2c3f27;
+  --background-300: #415f3a;
+  --background-400: #577e4e;
+  --background-500: #6d9e61;
+  --background-600: #8ab181;
+  --background-700: #a7c5a0;
+  --background-800: #c5d8c0;
+  --background-900: #e2ecdf;
+  --background-950: #f0f5ef;
+
+  --primary-50: #0a1009;
+  --primary-100: #152013;
+  --primary-200: #2a4125;
+  --primary-300: #3f6138;
+  --primary-400: #54824a;
+  --primary-500: #69a25d;
+  --primary-600: #87b57d;
+  --primary-700: #a5c79e;
+  --primary-800: #c3dabe;
+  --primary-900: #e1ecdf;
+  --primary-950: #f0f6ef;
+
+  --secondary-50: #091010;
+  --secondary-100: #13201f;
+  --secondary-200: #25413f;
+  --secondary-300: #38615e;
+  --secondary-400: #4a827e;
+  --secondary-500: #5da29d;
+  --secondary-600: #7db5b1;
+  --secondary-700: #9ec7c4;
+  --secondary-800: #bedad8;
+  --secondary-900: #dfeceb;
+  --secondary-950: #eff6f5;
+
+  --accent-50: #090d10;
+  --accent-100: #131b20;
+  --accent-200: #253641;
+  --accent-300: #385161;
+  --accent-400: #4a6c82;
+  --accent-500: #5d86a2;
+  --accent-600: #7d9fb5;
+  --accent-700: #9eb7c7;
+  --accent-800: #becfda;
+  --accent-900: #dfe7ec;
+  --accent-950: #eff3f6;
+}
+
+:root {
+  --text: #060905;
+  --background: #f4f8f3;
+  --primary: #76a96a;
+  --secondary: #a2c9c6;
+  --accent: #83a3b8;
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: var(--background);
+    color: var(--text);
     display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
     margin: 0;
-    overflow-y: auto;
+    overflow: hidden; /* Prevent body scroll */
+    padding: 0;
+}
+
+.navbar {
+    width: 200px;
+    background-color: var(--primary);
+    color: white;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px 0;
+}
+
+.content {
+        flex-grow: 1;
+    padding: 20px;
+    height: 100vh; /* Match the height of the navigation bar */
+    overflow-y: auto; /* Enable scrolling */
 }
 
 .container {
-    width: 90%;
-    max-width: 1000px;
+    width: 100%;
+    max-width: 1200px;
     background: white;
-    padding: 20px;
+    padding: 15px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr; /* Change to single column */
     gap: 15px;
-    max-height: 90vh; /* Prevents overflow */
-    overflow-y: auto; /* Enables scrolling inside container */
+    margin: 10px auto; /* Center the container */
 }
 
 .header {
     grid-column: span 2;
-    background: #4a90e2;
-    color: white;
+    color: var(--text);
     padding: 10px;
     font-size: 20px;
     font-weight: bold;
@@ -37,39 +190,55 @@ body {
 .left-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    gap: 10px; /* Reduce the gap between elements */
+    margin-top: 5px;
+    margin-top: 5px; /* Reduce the margin */
+    margin-bottom: 5px; /* Reduce the margin */
+    padding: 5px; /* Reduce the padding */
 }
 
 .box {
-    background: #add8e6;
-    padding: 20px;
+    background: var(--secondary);
+    padding: 8px; /* Reduce the padding */
     border-radius: 10px;
     text-align: center;
+    margin-bottom: 5px; /* Reduce the margin */
+    margin-top: 5px;
+    height:auto;
 }
 
 .upload-section {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 5px; /* Reduce the margin */
+    margin-bottom: 5px; /* Reduce the margin */
+    padding: 5px; /* Reduce the padding */
 }
 
 .results-section {
-    background: #d3f4d1;
+    background: var(--accent);
     padding: 20px;
     border-radius: 10px;
     text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px; /* Reduce the margin */
+    height:auto;
+    gap: 10px; /* Reduce the gap between elements */
 }
 
 .submit-section {
-    grid-column: span 1.5;
     display: flex;
+    flex-direction: column; /* Change to column layout */
     justify-content: center;
-    margin-top: 10px;
+    align-items: center; /* Center align items */
+    margin-top: 8px;
+    width: 100%; /* Full width within its container */
 }
 
 button {
     padding: 10px 20px;
-    background: #28a745;
+    background: var(--primary);
     color: white;
     border: none;
     cursor: pointer;
@@ -77,30 +246,40 @@ button {
 }
 
 button:hover {
-    background: #218838;
+    background: darken(var(--primary), 10%);
 }
 
 .dropzone {
     width: 100%;
     padding: 20px;
-    border: 2px dashed #007bff;
+    border: 2px dashed lightgray; /* Dashed border */
     border-radius: 10px;
-    background: #f8f9fa;
+    background: var(--background);
     cursor: pointer;
+    text-align: center; /* Center text and icon */
+    transition: all 0.3s ease; /* Smooth transition */
+}
+
+.dropzone:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Hover effect with shadow */
+    background: #f4f6f9; /* Light gray background on hover */
 }
 
 /* Dropdown and Input Styling */
 .custom-dropdown, .input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center-align labels */
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 5px; /* Reduce the margin */
 }
 
-.custom-dropdown select, .input-group textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #007bff;
+.custom-dropdown select, .input-group textarea, .input-group input {
+    width: 80%; /* Ensure consistent width */
+    padding: 6px; /* Reduce the padding */
+    border: 1px solid var(--primary);
     border-radius: 5px;
-    background: #f8f9fa;
+    background: var(--background);
     font-size: 14px;
     box-sizing: border-box;
 }
@@ -108,10 +287,368 @@ button:hover {
 .custom-dropdown label, .input-group label {
     font-weight: bold;
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 3px; /* Reduce the margin */
+    padding-top: 5px;
+    text-align: center; /* Center-align labels */
 }
 
 .input-group textarea::placeholder {
     color: #888;
     font-style: italic;
+    margin-bottom: 5px;
+}
+
+.custom-dropdown-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px; /* Reduce the margin */
+    gap: 10px; /* Add gap between dropdowns */
+}
+
+.custom-dropdown {
+    flex: 1;
+    margin: 0 8px; /* Reduce the margin */
+}
+
+.custom-dropdown label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.custom-dropdown select {
+    width: 100%;
+    padding: 5px;
+}
+
+.input-group input#student-id {
+    width: 50%; /* Reduce the width of the student ID input */
+    margin: 0 auto; /* Center the input */
+}
+
+.input-group textarea#commands {
+    width: 80%; /* Increase the width of the commands input */
+    margin: 0 auto; /* Center the input */
+    height: 38px; /* Match height to dropdowns */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    width: 300px;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search-bar button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #88b57d;
+    color: black;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: #6a8b6d; /* Manually specify a darker shade of primary-400 */
+}
+
+.sort-filter-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.sort-filter-buttons button {
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: none;
+    background-color: var(--secondary);
+    color: black;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 2px solid transparent; /* Default border (transparent) */
+}
+
+.sort-filter-buttons button:hover {
+    background-color: #5da29d; /* Replace with a darker shade of secondary color */
+    transition: background-color 0.3s ease;
+    border-color: black; /* Add black outline on hover */
+}
+
+table {
+    width: 100%; /* Ensure the table spans the entire width of the container */
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background: white; /* White background */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadows */
+}
+
+table, th, td {
+    border: 1px solid #dee2e6;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f1f1f1;
+    cursor: pointer; /* Indicate sortable columns */
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Alternating row colors */
+}
+
+.status-pass {
+    color: green;
+}
+
+.status-fail {
+    color: red;
+}
+
+@media (max-width: 768px) {
+    .search-bar, .sort-filter-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .search-bar input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .sort-filter-buttons button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+.upload-container {
+    display: flex;
+    flex-direction: column; /* Change to column layout */
+    flex-grow: 1; /* Allow the container to grow */
+    width: 100%;
+    max-width: 1200px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    gap: 15px;
+    margin: 10px auto; /* Center the container */
+}
+
+.upload-left-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Increase gap for better readability */
+}
+
+.upload-box {
+    background: none; /* Remove background color */
+    padding: 8px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 5px;
+    height: auto;
+}
+
+.upload-section-container {
+    display: flex;
+    gap: 20px; /* Consistent gap */
+    align-items: center; /* Align items vertically */
+}
+
+.upload-section {
+    flex: 1;
+    min-width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+.submit-section {
+    display: flex;
+    flex-direction: column; /* Change to column layout */
+    justify-content: center;
+    align-items: center; /* Center align items */
+    margin-top: 8px;
+    width: 100%; /* Full width within its container */
+}
+
+button {
+    padding: 10px 20px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: #6a8b6d; /* Manually specify a darker shade of primary-400 */
+}
+
+.submit-button {
+    background: #4CAF50; /* Green background */
+    border-radius: 10px; /* Rounded corners */
+    width: 100%; /* Full width */
+    margin-bottom: 10px; /* Add margin to separate from progress bar */
+}
+
+.submit-button:hover {
+    background: #45a049; /* Darker green on hover */
+}
+
+/* Progress Bar */
+.progress-bar-container {
+    width: 80%;
+    background-color: #f3f3f3; /* Light gray background */
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px; /* Adjust margin for spacing */
+    text-align: center; /* Align to the center */
+}
+
+.submit-progress-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the items */
+    gap: 10px; /* Adds spacing */
+}
+
+.progress-bar-container {
+    width: 80%;
+    text-align: center;
+}
+
+/* Live Logs Panel */
+.live-logs {
+    background: #333; /* Dark background */
+    color: #f4f6f9; /* Light text */
+    border: 1px solid var(--primary);
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+    height: 200px;
+    overflow-y: auto;
+    font-family: monospace; /* Monospace font */
+}
+
+/* Dropdown and Input Styling */
+.custom-dropdown, .input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center-align labels */
+    width: 50%;
+    margin-bottom: 5px; /* Reduce the margin */
+}
+
+.input-group input{
+    width: 70%; /* Same as dropdowns */
+    height: 50px; /* Match dropdown height */    
+}
+
+.input-group textarea {
+    width: 70%; /* Same as dropdowns */
+    height: 60%; /* Set a fixed height */
+}
+
+.custom-dropdown select{
+    width: 70%; /* Reduce width slightly */
+    padding: 6px; /* Reduce the padding */
+    border: 1px solid var(--primary);
+    border-radius: 5px;
+    background: var(--background);
+    font-size: 14px;
+    box-sizing: border-box;
+    text-align: center; /* Center the text inside */
+}
+
+.custom-dropdown label, .input-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 3px; /* Reduce the margin */
+    padding-top: 5px;
+    text-align: center; /* Center-align labels */
+}
+
+textarea {
+    width: 100%; /* Match dropdown width */
+    height: 40px; /* Match dropdown height */
+    text-align: center; /* Center text */
+    resize: none; /* Prevent resizing */
+}
+
+.input-group textarea::placeholder {
+    color: #888;
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
+.custom-dropdown-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px; /* Reduce the margin */
+    gap: 10px; /* Add gap between dropdowns */
+}
+
+.custom-dropdown {
+    flex: 1;
+    margin: 0 8px; /* Reduce the margin */
+}
+
+.custom-dropdown label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.custom-dropdown select {
+    width: 100%;
+    padding: 5px;
+}
+
+.input-group input#student-id {
+    width: 80%; /* Increase width for better visibility */
+    margin: 0 auto; /* Center the input */
+}
+
+.input-group textarea#commands {
+    width: 100%; /* Increase the width of the commands input */
+    margin: 0 auto; /* Center the input */
+    height: 38px; /* Match height to dropdowns */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Live Logs and Results sections side by side */
+.live-logs-results-container {
+    display: flex;
+    gap: 20px; /* Add spacing between the two sections */
+    margin-top: 20px; /* Add margin to separate from other content */
+}
+
+.live-logs, .upload-results-container {
+    flex: 1; /* Allow both sections to take equal space */
 }

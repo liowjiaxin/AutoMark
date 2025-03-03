@@ -106,6 +106,17 @@ class LLM:
     def invoke(self, input: dict):
         return self.chain.invoke(input)
 
+    def analyze_and_grade(self, input: dict):
+        style_analyser = StyleAnalyserLLM()
+        style_analysis_result = style_analyser.invoke(input)
+        
+        input.update(style_analysis_result)
+        
+        grader = GraderLLM()
+        grading_result = grader.invoke(input)
+        
+        return grading_result
+
 
 class StyleAnalyserLLM(LLM):
     def __init__(self):
