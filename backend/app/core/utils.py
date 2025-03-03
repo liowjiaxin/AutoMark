@@ -2,7 +2,7 @@ import os
 import uuid
 import zipfile
 import shutil
-from fastapi import UploadFile
+from fastapi import UploadFile, HTTPException
 
 from core.config import settings
 
@@ -22,20 +22,25 @@ def extract_zip_file(filename: str) -> list:
     """Extract zip file and return list of file contents"""
     file_location = os.path.join(settings.FILE_UPLOAD_DIR, filename)
 
-    # Extract the zip file
-    with zipfile.ZipFile(file_location, "r") as zip_ref:
-        zip_ref.extractall(settings.TEMP_EXTRACT_DIR)
+    if not os.path.exists(file_location):
+        raise HTTPException(status_code=404, detail="File not found")
 
-    # Read the extracted code files
-    extracted_files = os.listdir(settings.TEMP_EXTRACT_DIR)
-    code_files = []
+    try:
+        # Extract the zip file
+        with zipfile.ZipFile(file_location, "r") as zip_ref:
+            zip_ref.extractall(settings.TEMP_EXTRACT_DIR)
 
-    for filename in extracted_files:
-        code_file_path = os.path.join(settings.TEMP_EXTRACT_DIR, filename)
-        with open(code_file_path, "r") as code_file:
-            code_files.append(code_file.read())
+        # Read the extracted files
+        extracted_files = os.listdir(settings.TEMP_EXTRACT_DIR)
+        files_content = []
 
-    return code_files
+        for filename in extracted_files:
+            file_path = os.path.join(settings.TEMP_EXTRACT_DIR, filename)
+            with open(file_path, "r") as file:
+                files_content.append(file.read())
+        return files_content
+    except Exception:
+        raise HTTPException(status_code=500, detail="Error unzipping files")
 
 
 def read_file_content(filename: str) -> str:

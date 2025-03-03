@@ -63,7 +63,8 @@ async def grade_code(
         session.refresh(submission)
 
         return {"grade": submission.grade, "feedback": submission.feedback}
-
+    except HTTPException as e:
+        raise e
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     finally:
