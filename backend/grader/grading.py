@@ -1,4 +1,4 @@
-from grader.model import StyleAnalyserLLM, GraderLLM
+from grader.llm import StyleAnalyserLLM, GraderLLM
 from dataclasses import dataclass
 
 """
