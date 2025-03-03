@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, UploadFile, File, HTTPException
+from fastapi import APIRouter, Depends, UploadFile, File, HTTPException, WebSocket
 from sqlmodel import Session
 import os
 
@@ -12,10 +12,11 @@ from core.utils import (
     cleanup_temp_files,
 )
 
-router = APIRouter(tags=["submissions"])
+api_router = APIRouter(prefix="/api")
+ws_router = APIRouter(prefix="/ws")
 
 
-@router.post("/upload")
+@api_router.post("/upload")
 async def upload_file(file: UploadFile = File(...)):
     try:
         unique_filename = save_upload_file(file)
@@ -27,7 +28,7 @@ async def upload_file(file: UploadFile = File(...)):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.post("/run_code")
+@ws_router.websocket("/run_code")
 async def run_code(req: RunCodeRequest):
     # TODO: unzip and run the code by calling the code runner
     # TODO: stream the stdout and stderr to frontend with websocket
@@ -37,13 +38,16 @@ async def run_code(req: RunCodeRequest):
     pass
 
 
-@router.post("/grade")
+@api_router.post("/grade")
 async def grade_code(
     req: GradeCodeRequest,
     session: Session = Depends(get_db),
     grader=Depends(get_grader),
 ):
     try:
+        if req.code_zip_filename == "":
+            raise HTTPException(status_code=400, detail="Empty code zip file path")
+
         # Extract and read code files
         code_files = extract_zip_file(req.code_zip_filename)
         combined_code = "\n".join(code_files)

@@ -18,7 +18,8 @@ def create_application() -> FastAPI:
 
     # Include routers
     application.include_router(health.router)
-    application.include_router(submissions.router, prefix="")
+    application.include_router(submissions.api_router)
+    application.include_router(submissions.ws_router)
 
     return application
 
