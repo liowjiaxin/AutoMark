@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated Marking</title>
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS -->
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <h2>Automated Marking</h2>
+        <a href="index.html">Home</a>
+        <a href="upload_code.html">Upload Code</a>
+        <a href="check_result.html">Check Result</a>
+    </div>
+    <div class="content">
+        <div><h1>Upload Student's Work</h1></div>
+        <div class="upload-container">
+            <div class="custom-dropdown-container">
+                <div class="custom-dropdown">
+                    <label for="language">Language</label>
+                    <select id="language">
+                        <option>Python</option>
+                        <option>C</option>
+                        <option>Java</option>
+                    </select>
+                </div>
+                <div class="custom-dropdown">
+                    <label for="version">Version</label>
+                    <select id="version" disabled>
+                        <option>-</option>
+                    </select>
+                </div>
+            </div>
+            <!-- <div class="upload-left-section">
+                <div class="custom-dropdown">
+                    <label for="language">Language</label>
+                    <select id="language">
+                        <option>Python</option>
+                        <option>C</option>
+                        <option>Java</option>
+                        <option>C++</option>
+                        <option>C#</option>
+                    </select>
+                </div>
+                <div class="custom-dropdown">
+                    <label for="compiler">Compiler</label>
+                    <select id="compiler">
+                        <option>GCC</option>
+                        <option>Clang</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="commands">Commands:</label>
+                    <textarea id="commands" placeholder="e.g., gcc program.c -o program.out\n./program.out"></textarea>
+                </div>
+            </div> -->
+
+            <div class="upload-section-container">
+
+                <div class="upload-box upload-section">
+                    <h3>Upload Marking Scheme</h3>
+                    <form action="/upload/uploadfile" class="dropzone" id="marking-scheme-dropzone"></form>
+                </div>
+                
+                <div class="input-group">
+                    <label for="student-id">Student ID:</label>
+                    <input type="text" id="student-id" placeholder="Enter student ID">
+                </div>
+                
+                <div class="upload-section">
+                    <h3>Upload Student’s Answer</h3>
+                    <form action="/upload/uploadfile" class="dropzone" id="student-answer-dropzone"></form>
+                </div>
+
+                <input type="hidden" id="marking-scheme-filename">
+                <input type="hidden" id="student-answer-zip-filename">
+            </div>
+
+            <div class="submit-progress-container">
+                <button type="button" id="submit-assignment" class="submit-button">Submit</button>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progress-bar">0%</div>
+                </div>
+            </div>
+
+            <div class="live-logs-results-container">
+                <div class="live-logs" id="live-logs">
+                    <h3>Live Logs</h3>
+                    <div id="logs-content"></div>
+                </div>
+
+                <div class="upload-results-container">
+                    <div class="upload-box upload-results-section">
+                        <h3>Results</h3>
+                        <table id="result-table">
+                            <tr>
+                                <td><label for="marks">Marks:</label></td>
+                                <td><span id="marks"></span></td>
+                            </tr>
+                            <tr>
+                                <td><label for="grade">Grade:</label></td>
+                                <td><span id="grade"></span></td>
+                            </tr>
+                            <tr>
+                                <td><label for="comments">Comments:</label></td>
+                                <td><span id="comments"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
