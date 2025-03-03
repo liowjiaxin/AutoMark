@@ -15,7 +15,7 @@ from core.utils import (
 router = APIRouter(tags=["submissions"])
 
 
-@router.post("/uploadfile")
+@router.post("/upload")
 async def upload_file(file: UploadFile = File(...)):
     try:
         unique_filename = save_upload_file(file)
