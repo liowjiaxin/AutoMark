@@ -1,7 +1,6 @@
 services:
   nginx:
     image: nginx:alpine
-    container_name: web_server
     ports:
       - "8080:8080"
     volumes:
@@ -16,15 +15,16 @@ services:
 
   backend:
     build: ./backend
-    container_name: backend
     env_file:
-      - .env.docker
-      - .env.local
+      - .env.backend
+      - .env.db
     networks:
       - backend-network
       - frontend-network
+    privileged: true
     volumes:
       - ./backend/uploaded_files:/app/uploaded_files
+      - code_runner_data:/var/lib/docker
     depends_on:
       db:
         condition: service_healthy
@@ -37,8 +37,7 @@ services:
 
   db:
     image: mysql:8.0
-    container_name: db
-    env_file: .env.docker
+    env_file: .env.db
     volumes:
       - db_data:/var/lib/mysql
     networks:
@@ -49,8 +48,11 @@ services:
       timeout: 20s
       retries: 10
 
+
 volumes:
   db_data:
+  code_runner_data:
+
 
 networks:
   frontend-network:

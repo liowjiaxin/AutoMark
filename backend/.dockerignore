@@ -1,3 +1,6 @@
 .dockerignore
 __pycache__
 db.sqlite*
+Dockerfile
+code_runner_data/
+temp/

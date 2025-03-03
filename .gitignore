@@ -11,6 +11,11 @@ db.*
 
 .env
 .env.local
+.env.db
+.env.backend
 .*.local
 
+# backend
 uploaded_files/
+code_runner_data/
+temp/
