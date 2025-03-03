@@ -53,6 +53,8 @@ def read_file_content(filename: str) -> str:
 def cleanup_temp_files(filename: str):
     """Clean up temporary files"""
     shutil.rmtree(settings.TEMP_EXTRACT_DIR)
+    if filename == "":
+        return
     file_location = os.path.join(settings.FILE_UPLOAD_DIR, filename)
     if os.path.exists(file_location):
         os.remove(file_location)
