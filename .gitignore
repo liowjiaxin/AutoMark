@@ -18,3 +18,4 @@ db.*
 # backend
 uploaded_files/
 code_runner_data/
+temp/

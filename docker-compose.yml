@@ -24,7 +24,7 @@ services:
     privileged: true
     volumes:
       - ./backend/uploaded_files:/app/uploaded_files
-      - ./backend/code_runner/code_runner_data:/var/lib/docker
+      - code_runner_data:/var/lib/docker
     depends_on:
       db:
         condition: service_healthy
@@ -51,6 +51,7 @@ services:
 
 volumes:
   db_data:
+  code_runner_data:
 
 
 networks:
