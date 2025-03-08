@@ -1,54 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Results Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="js/check_result.js"></script> <!-- Link to new script -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Results Dashboard</title>
+  <link rel="stylesheet" href="/static/css/styles.css"> <!-- Link to external CSS -->
+  <script defer src="/static/js/check_result.js"></script> <!-- Link to new script -->
 </head>
+
 <body>
-    <div class="navbar">
-        <h2>Automated Marking</h2>
-        <a href="index.html">Home</a>
-        <a href="upload_code.html">Upload Code</a>
-        <a href="check_result.html">Check Result</a>
+  <div class="navbar">
+    <h2>Automated Marking</h2>
+    <a href="index.html">Home</a>
+    <a href="upload_code.html">Upload Code</a>
+    <a href="check_result.html">Check Result</a>
+  </div>
+
+  <div class="content">
+    <div>
+      <h1>Student Results Dashboard</h1>
     </div>
-    
-    <div class="content">
-        <div><h1>Student Results Dashboard</h1></div>
-        <div class="container">
+    <div class="container">
 
-            <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Enter Student ID">
-                <button onclick="searchStudent()">Search</button>
-            </div>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Enter Student ID">
+        <button onclick="searchStudent()">Search</button>
+      </div>
 
-            <div class="sort-filter-buttons">
-                <button onclick="sortTable('marks')">Sort by Marks</button>
-                <button onclick="sortTable('status')">Sort by Status</button>
-                <button onclick="filterTable('pass')">Show Passed</button>
-                <button onclick="filterTable('fail')">Show Failed</button>
-            </div>
-            
-            <table id="resultsTable" style="width: 100%; margin: 0 auto;">
-                <thead>
-                    <tr>
-                        <th>Student ID</th>
-                        <th>Code Uploaded</th>
-                        <th>Marks</th>
-                        <th>Grade</th>
-                        <th>Feedback</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Rows will be populated dynamically -->
-                </tbody>
-            </table>
-        </div>
+      <div class="sort-filter-buttons">
+        <button onclick="sortTable('marks')">Sort by Marks</button>
+        <button onclick="sortTable('status')">Sort by Status</button>
+        <button onclick="filterTable('pass')">Show Passed</button>
+        <button onclick="filterTable('fail')">Show Failed</button>
+      </div>
 
+      <table id="resultsTable" style="width: 100%; margin: 0 auto;">
+        <thead>
+          <tr>
+            <th>Student ID</th>
+            <th>Code Uploaded</th>
+            <th>Marks</th>
+            <th>Grade</th>
+            <th>Feedback</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Rows will be populated dynamically -->
+        </tbody>
+      </table>
     </div>
-    
-    <script src="scripts.js"></script>
+
+  </div>
+
+  <script src="scripts.js"></script>
 </body>
+
 </html>
