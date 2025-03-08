@@ -82,8 +82,12 @@ async def grade_code(
         # TODO: check if code_run_result_id got anything
         # if yes then pass the code run result to grader
 
+        # TODO: Less important, the progress bar effect, maybe with SSE also?
+
         # Grade the code
-        marks, feedback = grader.grade(code_files, req.language, marking_scheme)
+        marks, feedback = grader.grade(
+            extract_path, code_files, req.language, marking_scheme
+        )
 
         # Save to database
         file_location = os.path.join("uploaded_files", req.code_zip_filename)
@@ -100,7 +104,7 @@ async def grade_code(
         session.refresh(submission)
 
         cleanup_extracted_files(extract_path)
-        return {"grade": submission.grade, "feedback": submission.feedback}
+        return {"marks": submission.marks, "feedback": submission.feedback}
     except HTTPException as e:
         raise e
     except Exception as e:

@@ -19,7 +19,7 @@ You are a code style analyst for programming assignments. Your task is to evalua
 
 - **Rubrics:** 
 1. **Comment Quality:** Assess clarity, relevance, and detail of comments.
-2. **Code Coverage:** Determine whether the code is sufficiently tested or explained to cover edge cases.
+2. **Code Coverage:** Assess if the student has used all of the functions written, see if there's no redundant code. If the marking scheme requires things like unit testing, determine whether the code is sufficiently tested or explained to cover edge cases.
 3. **Modularity:** Evaluate the structure of the code regarding reuse, separation of concerns, and overall organization.
 
 **Instructions:**
@@ -36,11 +36,11 @@ Please return your response as a JSON object with the following keys:
 - `"modularity_score"`: float
 
 Example:
-{
+{{
   "comments_quality_feedback": "The comments are clear but could be more descriptive in critical sections.",
   "code_coverage_feedback": "Some edge cases are not covered, and additional tests are recommended.",
   "modularity_score": 0.75
-}
+}}
 """
 
 grader_prompt = """
@@ -78,10 +78,10 @@ Return your evaluation as a JSON object with the following keys:
 - `"feedback"`: string
 
 Example:
-{
+{{
   "marks": 85,
   "feedback": "The code is well-organized with clear comments. However, some edge cases in testing are missing and modularity could be improved by refactoring repeated code segments."
-}
+}}
 """
 
 
@@ -107,12 +107,12 @@ class LLM:
     def analyze_and_grade(self, input: dict):
         style_analyser = StyleAnalyserLLM()
         style_analysis_result = style_analyser.invoke(input)
-        
+
         input.update(style_analysis_result)
-        
+
         grader = GraderLLM()
         grading_result = grader.invoke(input)
-        
+
         return grading_result
 
 
