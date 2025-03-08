@@ -63,9 +63,6 @@ function sortTable(column) {
     let compare;
 
     switch (column) {
-        case 'name':
-            compare = (a, b) => a.cells[1].textContent.localeCompare(b.cells[1].textContent);
-            break;
         case 'marks':
             compare = (a, b) => b.cells[3].textContent - a.cells[3].textContent;
             break;
