@@ -11,7 +11,7 @@ done
 echo "Docker started successfully!"
 
 # Build the inner image
-docker build -t code-runner -f Dockerfile.code-runner /app/inner
+docker build -t code-runner -f Dockerfile.code-runner /app/code_runner/inner
 
 # Execute the command passed to docker run
 exec "$@"
