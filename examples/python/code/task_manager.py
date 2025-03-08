@@ -18,7 +18,7 @@ class TaskManager:
 
         for i, task in enumerate(self.tasks):
             if (
-                priority_filter is None
+                priority_filter == ""
                 or task.priority.lower() == priority_filter.lower()
             ):
                 print(f"{i + 1}. {task}")
