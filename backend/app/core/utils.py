@@ -3,6 +3,7 @@ import uuid
 import zipfile
 import shutil
 from fastapi import UploadFile, HTTPException
+import PyPDF2
 
 from core.config import settings
 
@@ -32,17 +33,49 @@ def extract_zip_file(filename: str) -> tuple[list, str]:
         with zipfile.ZipFile(file_location, "r") as zip_ref:
             zip_ref.extractall(extract_path)
 
-        extracted_files = os.listdir(extract_path)
-        return extracted_files, extract_path
+        def get_all_files(directory: str) -> list[str]:
+            """Recursively get all files in a directory."""
+            file_list = []
+            for root, _, files in os.walk(directory):
+                for file in files:
+                    file_list.append(os.path.join(root, file))
+            return file_list
+
+        all_files = get_all_files(extract_path)
+        relative_files = [os.path.relpath(file, extract_path) for file in all_files]
+
+        return relative_files, extract_path
     except Exception:
         raise HTTPException(status_code=500, detail="Error unzipping files")
 
 
 def read_file_content(filename: str) -> str:
-    """Read file content from the upload directory"""
+    """Read file content from the upload directory, handling PDF and text files."""
     file_path = os.path.join(settings.FILE_UPLOAD_DIR, filename)
-    with open(file_path, "r") as f:
-        return f.read()
+    try:
+        with open(file_path, "rb") as f:  # Open in binary mode for both text and PDF
+            if filename.lower().endswith(".pdf"):
+                try:
+                    pdf_reader = PyPDF2.PdfReader(f)
+                    text = ""
+                    for page_num in range(len(pdf_reader.pages)):
+                        page = pdf_reader.pages[page_num]
+                        text += (
+                            page.extract_text() or ""
+                        )  # Handle cases where extract_text returns None
+                    return text
+                except PyPDF2.errors.PdfReadError:
+                    return "Error: Could not read PDF file."
+                except Exception as e:
+                    return f"Error reading PDF: {e}"
+
+            else:  # Assume it's a text file
+                return f.read().decode("utf-8")
+
+    except FileNotFoundError:
+        return "Error: File not found."
+    except Exception as e:
+        return f"An unexpected error occurred: {e}"
 
 
 def cleanup_extracted_files(extract_path: str):
