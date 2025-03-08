@@ -652,3 +652,27 @@ h1 {
 .live-logs, .upload-results-container {
     flex: 1; /* Allow both sections to take equal space */
 }
+
+.result-card {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+}
+
+.result-card h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.feedback-section {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+}

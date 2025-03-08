@@ -36,6 +36,31 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function submitAssignment() {
+  const submitBtn = document.getElementById("submit-assignment");
+  const progressBar = document.getElementById("progress-bar");
+
+  // Disable button and change style
+  submitBtn.disabled = true;
+  submitBtn.style.backgroundColor = "#ccc"; // Grey color
+  submitBtn.style.cursor = "not-allowed";
+
+  // Show progress bar
+  progressBar.style.display = "block";
+  let progress = 0;
+
+  const interval = setInterval(() => {
+    if (progress >= 100) {
+      clearInterval(interval);
+      progressBar.style.display = "none"; // Hide progress bar
+      submitBtn.disabled = false; // Re-enable button
+      submitBtn.style.backgroundColor = ""; // Reset color
+      submitBtn.style.cursor = "pointer";
+    } else {
+      progress += 10;
+      progressBar.value = progress;
+    }
+  }, 300);
+
   const studentId = document.getElementById("student-id").value;
   const language = document.getElementById("language").value;
   const version = document.getElementById("version").value;
@@ -77,24 +102,60 @@ function submitAssignment() {
 
   fetch("/api/grade", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
   })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
+    .then(response => response.json())
     .then(data => {
-      document.getElementById("result").innerText = JSON.stringify(data, null, 2);
+      console.log("Received Data:", data); // Debugging: Ensure data is received correctly
+
+      // Get the result card elements
+      const marksElement = document.getElementById("marks");
+      const gradeElement = document.getElementById("grade");
+      const feedbackElement = document.getElementById("feedback");
+
+      if (marksElement && feedbackElement && gradeElement) {
+        marksElement.innerText = data.marks;
+        gradeElement.innerText = data.grade || calculateGrade(data.marks);
+        feedbackElement.innerHTML = formatFeedback(data.feedback);
+      } else {
+        console.error("Error: Result card elements not found!");
+        alert("Error displaying the results. Please check the result card elements.");
+      }
+
+      alert("Assignment submitted successfully!");
     })
     .catch(error => {
       console.error("Error:", error);
       alert("An error occurred while submitting the assignment. Please try again.");
     });
+}
+
+// Function to determine grade if not provided
+function calculateGrade(marks) {
+  if (marks >= 90) return "A+";
+  if (marks >= 80) return "A";
+  if (marks >= 70) return "B";
+  if (marks >= 60) return "C";
+  if (marks >= 50) return "D";
+  return "F";
+}
+
+// Function to format feedback
+function formatFeedback(feedback) {
+  // Convert **bold text** to <strong>bold text</strong>
+  feedback = feedback.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+  // Convert lists (* item or - item) to <ul><li>item</li></ul>
+  feedback = feedback.replace(/(?:^|\n)([*-])\s*(.*?)(?=\n|$)/g, '<ul><li>$2</li></ul>');
+
+  // Convert numbered lists (1. item) to <ol><li>item</li></ol>
+  feedback = feedback.replace(/(?:^|\n)(\d+)\.\s*(.*?)(?=\n|$)/g, '<ol><li>$2</li></ol>');
+
+  // Convert line breaks (\n) to <br>
+  feedback = feedback.replace(/\n/g, '<br>');
+
+  return feedback;
 }
 
 Dropzone.options.markingSchemeDropzone = {
@@ -124,19 +185,19 @@ Dropzone.options.studentAnswerDropzone = {
 };
 
 function fetchResults() {
-  // Fetch data from the backend (replace with actual backend API)
-  fetch('https://api.example.com/student-results')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => populateTable(data))
-    .catch(error => {
-      console.error('Error fetching data:', error);
-      alert('An error occurred while fetching the results. Please try again.');
-    });
+    // Fetch data from the backend (replace with actual backend API)
+    fetch('https://api.example.com/student-results')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => populateTable(data))
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            alert('An error occurred while fetching the results. Please try again.');
+        });
 }
 
 function populateTable(data) {
