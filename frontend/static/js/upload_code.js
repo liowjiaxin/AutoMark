@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById("submit-assignment").addEventListener("click", submitAssignment);
+  document.getElementById("stop-run-code").addEventListener("click", stopRunCode);
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -142,6 +143,11 @@ function submitAssignment() {
     submitBtn.style.backgroundColor = ""; // Reset color
     submitBtn.style.cursor = "pointer";
   }
+}
+
+function stopRunCode() {
+  // Logic to stop the running code
+  alert("Run code stopped.");
 }
 
 // TODO: add run code function, using websocket
