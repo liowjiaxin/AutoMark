@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
 from db.database import engine, create_db_and_tables
-from api.endpoints import health, submissions, results
+from api.endpoints import health, submissions, ws_run_code, results
 from core.config import settings
 
 
@@ -18,8 +18,8 @@ def create_application() -> FastAPI:
 
     # Include routers
     application.include_router(health.router)
-    application.include_router(submissions.api_router)
-    application.include_router(submissions.ws_router)
+    application.include_router(submissions.router)
+    application.include_router(ws_run_code.router)
     application.include_router(results.router)
 
     return application
