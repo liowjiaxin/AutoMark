@@ -1,0 +1,19 @@
+1
+Buy groceries
+High
+1
+Pay bills
+Medium
+1
+Clean the house
+Low
+2
+3
+1
+2
+4
+2
+Medium
+3
+2
+5
