@@ -1,6 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById("submit-assignment").addEventListener("click", submitAssignment);
   document.getElementById("stop-run-code").addEventListener("click", stopRunCode);
+  document.getElementById("run-code").addEventListener("click", runCode);
+
+  // Initialize Monaco Editor
+  require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.47.0/min/vs' }});
+  require(['vs/editor/editor.main'], function() {
+    window.editor = monaco.editor.create(document.getElementById('monaco-editor'), {
+      value: '#!/bin/bash\n# Type your commands here\n# Example: python main.py',
+      language: 'shell',
+      theme: 'vs',
+      minimap: { enabled: false },
+      lineNumbers: 'on',
+      roundedSelection: false,
+      scrollBeyondLastLine: false,
+      readOnly: false,
+      fontSize: 14,
+      automaticLayout: true,
+      wordWrap: 'on',
+      wrappingStrategy: 'advanced'
+    });
+  });
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -37,12 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function submitAssignment() {
   const submitBtn = document.getElementById("submit-assignment");
+  const runBtn = document.getElementById("run-code");
   const progressBar = document.getElementById("progress-bar");
 
-  // Disable button and change style
-  submitBtn.disabled = true;
-  submitBtn.style.backgroundColor = "#ccc"; // Grey color
-  submitBtn.style.cursor = "not-allowed";
+  // Set loading state
+  setButtonLoading(submitBtn, true);
+  runBtn.disabled = true;
 
   // Show progress bar
   progressBar.style.display = "block";
@@ -52,9 +72,8 @@ function submitAssignment() {
     if (progress >= 100) {
       clearInterval(interval);
       progressBar.style.display = "none"; // Hide progress bar
-      submitBtn.disabled = false; // Re-enable button
-      submitBtn.style.backgroundColor = ""; // Reset color
-      submitBtn.style.cursor = "pointer";
+      setButtonLoading(submitBtn, false);
+      runBtn.disabled = false; // Re-enable button
     } else {
       progress += 10;
       progressBar.value = progress;
@@ -139,9 +158,8 @@ function submitAssignment() {
   function resetProgressBar() {
     clearInterval(interval);
     progressBar.style.display = "none"; // Hide progress bar
-    submitBtn.disabled = false; // Re-enable button
-    submitBtn.style.backgroundColor = ""; // Reset color
-    submitBtn.style.cursor = "pointer";
+    setButtonLoading(submitBtn, false);
+    runBtn.disabled = false; // Re-enable button
   }
 }
 
@@ -150,7 +168,92 @@ function stopRunCode() {
   alert("Run code stopped.");
 }
 
-// TODO: add run code function, using websocket
+function setButtonLoading(button, isLoading) {
+  if (isLoading) {
+    // Store the original text as a data attribute
+    button.dataset.originalText = button.textContent;
+    button.classList.add('loading');
+    button.textContent = '';
+  } else {
+    button.classList.remove('loading');
+    // Restore the original text from the data attribute
+    button.textContent = button.dataset.originalText || button.textContent;
+  }
+  button.disabled = isLoading;
+}
+
+function runCode() {
+  const runButton = document.getElementById("run-code");
+  const submitButton = document.getElementById("submit-assignment");
+  
+  // Validate inputs
+  const language = document.getElementById("language").value;
+  const version = document.getElementById("version").value;
+  const studentAnswerZipFilename = document.getElementById("student-answer-zip-filename").value;
+  const commands = window.editor.getValue()
+      .split('\n')
+      .filter(line => line.trim() && !line.startsWith('#') && line !== '#!/bin/bash');
+  console.log(commands)
+  
+  if (!language || language === '-') {
+    alert("Please select a language.");
+    return;
+  }
+
+  if (!version || version === '-') {
+    alert("Please select a version.");
+    return;
+  }
+
+  if (!studentAnswerZipFilename) {
+    alert("Please upload the student's answer.");
+    return;
+  }
+
+  if (commands.length === 0) {
+    alert("Please enter at least one command to run.");
+    return;
+  }
+
+  // Set loading state
+  setButtonLoading(runButton, true);
+  submitButton.disabled = true;
+
+  // Create WebSocket connection
+  const ws = new WebSocket(`ws://${window.location.host}/ws/run-code`);
+
+  ws.onopen = () => {
+    console.log('WebSocket connection established');
+    const data = {
+      language,
+      version,
+      code_zip_filename: studentAnswerZipFilename,
+      commands: commands
+    };
+    ws.send(JSON.stringify(data));
+  };
+
+  ws.onmessage = (event) => {
+    const logsContent = document.getElementById('logs-content');
+    logsContent.innerHTML += event.data + '<br>';
+    logsContent.scrollTop = logsContent.scrollHeight;
+  };
+
+  ws.onclose = () => {
+    console.log('WebSocket connection closed');
+    // Reset button states
+    setButtonLoading(runButton, false);
+    submitButton.disabled = false;
+  };
+
+  ws.onerror = (error) => {
+    console.error('WebSocket error:', error);
+    alert('An error occurred while running the code. Please try again.');
+    // Reset button states
+    setButtonLoading(runButton, false);
+    submitButton.disabled = false;
+  };
+}
 
 // Function to determine grade if not provided
 function calculateGrade(marks) {
@@ -204,19 +307,3 @@ Dropzone.options.studentAnswerDropzone = {
     alert("An error occurred while uploading the student's answer. Please try again.");
   }
 };
-
-function fetchResults() {
-  // Fetch data from the backend (replace with actual backend API)
-  fetch('https://api.example.com/student-results')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => populateTable(data))
-    .catch(error => {
-      console.error('Error fetching data:', error);
-      alert('An error occurred while fetching the results. Please try again.');
-    });
-}

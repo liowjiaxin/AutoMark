@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
   <link rel="stylesheet" href="/static/css/styles.css"> <!-- Link to external CSS -->
   <script defer src="/static/js/upload_code.js"></script> <!-- Link to new script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.47.0/min/vs/loader.min.js"></script>
 </head>
 
 <body>
@@ -38,31 +39,11 @@
             <option>-</option>
           </select>
         </div>
+        <div class="input-group">
+          <label for="student-id">Student ID:</label>
+          <input type="text" id="student-id" placeholder="Enter student ID">
+        </div>
       </div>
-      <!-- <div class="upload-left-section">
-                <div class="custom-dropdown">
-                    <label for="language">Language</label>
-                    <select id="language">
-                        <option>Python</option>
-                        <option>C</option>
-                        <option>Java</option>
-                        <option>C++</option>
-                        <option>C#</option>
-                    </select>
-                </div>
-                <div class="custom-dropdown">
-                    <label for="compiler">Compiler</label>
-                    <select id="compiler">
-                        <option>GCC</option>
-                        <option>Clang</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <label for="commands">Commands:</label>
-                    <textarea id="commands" placeholder="e.g., gcc program.c -o program.out\n./program.out"></textarea>
-                </div>
-            </div> -->
-
       <div class="upload-section-container">
 
         <div class="upload-box upload-section">
@@ -70,13 +51,13 @@
           <form action="/api/upload" class="dropzone" id="marking-scheme-dropzone"></form>
         </div>
 
-        <div class="input-group">
-          <label for="student-id">Student ID:</label>
-          <input type="text" id="student-id" placeholder="Enter student ID">
+        <div class="commands-section">
+          <h3>Run Commands</h3>
+          <div id="monaco-editor" class="code-editor-wrapper"></div>
         </div>
 
         <div class="upload-section">
-          <h3>Upload Student’s Answer</h3>
+          <h3>Upload Student's Answer</h3>
           <form action="/api/upload" class="dropzone" id="student-answer-dropzone"></form>
         </div>
 
@@ -85,7 +66,10 @@
       </div>
 
       <div class="submit-progress-container">
-        <button type="button" id="submit-assignment" class="submit-button">Submit</button>
+        <div class="button-container">
+          <button type="button" id="run-code" class="submit-button">Run Code</button>
+          <button type="button" id="submit-assignment" class="submit-button">Submit</button>
+        </div>
         <progress id="progress-bar" value="0" max="100" style="width: 100%; display: none;"></progress>
       </div>
 
