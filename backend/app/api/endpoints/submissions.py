@@ -48,7 +48,7 @@ async def grade_code(
             marking_scheme = read_file_content(req.marking_scheme_filename)
 
         code_run_output = ""
-        if req.code_run_result_id != "":
+        if req.code_run_result_id:
             code_run_result = session.get(CodeRunResult, req.code_run_result_id)
             if not code_run_result:
                 raise HTTPException(
