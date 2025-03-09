@@ -58,27 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
 function submitAssignment() {
   const submitBtn = document.getElementById("submit-assignment");
   const runBtn = document.getElementById("run-code");
-  const progressBar = document.getElementById("progress-bar");
 
   // Set loading state
   setButtonLoading(submitBtn, true);
   runBtn.disabled = true;
-
-  // Show progress bar
-  progressBar.style.display = "block";
-  let progress = 0;
-
-  const interval = setInterval(() => {
-    if (progress >= 100) {
-      clearInterval(interval);
-      progressBar.style.display = "none"; // Hide progress bar
-      setButtonLoading(submitBtn, false);
-      runBtn.disabled = false; // Re-enable button
-    } else {
-      progress += 10;
-      progressBar.value = progress;
-    }
-  }, 500); // Increased delay to 500ms
 
   const studentId = document.getElementById("student-id").value;
   const language = document.getElementById("language").value;
@@ -89,31 +72,26 @@ function submitAssignment() {
 
   if (!language || language === '-') {
     alert("Please select a language.");
-    resetProgressBar();
     return;
   }
 
   if (!version || version === '-') {
     alert("Please select a version.");
-    resetProgressBar();
     return;
   }
 
   if (!markingSchemeFilename) {
     alert("Please upload the marking scheme.");
-    resetProgressBar();
     return;
   }
 
   if (!studentAnswerZipFilename) {
     alert("Please upload the student's answer.");
-    resetProgressBar();
     return;
   }
 
   if (!studentId) {
     alert("Please enter the student ID.");
-    resetProgressBar();
     return;
   }
 
@@ -150,19 +128,13 @@ function submitAssignment() {
       }
 
       alert("Assignment submitted successfully!");
+      setButtonLoading(submitBtn, false);
     })
     .catch(error => {
       console.error("Error:", error);
       alert("An error occurred while submitting the assignment. Please try again.");
-      resetProgressBar();
     });
 
-  function resetProgressBar() {
-    clearInterval(interval);
-    progressBar.style.display = "none"; // Hide progress bar
-    setButtonLoading(submitBtn, false);
-    runBtn.disabled = false; // Re-enable button
-  }
 }
 
 function stopRunCode() {
@@ -193,7 +165,7 @@ async function checkRunCodeImage() {
 async function runCode() {
   // check if the run code docker image is ready
   if (!(await checkRunCodeImage())) {
-    alert("The run code docker image not ready yet, it will take around 5 to 10 minutes to build, please be patient :)")
+    alert("The run code docker image not ready yet, it will take around 60 seconds to load, please be patient :)")
     return;
   }
 
@@ -233,6 +205,8 @@ async function runCode() {
   setButtonLoading(runButton, true);
   submitButton.disabled = true;
 
+  const stdinFilename = document.getElementById("stdin-filename").value;
+
   // Create WebSocket connection
   const ws = new WebSocket(`ws://${window.location.host}/ws/run-code`);
 
@@ -242,9 +216,9 @@ async function runCode() {
       language,
       version,
       code_zip_filename: studentAnswerZipFilename,
-      commands: commands
+      commands: commands,
+      stdin_input_filename: stdinFilename || ""
     };
-    // send initial data
     ws.send(JSON.stringify(data));
   };
 
@@ -326,5 +300,18 @@ Dropzone.options.studentAnswerDropzone = {
   error: function(file, response) {
     console.error("File upload error:", response);
     alert("An error occurred while uploading the student's answer. Please try again.");
+  }
+};
+
+Dropzone.options.stdinFileDropzone = {
+  paramName: "file",
+  maxFilesize: 20, // MB
+  success: function(file, response) {
+    console.log("File uploaded successfully:", response.info);
+    document.getElementById("stdin-filename").value = response.filename;
+  },
+  error: function(file, response) {
+    console.error("File upload error:", response);
+    alert("An error occurred while uploading the stdin file. Please try again.");
   }
 };

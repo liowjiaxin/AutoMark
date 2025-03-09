@@ -14,6 +14,7 @@ async def container_run_code_stream(
     version: str | None,
     code_dir: str,
     run_commands: list[str],
+    stdin_input_file_path: str,
     send_output: Callable[[str], Coroutine[Any, Any, None]],
 ):
     """
@@ -32,21 +33,31 @@ async def container_run_code_stream(
     if language not in SUPPORTED_LANGUAGES_LIST:
         raise ValueError("Unsupported language. Use 'python', 'c', 'cpp', or 'java'.")
 
+    uid = os.getuid()
+    gid = os.getgid()
     container_workdir = "/app"
-    volumes = {os.path.abspath(code_dir): {"bind": container_workdir, "mode": "rw"}}
+    volumes = {
+        os.path.abspath(code_dir): {"bind": container_workdir, "mode": "rw"},
+        os.path.abspath(stdin_input_file_path): {
+            "bind": "/code_runner_input.txt",
+            "mode": "rw",
+        },
+    }
     run_commands.insert(0, f"cd {container_workdir}")
 
     cmd_string = " && ".join(run_commands)
+    if stdin_input_file_path != "":
+        cmd_string = f"{cmd_string} < /code_runner_input.txt"
     cmd = f'/bin/sh -c "{cmd_string}"'
 
-    # TODO: support stdin
+    print(cmd)
 
     try:
         # Create and start the container using the prebuilt sandbox image.
         container = client.containers.run(
             image="code-runner",  # Name/tag of code_runner image.
             command=cmd,
-            user="sandboxuser",  # Run as non-root.
+            user="root",
             detach=True,
             stdout=True,
             stderr=True,
@@ -57,7 +68,6 @@ async def container_run_code_stream(
 
         for chunk in container.logs(stream=True, follow=True, stdout=True, stderr=True):
             chunk_str = chunk.decode("utf-8", errors="replace")
-            print("output:", chunk_str)
             await send_output(chunk_str)
 
         result = container.wait()

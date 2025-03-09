@@ -14,7 +14,7 @@ echo "Docker started successfully!"
 # docker build -t code-runner -f /app/code_runner/inner/Dockerfile.code-runner /app/code_runner/inner &
 
 # load the code-runner image
-docker load -i /code-runner.tar
+docker load -i /code-runner.tar &
 
 # Execute the command passed to docker run
 exec "$@"

@@ -7,6 +7,8 @@ from db.models import CodeRunResult
 import json
 import asyncio
 from dataclasses import dataclass
+from core.config import settings
+import os
 
 
 router = APIRouter(prefix="/ws")
@@ -18,7 +20,7 @@ class RunCodeInitialData:
     language: str
     commands: list[str]
     version: str = ""
-    stdin_input: str = ""
+    stdin_input_filename: str = ""
 
 
 @router.websocket("/run-code")
@@ -46,16 +48,23 @@ async def run_code(websocket: WebSocket, session: Session = Depends(get_db)):
             data = await websocket.receive_text()
             try:
                 message: dict = json.loads(data)
-                print(f"Initial data received: {message}")
                 initial_data = RunCodeInitialData(
                     code_zip_filename=message.get("code_zip_filename", ""),
                     language=message.get("language", ""),
                     commands=message.get("commands", []),
                     version=message.get("version", ""),
-                    stdin_input=message.get("stdin_input", ""),
+                    stdin_input_filename=message.get("stdin_input_filename", ""),
                 )
 
                 _, extract_path = extract_zip_file(initial_data.code_zip_filename)
+
+                stdin_input_file_path = ""
+                if initial_data.stdin_input_filename:
+                    stdin_input_file_path = os.path.join(
+                        settings.FILE_UPLOAD_DIR, initial_data.stdin_input_filename
+                    )
+                    if not os.path.exists(stdin_input_file_path):
+                        stdin_input_file_path = ""
 
                 # Start Docker container
                 container_task = asyncio.create_task(
@@ -64,6 +73,7 @@ async def run_code(websocket: WebSocket, session: Session = Depends(get_db)):
                         initial_data.version,
                         extract_path,
                         initial_data.commands,
+                        stdin_input_file_path=stdin_input_file_path,
                         send_output=send_code_run_output,
                     )
                 )
@@ -83,7 +93,6 @@ async def run_code(websocket: WebSocket, session: Session = Depends(get_db)):
         )
 
         while True:
-            print("Start receiving message")
             if container_task.done():  # Check if container task has completed.
                 break
 
