@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Start Docker daemon
 dockerd-entrypoint.sh &
 
@@ -11,7 +11,10 @@ done
 echo "Docker started successfully!"
 
 # Build the inner image
-docker build -t code-runner -f Dockerfile.code-runner /app/code_runner/inner
+# docker build -t code-runner -f /app/code_runner/inner/Dockerfile.code-runner /app/code_runner/inner &
+
+# load the code-runner image
+docker load -i /code-runner.tar &
 
 # Execute the command passed to docker run
 exec "$@"

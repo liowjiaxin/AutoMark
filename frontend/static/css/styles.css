@@ -131,565 +131,742 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: var(--background);
-    color: var(--text);
-    display: flex;
-    height: 100vh;
-    margin: 0;
-    overflow: hidden; /* Prevent body scroll */
-    padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--background);
+  color: var(--text);
+  display: flex;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  /* Prevent body scroll */
+  padding: 0;
 }
 
 .navbar {
-    width: 200px;
-    background-color: var(--primary);
-    color: white;
-    height: 100vh;
-    padding: 20px;
-    box-sizing: border-box;
+  width: 200px;
+  background-color: var(--primary);
+  color: white;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .navbar a {
-    color: white;
-    text-decoration: none;
-    display: block;
-    padding: 10px 0;
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 10px 0;
 }
 
 .content {
-        flex-grow: 1;
-    padding: 20px;
-    height: 100vh; /* Match the height of the navigation bar */
-    overflow-y: auto; /* Enable scrolling */
+  flex-grow: 1;
+  padding: 20px;
+  height: 100vh;
+  /* Match the height of the navigation bar */
+  overflow-y: auto;
+  /* Enable scrolling */
 }
 
 .container {
-    width: 100%;
-    max-width: 1200px;
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: grid;
-    grid-template-columns: 1fr; /* Change to single column */
-    gap: 15px;
-    margin: 10px auto; /* Center the container */
+  width: 100%;
+  max-width: 1200px;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: 1fr;
+  /* Change to single column */
+  gap: 15px;
+  margin: 10px auto;
+  /* Center the container */
 }
 
 .header {
-    grid-column: span 2;
-    color: var(--text);
-    padding: 10px;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 10px;
-    text-align: center;
+  grid-column: span 2;
+  color: var(--text);
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 10px;
+  text-align: center;
 }
 
 .left-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px; /* Reduce the gap between elements */
-    margin-top: 5px;
-    margin-top: 5px; /* Reduce the margin */
-    margin-bottom: 5px; /* Reduce the margin */
-    padding: 5px; /* Reduce the padding */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  /* Reduce the gap between elements */
+  margin-top: 5px;
+  margin-top: 5px;
+  /* Reduce the margin */
+  margin-bottom: 5px;
+  /* Reduce the margin */
+  padding: 5px;
+  /* Reduce the padding */
 }
 
 .box {
-    background: var(--secondary);
-    padding: 8px; /* Reduce the padding */
-    border-radius: 10px;
-    text-align: center;
-    margin-bottom: 5px; /* Reduce the margin */
-    margin-top: 5px;
-    height:auto;
+  background: var(--secondary);
+  padding: 8px;
+  /* Reduce the padding */
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 5px;
+  /* Reduce the margin */
+  margin-top: 5px;
+  height: auto;
 }
 
 .upload-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 5px; /* Reduce the margin */
-    margin-bottom: 5px; /* Reduce the margin */
-    padding: 5px; /* Reduce the padding */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5px;
+  /* Reduce the margin */
+  margin-bottom: 5px;
+  /* Reduce the margin */
+  padding: 5px;
+  /* Reduce the padding */
 }
 
 .results-section {
-    background: var(--accent);
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    margin-top: 5px;
-    margin-bottom: 5px; /* Reduce the margin */
-    height:auto;
-    gap: 10px; /* Reduce the gap between elements */
+  background: var(--accent);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  /* Reduce the margin */
+  height: auto;
+  gap: 10px;
+  /* Reduce the gap between elements */
 }
 
 .submit-section {
-    display: flex;
-    flex-direction: column; /* Change to column layout */
-    justify-content: center;
-    align-items: center; /* Center align items */
-    margin-top: 8px;
-    width: 100%; /* Full width within its container */
+  display: flex;
+  flex-direction: column;
+  /* Change to column layout */
+  justify-content: center;
+  align-items: center;
+  /* Center align items */
+  margin-top: 8px;
+  width: 100%;
+  /* Full width within its container */
 }
 
 button {
-    padding: 10px 20px;
-    background: var(--primary);
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
+  padding: 10px 20px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 button:hover {
-    background: darken(var(--primary), 10%);
+  background: darken(var(--primary), 10%);
 }
 
 .dropzone {
-    width: 100%;
-    padding: 20px;
-    border: 2px dashed lightgray; /* Dashed border */
-    border-radius: 10px;
-    background: var(--background);
-    cursor: pointer;
-    text-align: center; /* Center text and icon */
-    transition: all 0.3s ease; /* Smooth transition */
+  width: 100%;
+  padding: 20px;
+  border: 2px dashed lightgray;
+  /* Dashed border */
+  border-radius: 10px;
+  background: var(--background);
+  cursor: pointer;
+  text-align: center;
+  /* Center text and icon */
+  transition: all 0.3s ease;
+  /* Smooth transition */
 }
 
 .dropzone:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Hover effect with shadow */
-    background: #f4f6f9; /* Light gray background on hover */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  /* Hover effect with shadow */
+  background: #f4f6f9;
+  /* Light gray background on hover */
 }
 
 /* Dropdown and Input Styling */
-.custom-dropdown, .input-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center-align labels */
-    width: 100%;
-    margin-bottom: 5px; /* Reduce the margin */
+.custom-dropdown,
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Center-align labels */
+  width: 100%;
+  margin-bottom: 5px;
+  /* Reduce the margin */
 }
 
-.custom-dropdown select, .input-group textarea, .input-group input {
-    width: 80%; /* Ensure consistent width */
-    padding: 6px; /* Reduce the padding */
-    border: 1px solid var(--primary);
-    border-radius: 5px;
-    background: var(--background);
-    font-size: 14px;
-    box-sizing: border-box;
+.custom-dropdown select,
+.input-group textarea,
+.input-group input {
+  width: 80%;
+  /* Ensure consistent width */
+  padding: 6px;
+  /* Reduce the padding */
+  border: 1px solid var(--primary);
+  border-radius: 5px;
+  background: var(--background);
+  font-size: 14px;
+  box-sizing: border-box;
 }
 
-.custom-dropdown label, .input-group label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 3px; /* Reduce the margin */
-    padding-top: 5px;
-    text-align: center; /* Center-align labels */
+.custom-dropdown label,
+.input-group label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 3px;
+  /* Reduce the margin */
+  padding-top: 5px;
+  text-align: center;
+  /* Center-align labels */
 }
 
 .input-group textarea::placeholder {
-    color: #888;
-    font-style: italic;
-    margin-bottom: 5px;
+  color: #888;
+  font-style: italic;
+  margin-bottom: 5px;
 }
 
 .custom-dropdown-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px; /* Reduce the margin */
-    gap: 10px; /* Add gap between dropdowns */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  /* Reduce the margin */
+  gap: 10px;
+  /* Add gap between dropdowns */
 }
 
 .custom-dropdown {
-    flex: 1;
-    margin: 0 8px; /* Reduce the margin */
+  flex: 1;
+  margin: 0 8px;
+  /* Reduce the margin */
 }
 
 .custom-dropdown label {
-    display: block;
-    margin-bottom: 5px;
+  display: block;
+  margin-bottom: 5px;
 }
 
 .custom-dropdown select {
-    width: 100%;
-    padding: 5px;
+  width: 100%;
+  padding: 5px;
 }
 
 .input-group input#student-id {
-    width: 50%; /* Reduce the width of the student ID input */
-    margin: 0 auto; /* Center the input */
+  width: 50%;
+  /* Reduce the width of the student ID input */
+  margin: 0 auto;
+  /* Center the input */
 }
 
 .input-group textarea#commands {
-    width: 80%; /* Increase the width of the commands input */
-    margin: 0 auto; /* Center the input */
-    height: 38px; /* Match height to dropdowns */
+  width: 80%;
+  /* Increase the width of the commands input */
+  margin: 0 auto;
+  /* Center the input */
+  height: 38px;
+  /* Match height to dropdowns */
 }
 
 h1 {
-    text-align: center;
-    margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .search-bar {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
 .search-bar input {
-    width: 300px;
-    padding: 10px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  width: 300px;
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .search-bar button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #88b57d;
-    color: black;
-    border-radius: 4px;
-    cursor: pointer;
+  padding: 10px 20px;
+  border: none;
+  background-color: #88b57d;
+  color: black;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .search-bar button:hover {
-    background-color: #6a8b6d; /* Manually specify a darker shade of primary-400 */
+  background-color: #6a8b6d;
+  /* Manually specify a darker shade of primary-400 */
 }
 
 .sort-filter-buttons {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
 .sort-filter-buttons button {
-    padding: 10px 20px;
-    margin: 0 5px;
-    border: none;
-    background-color: var(--secondary);
-    color: black;
-    border-radius: 4px;
-    cursor: pointer;
-    border: 2px solid transparent; /* Default border (transparent) */
+  padding: 10px 20px;
+  margin: 0 5px;
+  border: none;
+  background-color: var(--secondary);
+  color: black;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  /* Default border (transparent) */
 }
 
 .sort-filter-buttons button:hover {
-    background-color: #5da29d; /* Replace with a darker shade of secondary color */
-    transition: background-color 0.3s ease;
-    border-color: black; /* Add black outline on hover */
+  background-color: #5da29d;
+  /* Replace with a darker shade of secondary color */
+  transition: background-color 0.3s ease;
+  border-color: black;
+  /* Add black outline on hover */
 }
 
 table {
-    width: 100%; /* Ensure the table spans the entire width of the container */
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    background: white; /* White background */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadows */
+  width: 100%;
+  /* Ensure the table spans the entire width of the container */
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background: white;
+  /* White background */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* Soft shadows */
 }
 
-table, th, td {
-    border: 1px solid #dee2e6;
+table,
+th,
+td {
+  border: 1px solid #dee2e6;
 }
 
-th, td {
-    padding: 12px;
-    text-align: left;
+th,
+td {
+  padding: 12px;
+  text-align: left;
 }
 
 th {
-    background-color: #f1f1f1;
-    cursor: pointer; /* Indicate sortable columns */
+  background-color: #f1f1f1;
+  cursor: pointer;
+  /* Indicate sortable columns */
 }
 
 tbody tr:nth-child(even) {
-    background-color: #f9f9f9; /* Alternating row colors */
+  background-color: #f9f9f9;
+  /* Alternating row colors */
 }
 
 .status-pass {
-    color: green;
+  color: green;
 }
 
 .status-fail {
-    color: red;
+  color: red;
 }
 
 @media (max-width: 768px) {
-    .search-bar, .sort-filter-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
 
-    .search-bar input {
-        width: 100%;
-        margin-bottom: 10px;
-    }
+  .search-bar,
+  .sort-filter-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .sort-filter-buttons button {
-        width: 100%;
-        margin-bottom: 10px;
-    }
+  .search-bar input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .sort-filter-buttons button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 }
 
 .upload-container {
-    display: flex;
-    flex-direction: column; /* Change to column layout */
-    flex-grow: 1; /* Allow the container to grow */
-    width: 100%;
-    max-width: 1200px;
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    gap: 15px;
-    margin: 10px auto; /* Center the container */
+  display: flex;
+  flex-direction: column;
+  /* Change to column layout */
+  flex-grow: 1;
+  /* Allow the container to grow */
+  width: 100%;
+  max-width: 1200px;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  gap: 15px;
+  margin: 10px auto;
+  /* Center the container */
 }
 
 .upload-left-section {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* Increase gap for better readability */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* Increase gap for better readability */
 }
 
 .upload-box {
-    background: none; /* Remove background color */
-    padding: 8px;
-    border-radius: 10px;
-    text-align: center;
-    margin-bottom: 5px;
-    height: auto;
+  background: none;
+  /* Remove background color */
+  padding: 8px;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 5px;
+  height: auto;
 }
 
 .upload-section-container {
-    display: flex;
-    gap: 20px; /* Consistent gap */
-    align-items: center; /* Align items vertically */
+  display: flex;
+  gap: 20px;
+  /* Consistent gap */
+  align-items: center;
+  /* Align items vertically */
 }
 
 .upload-section {
-    flex: 1;
-    min-width: 30%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    padding: 5px;
+  flex: 1;
+  min-width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
 }
 
 .submit-section {
-    display: flex;
-    flex-direction: column; /* Change to column layout */
-    justify-content: center;
-    align-items: center; /* Center align items */
-    margin-top: 8px;
-    width: 100%; /* Full width within its container */
+  display: flex;
+  flex-direction: column;
+  /* Change to column layout */
+  justify-content: center;
+  align-items: center;
+  /* Center align items */
+  margin-top: 8px;
+  width: 100%;
+  /* Full width within its container */
 }
 
 button {
-    padding: 10px 20px;
-    background: var(--primary);
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
+  padding: 10px 20px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 button:hover {
-    background: #6a8b6d; /* Manually specify a darker shade of primary-400 */
+  background: #6a8b6d;
+  /* Manually specify a darker shade of primary-400 */
 }
 
 .submit-button {
-    background: #4CAF50; /* Green background */
-    border-radius: 10px; /* Rounded corners */
-    width: 100%; /* Full width */
-    margin-bottom: 10px; /* Add margin to separate from progress bar */
+  background: #4CAF50;
+  border-radius: 10px;
+  width: 100%;
 }
 
 .submit-button:hover {
-    background: #45a049; /* Darker green on hover */
-}
-
-/* Progress Bar */
-.progress-bar-container {
-    width: 80%;
-    background-color: #f3f3f3; /* Light gray background */
-    border-radius: 10px;
-    overflow: hidden;
-    margin-top: 10px; /* Adjust margin for spacing */
-    text-align: center; /* Align to the center */
-}
-
-.submit-progress-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centers the items */
-    gap: 10px; /* Adds spacing */
-}
-
-.progress-bar-container {
-    width: 80%;
-    text-align: center;
+  background: #45a049;
+  /* Darker green on hover */
 }
 
 /* Live Logs Panel */
 .live-logs {
-    position: relative; /* Add relative positioning */
-    background: #333; /* Dark background */
-    color: #f4f6f9; /* Light text */
-    border: 1px solid var(--primary);
-    border-radius: 10px;
-    padding: 10px;
-    margin-top: 20px;
-    height: 200px;
-    overflow-y: auto;
-    font-family: monospace; /* Monospace font */
+  position: relative;
+  /* Add relative positioning */
+  background: #333;
+  /* Dark background */
+  color: #f4f6f9;
+  /* Light text */
+  border: 1px solid var(--primary);
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 20px;
+  height: 200px;
+  overflow-y: auto;
+  font-family: monospace;
+  /* Monospace font */
 }
 
 .stop-button {
-    position: absolute; /* Position the button absolutely */
-    top: 10px; /* 10px from the top */
-    right: 10px; /* 10px from the right */
-    background: #ff4c4c; /* Red background */
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    padding: 5px 10px;
+  position: absolute;
+  /* Position the button absolutely */
+  top: 10px;
+  /* 10px from the top */
+  right: 10px;
+  /* 10px from the right */
+  background: #ff4c4c;
+  /* Red background */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 5px 10px;
 }
 
 .stop-button:hover {
-    background: #e04343; /* Darker red on hover */
+  background: #e04343;
+  /* Darker red on hover */
 }
 
 /* Dropdown and Input Styling */
-.custom-dropdown, .input-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center-align labels */
-    width: 50%;
-    margin-bottom: 5px; /* Reduce the margin */
+.custom-dropdown,
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Center-align labels */
+  width: 50%;
+  margin-bottom: 5px;
+  /* Reduce the margin */
 }
 
-.input-group input{
-    width: 70%; /* Same as dropdowns */
-    height: 50px; /* Match dropdown height */    
+.input-group input {
+  width: 70%;
+  /* Same as dropdowns */
+  height: 50px;
+  /* Match dropdown height */
 }
 
 .input-group textarea {
-    width: 70%; /* Same as dropdowns */
-    height: 60%; /* Set a fixed height */
-}
-
-.custom-dropdown select{
-    width: 70%; /* Reduce width slightly */
-    padding: 6px; /* Reduce the padding */
-    border: 1px solid var(--primary);
-    border-radius: 5px;
-    background: var(--background);
-    font-size: 14px;
-    box-sizing: border-box;
-    text-align: center; /* Center the text inside */
-}
-
-.custom-dropdown label, .input-group label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 3px; /* Reduce the margin */
-    padding-top: 5px;
-    text-align: center; /* Center-align labels */
-}
-
-textarea {
-    width: 100%; /* Match dropdown width */
-    height: 40px; /* Match dropdown height */
-    text-align: center; /* Center text */
-    resize: none; /* Prevent resizing */
-}
-
-.input-group textarea::placeholder {
-    color: #888;
-    font-style: italic;
-    margin-bottom: 5px;
-}
-
-.custom-dropdown-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px; /* Reduce the margin */
-    gap: 10px; /* Add gap between dropdowns */
-}
-
-.custom-dropdown {
-    flex: 1;
-    margin: 0 8px; /* Reduce the margin */
-}
-
-.custom-dropdown label {
-    display: block;
-    margin-bottom: 5px;
+  width: 70%;
+  /* Same as dropdowns */
+  height: 60%;
+  /* Set a fixed height */
 }
 
 .custom-dropdown select {
-    width: 100%;
-    padding: 5px;
+  width: 70%;
+  /* Reduce width slightly */
+  padding: 6px;
+  /* Reduce the padding */
+  border: 1px solid var(--primary);
+  border-radius: 5px;
+  background: var(--background);
+  font-size: 14px;
+  box-sizing: border-box;
+  text-align: center;
+  /* Center the text inside */
+}
+
+.custom-dropdown label,
+.input-group label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 3px;
+  /* Reduce the margin */
+  padding-top: 5px;
+  text-align: center;
+  /* Center-align labels */
+}
+
+textarea {
+  width: 100%;
+  /* Match dropdown width */
+  height: 40px;
+  /* Match dropdown height */
+  text-align: center;
+  /* Center text */
+  resize: none;
+  /* Prevent resizing */
+}
+
+.input-group textarea::placeholder {
+  color: #888;
+  font-style: italic;
+  margin-bottom: 5px;
+}
+
+.custom-dropdown-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  /* Reduce the margin */
+  gap: 10px;
+  /* Add gap between dropdowns */
+}
+
+.custom-dropdown {
+  flex: 1;
+  margin: 0 8px;
+  /* Reduce the margin */
+}
+
+.custom-dropdown label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.custom-dropdown select {
+  width: 100%;
+  padding: 5px;
 }
 
 .input-group input#student-id {
-    width: 80%; /* Increase width for better visibility */
-    margin: 0 auto; /* Center the input */
+  width: 80%;
+  /* Increase width for better visibility */
+  margin: 0 auto;
+  /* Center the input */
 }
 
 .input-group textarea#commands {
-    width: 100%; /* Increase the width of the commands input */
-    margin: 0 auto; /* Center the input */
-    height: 38px; /* Match height to dropdowns */
+  width: 100%;
+  /* Increase the width of the commands input */
+  margin: 0 auto;
+  /* Center the input */
+  height: 38px;
+  /* Match height to dropdowns */
 }
 
 h1 {
-    text-align: center;
-    margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 /* Live Logs and Results sections side by side */
 .live-logs-results-container {
-    display: flex;
-    gap: 20px; /* Add spacing between the two sections */
-    margin-top: 20px; /* Add margin to separate from other content */
+  display: flex;
+  gap: 20px;
+  /* Add spacing between the two sections */
+  margin-top: 20px;
+  /* Add margin to separate from other content */
 }
 
-.live-logs, .upload-results-container {
-    flex: 1; /* Allow both sections to take equal space */
+.live-logs,
+.upload-results-container {
+  flex: 1;
+  /* Allow both sections to take equal space */
 }
 
 .result-card {
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .result-card h2 {
-    text-align: center;
-    margin-bottom: 15px;
-    color: #333;
+  text-align: center;
+  margin-bottom: 15px;
+  color: #333;
 }
 
 .feedback-section {
-    background: #f8f9fa;
-    padding: 10px;
-    border-radius: 5px;
-    max-height: 200px;
-    overflow-y: auto;
-    border: 1px solid #ddd;
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 5px;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+}
+
+.button-container {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  justify-content: center;
+}
+
+.loading {
+  position: relative;
+  cursor: not-allowed !important;
+  opacity: 0.7;
+}
+
+.loading::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border: 4px solid transparent;
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: button-loading-spinner 1s ease infinite;
+}
+
+@keyframes button-loading-spinner {
+  from {
+    transform: rotate(0turn);
+  }
+
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.commands-section {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  background: #f5f5f5;
+  border-radius: 5px;
+  flex: 1;
+  max-width: 600px;
+}
+
+.code-editor-wrapper {
+  height: 150px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.upload-files-row {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.upload-files-row .upload-section {
+  flex: 1;
+  min-width: 0;
+  /* Prevents flex items from overflowing */
+}
+
+.commands-row {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  /* Aligns items to the top */
+  justify-content: space-evenly;
+}
+
+.commands-section {
+  flex: 1;
+  margin: 0;
+}
+
+.buttons-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 43px;
+  /* Matches the height of the commands section h3 */
+}
+
+.buttons-column button {
+  width: 120px;
+  /* Fixed width for buttons */
 }

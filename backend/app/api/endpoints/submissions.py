@@ -48,17 +48,13 @@ async def grade_code(
             marking_scheme = read_file_content(req.marking_scheme_filename)
 
         code_run_output = ""
-        if req.code_run_result_id != "":
+        if req.code_run_result_id:
             code_run_result = session.get(CodeRunResult, req.code_run_result_id)
             if not code_run_result:
                 raise HTTPException(
                     status_code=400, detail="Invalid code run result id"
                 )
-            print("code run result:", code_run_result)
-            print("code run output:", code_run_result.output)
             code_run_output = code_run_result.output if code_run_result.output else ""
-
-        # NOTE: Less important, the progress bar effect, maybe with SSE also?
 
         # Grade the code
         marks, feedback = grader.grade(

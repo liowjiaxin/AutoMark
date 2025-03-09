@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
   <link rel="stylesheet" href="/static/css/styles.css"> <!-- Link to external CSS -->
   <script defer src="/static/js/upload_code.js"></script> <!-- Link to new script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.47.0/min/vs/loader.min.js"></script>
 </head>
 
 <body>
@@ -23,90 +24,80 @@
       <h1>Upload Student's Work</h1>
     </div>
     <div class="upload-container">
-      <div class="custom-dropdown-container">
-        <div class="custom-dropdown">
-          <label for="language">Language</label>
-          <select id="language">
-            <option>Python</option>
-            <option>C</option>
-            <option>Java</option>
-          </select>
-        </div>
-        <div class="custom-dropdown">
-          <label for="version">Version</label>
-          <select id="version" disabled>
-            <option>-</option>
-          </select>
+      <div class="input-controls-row">
+        <div class="custom-dropdown-container">
+          <div class="custom-dropdown">
+            <label for="language">Language</label>
+            <select id="language">
+              <option>Python</option>
+              <option>C</option>
+              <option>Java</option>
+            </select>
+          </div>
+          <div class="custom-dropdown">
+            <label for="version">Version</label>
+            <select id="version" disabled>
+              <option>-</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label for="student-id">Student ID:</label>
+            <input type="text" id="student-id" placeholder="Enter student ID">
+          </div>
         </div>
       </div>
-      <!-- <div class="upload-left-section">
-                <div class="custom-dropdown">
-                    <label for="language">Language</label>
-                    <select id="language">
-                        <option>Python</option>
-                        <option>C</option>
-                        <option>Java</option>
-                        <option>C++</option>
-                        <option>C#</option>
-                    </select>
-                </div>
-                <div class="custom-dropdown">
-                    <label for="compiler">Compiler</label>
-                    <select id="compiler">
-                        <option>GCC</option>
-                        <option>Clang</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <label for="commands">Commands:</label>
-                    <textarea id="commands" placeholder="e.g., gcc program.c -o program.out\n./program.out"></textarea>
-                </div>
-            </div> -->
 
-      <div class="upload-section-container">
-
-        <div class="upload-box upload-section">
+      <div class="upload-files-row">
+        <div class="upload-section">
           <h3>Upload Marking Scheme</h3>
           <form action="/api/upload" class="dropzone" id="marking-scheme-dropzone"></form>
         </div>
 
-        <div class="input-group">
-          <label for="student-id">Student ID:</label>
-          <input type="text" id="student-id" placeholder="Enter student ID">
-        </div>
-
         <div class="upload-section">
-          <h3>Upload Student’s Answer</h3>
+          <h3>Upload Student's Answer</h3>
           <form action="/api/upload" class="dropzone" id="student-answer-dropzone"></form>
         </div>
 
-        <input type="hidden" id="marking-scheme-filename">
-        <input type="hidden" id="student-answer-zip-filename">
-      </div>
-
-      <div class="submit-progress-container">
-        <button type="button" id="submit-assignment" class="submit-button">Submit</button>
-        <progress id="progress-bar" value="0" max="100" style="width: 100%; display: none;"></progress>
-      </div>
-
-      <div class="live-logs-results-container">
-        <div class="live-logs" id="live-logs">
-          <h3>Live Logs</h3>
-          <button type="button" id="stop-run-code" class="stop-button">Stop Run Code</button>
-          <div id="logs-content"></div>
+        <div class="upload-section">
+          <h3>Upload Stdin File (Optional)</h3>
+          <form action="/api/upload" class="dropzone" id="stdin-file-dropzone"></form>
         </div>
+      </div>
 
-        <div class="upload-results-container">
-          <div class="upload-box upload-results-section">
-            <!-- <h3>Results</h3> -->
-            <div class="result-card">
-              <h2>Results</h2>
-              <p><strong>Marks:</strong> <span id="marks"></span></p>
-              <p><strong>Grade:</strong> <span id="grade"></span></p>
-              <div class="feedback-section">
-                <h3>Feedback:</h3>
-                <p id="feedback"></p>
-              </div>
+      <div class="commands-row">
+        <div class="commands-section">
+          <h3>Run Commands</h3>
+          <div id="monaco-editor" class="code-editor-wrapper"></div>
+        </div>
+        <div class="buttons-column">
+          <button type="button" id="run-code" class="submit-button">Run Code</button>
+          <button type="button" id="submit-assignment" class="submit-button">Submit</button>
+        </div>
+      </div>
+
+      <input type="hidden" id="marking-scheme-filename">
+      <input type="hidden" id="student-answer-zip-filename">
+      <input type="hidden" id="stdin-filename">
+      <input type="hidden" id="code-run-result-id">
+    </div>
+
+    <div class="live-logs-results-container">
+      <div class="live-logs" id="live-logs">
+        <h3>Live Logs</h3>
+        <button type="button" id="stop-run-code" class="stop-button">Stop Run Code</button>
+        <div id="logs-content"></div>
+      </div>
+
+      <div class="upload-results-container">
+        <div class="upload-box upload-results-section">
+          <!-- <h3>Results</h3> -->
+          <div class="result-card">
+            <h2>Results</h2>
+            <p><strong>Marks:</strong> <span id="marks"></span></p>
+            <p><strong>Grade:</strong> <span id="grade"></span></p>
+            <div class="feedback-section">
+              <h3>Feedback:</h3>
+              <p id="feedback"></p>
             </div>
           </div>
         </div>

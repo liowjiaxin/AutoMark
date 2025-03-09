@@ -24,7 +24,8 @@ services:
     privileged: true
     volumes:
       - ./backend/uploaded_files:/app/uploaded_files
-      - code_runner_data:/var/lib/docker
+      # - code_runner_data:/var/lib/docker
+      - ./code-runner.tar:/code-runner.tar
     depends_on:
       db:
         condition: service_healthy
@@ -33,7 +34,7 @@ services:
       test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
 
   db:
     image: mysql:8.0
@@ -45,7 +46,8 @@ services:
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      timeout: 20s
+      interval: 5s
+      timeout: 2s
       retries: 10
 
 

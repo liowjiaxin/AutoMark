@@ -1,6 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById("submit-assignment").addEventListener("click", submitAssignment);
   document.getElementById("stop-run-code").addEventListener("click", stopRunCode);
+  document.getElementById("run-code").addEventListener("click", runCode);
+
+  // Initialize Monaco Editor
+  require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.47.0/min/vs' } });
+  require(['vs/editor/editor.main'], function() {
+    window.editor = monaco.editor.create(document.getElementById('monaco-editor'), {
+      value: '#!/bin/bash\n# Type your commands here\n# Example: python main.py',
+      language: 'shell',
+      theme: 'vs',
+      minimap: { enabled: false },
+      lineNumbers: 'on',
+      roundedSelection: false,
+      scrollBeyondLastLine: false,
+      readOnly: false,
+      fontSize: 14,
+      automaticLayout: true,
+      wordWrap: 'on',
+      wrappingStrategy: 'advanced'
+    });
+  });
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -37,63 +57,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function submitAssignment() {
   const submitBtn = document.getElementById("submit-assignment");
-  const progressBar = document.getElementById("progress-bar");
+  const runBtn = document.getElementById("run-code");
 
-  // Disable button and change style
-  submitBtn.disabled = true;
-  submitBtn.style.backgroundColor = "#ccc"; // Grey color
-  submitBtn.style.cursor = "not-allowed";
-
-  // Show progress bar
-  progressBar.style.display = "block";
-  let progress = 0;
-
-  const interval = setInterval(() => {
-    if (progress >= 100) {
-      clearInterval(interval);
-      progressBar.style.display = "none"; // Hide progress bar
-      submitBtn.disabled = false; // Re-enable button
-      submitBtn.style.backgroundColor = ""; // Reset color
-      submitBtn.style.cursor = "pointer";
-    } else {
-      progress += 10;
-      progressBar.value = progress;
-    }
-  }, 500); // Increased delay to 500ms
+  // Set loading state
+  setButtonLoading(submitBtn, true);
+  runBtn.disabled = true;
 
   const studentId = document.getElementById("student-id").value;
   const language = document.getElementById("language").value;
   const version = document.getElementById("version").value;
   const studentAnswerZipFilename = document.getElementById("student-answer-zip-filename").value;
   const markingSchemeFilename = document.getElementById("marking-scheme-filename").value;
+  const codeRunResultId = document.getElementById("code-run-result-id").value || undefined;
 
   if (!language || language === '-') {
     alert("Please select a language.");
-    resetProgressBar();
     return;
   }
 
   if (!version || version === '-') {
     alert("Please select a version.");
-    resetProgressBar();
     return;
   }
 
   if (!markingSchemeFilename) {
     alert("Please upload the marking scheme.");
-    resetProgressBar();
     return;
   }
 
   if (!studentAnswerZipFilename) {
     alert("Please upload the student's answer.");
-    resetProgressBar();
     return;
   }
 
   if (!studentId) {
     alert("Please enter the student ID.");
-    resetProgressBar();
     return;
   }
 
@@ -102,7 +100,8 @@ function submitAssignment() {
     language,
     version,
     code_zip_filename: studentAnswerZipFilename,
-    marking_scheme_filename: markingSchemeFilename
+    marking_scheme_filename: markingSchemeFilename,
+    code_run_result_id: codeRunResultId
   };
 
   fetch("/api/grade", {
@@ -129,20 +128,13 @@ function submitAssignment() {
       }
 
       alert("Assignment submitted successfully!");
+      setButtonLoading(submitBtn, false);
     })
     .catch(error => {
       console.error("Error:", error);
       alert("An error occurred while submitting the assignment. Please try again.");
-      resetProgressBar();
     });
 
-  function resetProgressBar() {
-    clearInterval(interval);
-    progressBar.style.display = "none"; // Hide progress bar
-    submitBtn.disabled = false; // Re-enable button
-    submitBtn.style.backgroundColor = ""; // Reset color
-    submitBtn.style.cursor = "pointer";
-  }
 }
 
 function stopRunCode() {
@@ -150,7 +142,113 @@ function stopRunCode() {
   alert("Run code stopped.");
 }
 
-// TODO: add run code function, using websocket
+function setButtonLoading(button, isLoading) {
+  if (isLoading) {
+    // Store the original text as a data attribute
+    button.dataset.originalText = button.textContent;
+    button.classList.add('loading');
+    button.textContent = '';
+  } else {
+    button.classList.remove('loading');
+    // Restore the original text from the data attribute
+    button.textContent = button.dataset.originalText || button.textContent;
+  }
+  button.disabled = isLoading;
+}
+
+async function checkRunCodeImage() {
+  const result = await fetch("/api/code-runner-image-healthy");
+  const json = await result.json();
+  return json.found;
+}
+
+async function runCode() {
+  // check if the run code docker image is ready
+  if (!(await checkRunCodeImage())) {
+    alert("The run code docker image not ready yet, it will take around 60 seconds to load, please be patient :)")
+    return;
+  }
+
+  const runButton = document.getElementById("run-code");
+  const submitButton = document.getElementById("submit-assignment");
+
+  // Validate inputs
+  const language = document.getElementById("language").value;
+  const version = document.getElementById("version").value;
+  const studentAnswerZipFilename = document.getElementById("student-answer-zip-filename").value;
+  const commands = window.editor.getValue()
+    .split('\n')
+    .filter(line => line.trim() && !line.startsWith('#') && line !== '#!/bin/bash');
+  console.log(commands)
+
+  if (!language || language === '-') {
+    alert("Please select a language.");
+    return;
+  }
+
+  if (!version || version === '-') {
+    alert("Please select a version.");
+    return;
+  }
+
+  if (!studentAnswerZipFilename) {
+    alert("Please upload the student's answer.");
+    return;
+  }
+
+  if (commands.length === 0) {
+    alert("Please enter at least one command to run.");
+    return;
+  }
+
+  // Set loading state
+  setButtonLoading(runButton, true);
+  submitButton.disabled = true;
+
+  const stdinFilename = document.getElementById("stdin-filename").value;
+
+  // Create WebSocket connection
+  const ws = new WebSocket(`ws://${window.location.host}/ws/run-code`);
+
+  ws.onopen = () => {
+    console.log('WebSocket connection established');
+    const data = {
+      language,
+      version,
+      code_zip_filename: studentAnswerZipFilename,
+      commands: commands,
+      stdin_input_filename: stdinFilename || ""
+    };
+    ws.send(JSON.stringify(data));
+  };
+
+  ws.onmessage = (event) => {
+    // live log code run output
+    const logsContent = document.getElementById('logs-content');
+    const contentJson = JSON.parse(event.data);
+    if (contentJson.output) {
+      logsContent.innerHTML += contentJson.output + '<br>';
+      logsContent.scrollTop = logsContent.scrollHeight;
+    } else if (contentJson.code_run_id) {
+      document.querySelector("#code-run-result-id").value = contentJson.code_run_id;
+    }
+  };
+
+  ws.onclose = () => {
+    console.log('WebSocket connection closed');
+    // Reset button states
+    setButtonLoading(runButton, false);
+    submitButton.disabled = false;
+  };
+
+  ws.onerror = (error) => {
+    console.error('WebSocket error:', error);
+    alert('An error occurred while running the code. Please try again.');
+    // Reset button states
+    setButtonLoading(runButton, false);
+    submitButton.disabled = false;
+  };
+}
 
 // Function to determine grade if not provided
 function calculateGrade(marks) {
@@ -205,18 +303,15 @@ Dropzone.options.studentAnswerDropzone = {
   }
 };
 
-function fetchResults() {
-  // Fetch data from the backend (replace with actual backend API)
-  fetch('https://api.example.com/student-results')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => populateTable(data))
-    .catch(error => {
-      console.error('Error fetching data:', error);
-      alert('An error occurred while fetching the results. Please try again.');
-    });
-}
+Dropzone.options.stdinFileDropzone = {
+  paramName: "file",
+  maxFilesize: 20, // MB
+  success: function(file, response) {
+    console.log("File uploaded successfully:", response.info);
+    document.getElementById("stdin-filename").value = response.filename;
+  },
+  error: function(file, response) {
+    console.error("File upload error:", response);
+    alert("An error occurred while uploading the stdin file. Please try again.");
+  }
+};

@@ -69,8 +69,9 @@ You are an expert grader for programming assignments. Using all available data, 
 **Instructions:**
 1. Review the original code, rubrics, style analysis, and additional metadata.
 2. Consider all factors (code correctness, style, testing, and execution behavior).
-3. Provide a final grade (for example, a percentage or score out of 100).
-4. Offer comprehensive feedback that highlights strengths, identifies weaknesses, and suggests areas for improvement.
+3. Analyze the program output (if any) about any errors.
+4. Provide a final grade (for example, a percentage or score out of 100).
+5. Offer comprehensive feedback that highlights strengths, identifies weaknesses, and suggests areas for improvement.
 
 **Output Format:**
 Return your evaluation as a JSON object with the following keys:
