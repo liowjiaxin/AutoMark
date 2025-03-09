@@ -50,7 +50,7 @@ async def run_code(websocket: WebSocket, session: Session = Depends(get_db)):
                 initial_data = RunCodeInitialData(
                     code_zip_filename=message.get("code_zip_filename", ""),
                     language=message.get("language", ""),
-                    commands=message.get("command", ""),
+                    commands=message.get("commands", []),
                     version=message.get("version", ""),
                     stdin_input=message.get("stdin_input", ""),
                 )
@@ -83,6 +83,10 @@ async def run_code(websocket: WebSocket, session: Session = Depends(get_db)):
         )
 
         while True:
+            print("Start receiving message")
+            if container_task.done():  # Check if container task has completed.
+                break
+
             data = await websocket.receive_text()
             message = json.loads(data)
 

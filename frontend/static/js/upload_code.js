@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById("run-code").addEventListener("click", runCode);
 
   // Initialize Monaco Editor
-  require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.47.0/min/vs' }});
+  require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.47.0/min/vs' } });
   require(['vs/editor/editor.main'], function() {
     window.editor = monaco.editor.create(document.getElementById('monaco-editor'), {
       value: '#!/bin/bash\n# Type your commands here\n# Example: python main.py',
@@ -85,6 +85,7 @@ function submitAssignment() {
   const version = document.getElementById("version").value;
   const studentAnswerZipFilename = document.getElementById("student-answer-zip-filename").value;
   const markingSchemeFilename = document.getElementById("marking-scheme-filename").value;
+  const codeRunResultId = document.getElementById("code-run-result-id").value || undefined;
 
   if (!language || language === '-') {
     alert("Please select a language.");
@@ -121,7 +122,8 @@ function submitAssignment() {
     language,
     version,
     code_zip_filename: studentAnswerZipFilename,
-    marking_scheme_filename: markingSchemeFilename
+    marking_scheme_filename: markingSchemeFilename,
+    code_run_result_id: codeRunResultId
   };
 
   fetch("/api/grade", {
@@ -182,19 +184,31 @@ function setButtonLoading(button, isLoading) {
   button.disabled = isLoading;
 }
 
-function runCode() {
+async function checkRunCodeImage() {
+  const result = await fetch("/api/code-runner-image-healthy");
+  const json = await result.json();
+  return json.found;
+}
+
+async function runCode() {
+  // check if the run code docker image is ready
+  if (!(await checkRunCodeImage())) {
+    alert("The run code docker image not ready yet, it will take around 5 to 10 minutes to build, please be patient :)")
+    return;
+  }
+
   const runButton = document.getElementById("run-code");
   const submitButton = document.getElementById("submit-assignment");
-  
+
   // Validate inputs
   const language = document.getElementById("language").value;
   const version = document.getElementById("version").value;
   const studentAnswerZipFilename = document.getElementById("student-answer-zip-filename").value;
   const commands = window.editor.getValue()
-      .split('\n')
-      .filter(line => line.trim() && !line.startsWith('#') && line !== '#!/bin/bash');
+    .split('\n')
+    .filter(line => line.trim() && !line.startsWith('#') && line !== '#!/bin/bash');
   console.log(commands)
-  
+
   if (!language || language === '-') {
     alert("Please select a language.");
     return;
@@ -230,13 +244,20 @@ function runCode() {
       code_zip_filename: studentAnswerZipFilename,
       commands: commands
     };
+    // send initial data
     ws.send(JSON.stringify(data));
   };
 
   ws.onmessage = (event) => {
+    // live log code run output
     const logsContent = document.getElementById('logs-content');
-    logsContent.innerHTML += event.data + '<br>';
-    logsContent.scrollTop = logsContent.scrollHeight;
+    const contentJson = JSON.parse(event.data);
+    if (contentJson.output) {
+      logsContent.innerHTML += contentJson.output + '<br>';
+      logsContent.scrollTop = logsContent.scrollHeight;
+    } else if (contentJson.code_run_id) {
+      document.querySelector("#code-run-result-id").value = contentJson.code_run_id;
+    }
   };
 
   ws.onclose = () => {
