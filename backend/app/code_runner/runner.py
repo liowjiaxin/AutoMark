@@ -55,7 +55,7 @@ async def container_run_code_stream(
     try:
         # Create and start the container using the prebuilt sandbox image.
         container = client.containers.run(
-            image="code-runner",  # Name/tag of code_runner image.
+            image="code-runner:1.0",  # Name/tag of code_runner image.
             command=cmd,
             user="root",
             detach=True,
