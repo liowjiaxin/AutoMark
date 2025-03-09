@@ -541,6 +541,7 @@ button:hover {
 
 /* Live Logs Panel */
 .live-logs {
+    position: relative; /* Add relative positioning */
     background: #333; /* Dark background */
     color: #f4f6f9; /* Light text */
     border: 1px solid var(--primary);
@@ -550,6 +551,22 @@ button:hover {
     height: 200px;
     overflow-y: auto;
     font-family: monospace; /* Monospace font */
+}
+
+.stop-button {
+    position: absolute; /* Position the button absolutely */
+    top: 10px; /* 10px from the top */
+    right: 10px; /* 10px from the right */
+    background: #ff4c4c; /* Red background */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.stop-button:hover {
+    background: #e04343; /* Darker red on hover */
 }
 
 /* Dropdown and Input Styling */

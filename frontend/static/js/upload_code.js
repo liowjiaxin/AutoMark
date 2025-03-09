@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById("submit-assignment").addEventListener("click", submitAssignment);
+  document.getElementById("stop-run-code").addEventListener("click", stopRunCode);
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -68,26 +69,31 @@ function submitAssignment() {
 
   if (!language || language === '-') {
     alert("Please select a language.");
+    resetProgressBar();
     return;
   }
 
   if (!version || version === '-') {
     alert("Please select a version.");
+    resetProgressBar();
     return;
   }
 
   if (!markingSchemeFilename) {
     alert("Please upload the marking scheme.");
+    resetProgressBar();
     return;
   }
 
   if (!studentAnswerZipFilename) {
     alert("Please upload the student's answer.");
+    resetProgressBar();
     return;
   }
 
   if (!studentId) {
     alert("Please enter the student ID.");
+    resetProgressBar();
     return;
   }
 
@@ -127,7 +133,21 @@ function submitAssignment() {
     .catch(error => {
       console.error("Error:", error);
       alert("An error occurred while submitting the assignment. Please try again.");
+      resetProgressBar();
     });
+
+  function resetProgressBar() {
+    clearInterval(interval);
+    progressBar.style.display = "none"; // Hide progress bar
+    submitBtn.disabled = false; // Re-enable button
+    submitBtn.style.backgroundColor = ""; // Reset color
+    submitBtn.style.cursor = "pointer";
+  }
+}
+
+function stopRunCode() {
+  // Logic to stop the running code
+  alert("Run code stopped.");
 }
 
 // TODO: add run code function, using websocket
