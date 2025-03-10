@@ -23,7 +23,6 @@ async def get_student_result(student_id: int, session: Session = Depends(get_db)
 @router.get("/results/")
 async def get_results(
     offset: int = 0,
-    limit: int = Query(default=10, le=10),
     order_by: str = Query(default=None),
     order_direction: str = Query(default="asc", regex="^(asc|desc)$"),
     session: Session = Depends(get_db),
@@ -44,6 +43,6 @@ async def get_results(
         else:
             statement = statement.order_by(asc(sort_column))
 
-    statement = statement.offset(offset).limit(limit)
+    statement = statement.offset(offset)
     results_list = session.exec(statement).all()
     return {"results": results_list}

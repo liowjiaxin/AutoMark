@@ -870,3 +870,38 @@ h1 {
   width: 120px;
   /* Fixed width for buttons */
 }
+
+#pagination {
+  display: flex;
+  justify-content: center; /* Center the pagination */
+  gap: 10px; /* Adds space between buttons */
+}
+
+.pagination-button {
+  padding: 10px 15px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination-button:hover {
+  background-color: darkgreen;
+}
+
+/* Feedback and See More Styling */
+.feedback-short {
+  display: inline;
+}
+
+.feedback-full {
+  display: none;
+}
+
+.see-more {
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
