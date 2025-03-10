@@ -1,0 +1,3 @@
+# fix line endings problem on Windows
+*.sh text eol=lf
+input.txt text eol=lf
