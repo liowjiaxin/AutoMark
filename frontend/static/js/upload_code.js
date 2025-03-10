@@ -59,10 +59,6 @@ function submitAssignment() {
   const submitBtn = document.getElementById("submit-assignment");
   const runBtn = document.getElementById("run-code");
 
-  // Set loading state
-  setButtonLoading(submitBtn, true);
-  runBtn.disabled = true;
-
   const studentId = document.getElementById("student-id").value;
   const language = document.getElementById("language").value;
   const version = document.getElementById("version").value;
@@ -75,8 +71,8 @@ function submitAssignment() {
     return;
   }
 
-  if (!version || version === '-') {
-    alert("Please select a version.");
+  if (language.toLowerCase() == "python" && (!version || version === '-')) {
+    alert("Please select a python version.");
     return;
   }
 
@@ -94,6 +90,11 @@ function submitAssignment() {
     alert("Please enter the student ID.");
     return;
   }
+
+  // Set loading state
+  setButtonLoading(submitBtn, true);
+  runBtn.disabled = true;
+
 
   const data = {
     student_id: studentId,
@@ -187,7 +188,7 @@ async function runCode() {
   }
 
   if (!version || version === '-') {
-    alert("Please select a version.");
+    alert("Please select a python version.");
     return;
   }
 
