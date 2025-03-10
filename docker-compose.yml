@@ -49,6 +49,19 @@ services:
       timeout: 2s
       retries: 10
 
+  pma:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      UPLOAD_LIMIT: 100M
+    networks:
+      - backend-network
+      - frontend-network
+    depends_on:
+      - db
+    restart: unless-stopped
+
 
 volumes:
   db_data:
