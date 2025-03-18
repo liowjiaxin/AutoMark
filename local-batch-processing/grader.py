@@ -4,9 +4,9 @@ from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.prompts import PromptTemplate
 from pydantic import BaseModel
-from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from load_dataset import DatasetLoader
+from typing import Literal
 import pickle
 import os
 
@@ -101,24 +101,45 @@ class GradeFeedback(BaseModel):
 
 
 class GraderRAG:
-    def __init__(self, dataset_path: str):
-        # Initialize embeddings and vector store
+    def __init__(
+        self, dataset_path: str, model_type: Literal["gemini", "deepseek"] = "gemini"
+    ):
+        self.model_type = model_type
         self.embedder: Embeddings = GoogleGenerativeAIEmbeddings(
             model="models/embedding-001"
         )
         self.dataset_path = dataset_path
         self.vector_store = self._load_or_create_vector_store()
 
-        self.llm = ChatGoogleGenerativeAI(
-            model=GRADER_MODEL_NAME,
-            temperature=0,
-            max_tokens=None,
-            timeout=None,
-            max_retries=2,
-        )
+        self.llm = self._initialize_llm()
 
         # Initialize grader chain
         self.grader = self._create_grader_chain()
+
+    def _initialize_llm(self):
+        """Initialize the LLM based on selected model type"""
+        if self.model_type == "gemini":
+            from langchain_google_genai import ChatGoogleGenerativeAI
+
+            return ChatGoogleGenerativeAI(
+                model=GRADER_MODEL_NAME,
+                temperature=0,
+                max_tokens=None,
+                timeout=None,
+                max_retries=2,
+            )
+        elif self.model_type == "deepseek":
+            from langchain_deepseek import ChatDeepSeek
+
+            return ChatDeepSeek(
+                model="deepseek-chat",
+                temperature=0,
+                max_tokens=None,
+                timeout=None,
+                max_retries=2,
+            )
+        else:
+            raise ValueError(f"Unsupported model type: {self.model_type}")
 
     def _load_or_create_vector_store(self) -> FAISS:
         if os.path.exists(VECTOR_STORE_PATH):

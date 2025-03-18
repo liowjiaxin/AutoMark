@@ -19,6 +19,9 @@ def parse_arguments():
         "-m", "--marking-scheme", required=True, help="Path to PDF marking scheme"
     )
     parser.add_argument("-d", "--dataset", required=True, help="Path to dataset")
+    parser.add_argument(
+        "--modelname", required=False, help="LLM Model (gemini or deepseek)"
+    )
     return parser.parse_args()
 
 
@@ -57,9 +60,14 @@ def main():
         "rubrics": rubrics,
     }
 
+    try:
+        model = args.modelname
+    except Exception:
+        model = "gemini"
+
     # Initialize and run grader
     try:
-        grader = GraderRAG(args.dataset)
+        grader = GraderRAG(args.dataset, model_type=model)
         result = grader.grade(grading_context)
         print("\nGrading Results:")
         print(f"Score: {result['marks']}/100")
