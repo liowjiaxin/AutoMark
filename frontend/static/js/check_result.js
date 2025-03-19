@@ -1,155 +1,174 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
     fetchResults();
 });
 
-function fetchResults() {
-    fetch('/api/results/')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            populateTable(data.results);
-            setupPagination(data.results);
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-            alert('An error occurred while fetching the results. Please try again.');
-        });
+async function fetchResults() {
+    try {
+        const response = await fetch("/api/results/");
+        if (!response.ok) throw new Error("Network response was not ok");
+        
+        const data = await response.json();
+        populateTable(data.results);
+        displayTablePage(1); // Ensure pagination is correctly applied
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        alert("An error occurred while fetching the results. Please try again.");
+    }
 }
 
-function populateTable(data, page = 1, rowsPerPage = 10) {
-    const tableBody = document.querySelector('#resultsTable tbody');
-    tableBody.innerHTML = '';
+function populateTable(data) {
+    const tableBody = document.querySelector("#resultsTable tbody");
+    tableBody.innerHTML = "";
 
-    const start = (page - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
-    const paginatedData = data.slice(start, end);
+    data.forEach(result => {
+        const shortFeedback = result.feedback.substring(0, 100);
+        const feedback =
+            result.feedback.length > 100
+                ? `<span class="short-feedback">${formatFeedback(shortFeedback)}... <a href="#" class="see-more">See more</a></span>
+                   <span class="full-feedback" style="display:none;">${formatFeedback(result.feedback)} <a href="#" class="see-less">See less</a></span>`
+                : formatFeedback(result.feedback);
 
-    paginatedData.forEach(student => {
-        const row = document.createElement('tr');
+        const grade = result.grade || calculateGrade(result.marks);
+
+        const row = document.createElement("tr");
         row.innerHTML = `
-            <td>${student.student_id}</td>
-            <td>${student.code_zip_path}</td>
-            <td>${student.marks}</td>
-            <td>${student.grade}</td>
-            <td>${truncateFeedback(formatFeedback(student.feedback))}</td>
+            <td>${result.student_id}</td>
+            <td><a href="${result.code_zip_path}" target="_blank">Download Code</a></td>
+            <td>${result.marks}</td>
+            <td>${grade}</td>
+            <td class="feedback">${feedback}</td>
         `;
         tableBody.appendChild(row);
     });
-}
 
-function truncateFeedback(feedback, maxLength = 100) {
-    if (feedback.length > maxLength) {
-        const truncated = feedback.substring(0, maxLength) + '...';
-        return `<span class="feedback-short">${truncated}</span>
-                <span class="feedback-full" style="display:none;">${feedback}</span>
-                <a href="#" class="see-more" onclick="toggleFeedback(this); return false;">See more</a>`;
-    }
-    return feedback;
-}
-
-function toggleFeedback(link) {
-    const shortFeedback = link.previousElementSibling.previousElementSibling;
-    const fullFeedback = link.previousElementSibling;
-    if (shortFeedback.style.display === 'none') {
-        shortFeedback.style.display = 'inline';
-        fullFeedback.style.display = 'none';
-        link.textContent = 'See more';
-    } else {
-        shortFeedback.style.display = 'none';
-        fullFeedback.style.display = 'inline';
-        link.textContent = 'See less';
-    }
+    attachFeedbackToggle(); // Attach event listeners for feedback expansion
+    displayTablePage(1);
 }
 
 function formatFeedback(feedback) {
-    // Convert **bold text** to <strong>bold text</strong>
-    feedback = feedback.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-
-    // Convert lists (* item or - item) to <ul><li>item</li></ul>
-    feedback = feedback.replace(/(?:^|\n)([*-])\s*(.*?)(?=\n|$)/g, '<ul><li>$2</li></ul>');
-
-    // Convert numbered lists (1. item) to <ol><li>item</li></ol>
-    feedback = feedback.replace(/(?:^|\n)(\d+)\.\s*(.*?)(?=\n|$)/g, '<ol><li>$2</li></ol>');
-
-    // Convert line breaks (\n) to <br>
-    feedback = feedback.replace(/\n/g, '<br>');
-
-    return feedback;
+    return feedback
+        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // Bold **text**
+        .replace(/(?:^|\n)([*-])\s*(.*?)(?=\n|$)/g, "<ul><li>$2</li></ul>") // Bullet list
+        .replace(/(?:^|\n)(\d+)\.\s*(.*?)(?=\n|$)/g, "<ol><li>$2</li></ol>") // Numbered list
+        .replace(/\n/g, "<br>"); // Line breaks
 }
 
-function setupPagination(data, rowsPerPage = 10) {
-    const pagination = document.getElementById('pagination');
-    pagination.innerHTML = '';
-
-    const pageCount = Math.ceil(data.length / rowsPerPage);
-    for (let i = 1; i <= pageCount; i++) {
-        const pageButton = document.createElement('button');
-        pageButton.textContent = i;
-        pageButton.addEventListener('click', () => populateTable(data, i, rowsPerPage));
-        pagination.appendChild(pageButton);
-    }
-}
-
-// Searching Function
-function searchStudent() {
-    const studentId = document.getElementById('searchInput').value;
-    const url = studentId ? `/api/result/${studentId}` : '/api/results';
-    
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                if (response.status === 404) {
-                    return response.json().then(errorDetails => {
-                        console.log('Error details:', errorDetails);
-                        throw new Error('Result not found');
-                    });
-                }
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            populateTable(data.results);
-            setupPagination(data.results);
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-            alert(error.message === 'Result not found' ? `Result for student id ${studentId} not found.` : 'An error occurred while fetching the results. Please try again.');
-        });
-}
-
-// Sorting Function
-function sortTable(column) {
-    const table = document.getElementById('resultsTable');
-    const rows = Array.from(table.rows).slice(1);
-    let compare;
-
-    switch (column) {
-        case 'marks':
-            compare = (a, b) => b.cells[2].textContent - a.cells[2].textContent;
-            break;
-        case 'status':
-            compare = (a, b) => a.cells[4].textContent.localeCompare(b.cells[4].textContent);
-            break;
-    }
-
-    rows.sort(compare).forEach(row => table.appendChild(row));
-}
-
-// Filtering Function
-function filterTable(status) {
-    const tableRows = document.querySelectorAll('#resultsTable tbody tr');
-
-    tableRows.forEach(row => {
-        const studentStatus = row.cells[4].textContent.toLowerCase();
-        if (studentStatus === status) {
-            row.style.display = '';
-        } else {
-            row.style.display = 'none';
+// Toggle feedback visibility efficiently using event delegation
+function attachFeedbackToggle() {
+    document.querySelector("#resultsTable").addEventListener("click", (event) => {
+        if (event.target.classList.contains("see-more")) {
+            event.preventDefault();
+            const shortFeedback = event.target.closest(".short-feedback");
+            const fullFeedback = shortFeedback.nextElementSibling;
+            shortFeedback.style.display = "none";
+            fullFeedback.style.display = "inline";
+        } else if (event.target.classList.contains("see-less")) {
+            event.preventDefault();
+            const fullFeedback = event.target.closest(".full-feedback");
+            const shortFeedback = fullFeedback.previousElementSibling;
+            fullFeedback.style.display = "none";
+            shortFeedback.style.display = "inline";
         }
     });
 }
+
+// Grade calculation function
+function calculateGrade(marks) {
+    return marks >= 90 ? "A+" :
+           marks >= 80 ? "A" :
+           marks >= 70 ? "B" :
+           marks >= 60 ? "C" :
+           marks >= 50 ? "D" : "F";
+}
+
+// Search function
+function searchStudent() {
+    const searchInput = document.getElementById("searchInput").value.toLowerCase();
+    const rows = document.querySelectorAll("#resultsTable tbody tr");
+    let studentFound = false;
+
+    rows.forEach(row => {
+        const studentId = row.cells[0].textContent.toLowerCase();
+        if (studentId.includes(searchInput)) {
+            row.style.display = "";
+            studentFound = true;
+        } else {
+            row.style.display = "none";
+        }
+    });
+
+    if (!studentFound) alert("Student ID does not exist.");
+}
+
+function sortTable(column) {
+    const table = document.querySelector("#resultsTable tbody");
+    const rows = Array.from(table.querySelectorAll("tr"));
+    let columnIndex = column === "marks" ? 2 : 3;
+
+    rows.sort((a, b) => {
+        let valA = a.children[columnIndex].innerText.trim();
+        let valB = b.children[columnIndex].innerText.trim();
+        
+        if (column === "marks") {
+            return parseFloat(valB) - parseFloat(valA);
+        } else {
+            return valA.localeCompare(valB);
+        }
+    });
+
+    table.innerHTML = "";
+    rows.forEach(row => table.appendChild(row));
+}
+
+function filterTable(status) {
+    const table = document.querySelector("#resultsTable tbody");
+    const rows = Array.from(table.querySelectorAll("tr"));
+    
+    rows.forEach(row => {
+        let grade = row.children[3].innerText.trim().toLowerCase();
+        if ((status === "pass" && grade !== "a" && grade !== "b" && grade !== "c") ||
+            (status === "fail" && (grade === "a" || grade === "b" || grade === "c"))) {
+            row.style.display = "none";
+        } else {
+            row.style.display = "table-row";
+        }
+    });
+}
+// Pagination logic
+let currentPage = 1;
+const rowsPerPage = 10;
+
+function displayTablePage(page) {
+    const table = document.getElementById("resultsTable").getElementsByTagName("tbody")[0];
+    const rows = table.getElementsByTagName("tr");
+    const totalPages = Math.ceil(rows.length / rowsPerPage);
+
+    Array.from(rows).forEach((row, index) => {
+        row.style.display = index >= (page - 1) * rowsPerPage && index < page * rowsPerPage ? "" : "none";
+    });
+
+    document.getElementById("btnPrev").disabled = page === 1;
+    document.getElementById("btnNext").disabled = page === totalPages;
+    currentPage = page;
+}
+
+function prevPage() {
+    if (currentPage > 1) {
+        displayTablePage(--currentPage);
+    }
+}
+
+function nextPage() {
+    const table = document.getElementById("resultsTable").getElementsByTagName("tbody")[0];
+    const totalRows = table.getElementsByTagName("tr").length;
+    const totalPages = Math.ceil(totalRows / rowsPerPage);
+
+    if (currentPage < totalPages) {
+        displayTablePage(++currentPage);
+    }
+}
+
+// Initialize pagination on page load
+document.addEventListener("DOMContentLoaded", () => {
+    displayTablePage(1);
+});

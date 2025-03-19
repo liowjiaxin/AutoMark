@@ -30,7 +30,7 @@
 
       <div class="sort-filter-buttons">
         <button onclick="sortTable('marks')">Sort by Marks</button>
-        <button onclick="sortTable('status')">Sort by Status</button>
+        <button onclick="sortTable('status')">Sort by Grade</button>
         <button onclick="filterTable('pass')">Show Passed</button>
         <button onclick="filterTable('fail')">Show Failed</button>
       </div>
@@ -49,9 +49,10 @@
           <!-- Rows will be populated dynamically -->
         </tbody>
       </table>
-      
-      <!-- Pagination controls -->
-      <div id="pagination"></div>
+      <div class="pagination">
+        <button onclick="prevPage()" id="btnPrev">Previous</button>
+        <button onclick="nextPage()" id="btnNext">Next</button>
+      </div>
     </div>
 
   </div>
