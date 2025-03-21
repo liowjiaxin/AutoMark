@@ -1,93 +1,99 @@
+from langchain_core.output_parsers import JsonOutputParser
+from langchain_core.prompts import PromptTemplate
+from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 import os
 
-STYLE_ANALYZER_MODEL_NAME = os.environ.get(
-    "STYLE_ANALYZER_MODEL_NAME", "gemini-1.5-flash"
-)
 GRADER_MODEL_NAME = os.environ.get("GRADER_MODEL_NAME", "gemini-1.5-flash")
 
-style_analyser_prompt = """
-You are a code style analyst for programming assignments. Your task is to evaluate the submitted code based on the provided rubrics and generate feedback on various style aspects.
-
-**Submission Details:**
-- **Code:** 
-{code}
-
-- **Language:**
-{language}
-
-- **Rubrics:** 
-1. **Comment Quality:** Assess clarity, relevance, and detail of comments.
-2. **Code Coverage:** Assess if the student has used all of the functions written, see if there's no redundant code. If the marking scheme requires things like unit testing, determine whether the code is sufficiently tested or explained to cover edge cases.
-3. **Modularity:** Evaluate the structure of the code regarding reuse, separation of concerns, and overall organization.
-
-**Instructions:**
-1. Analyze the code with the above rubrics in mind.
-2. Provide a detailed evaluation of the comment quality.
-3. Comment on the code coverage, indicating any missing tests or explanations.
-4. Assign a modularity score on a scale from 0 (poorly modular) to 1 (highly modular).
-5. Include any additional observations regarding duplication or stylistic issues if applicable.
-
-**Output Format:**
-Please return your response as a JSON object with the following keys:
-- `"comments_quality_feedback"`: string
-- `"code_coverage_feedback"`: string
-- `"modularity_score"`: float
-
-Example:
-{{
-  "comments_quality_feedback": "The comments are clear but could be more descriptive in critical sections.",
-  "code_coverage_feedback": "Some edge cases are not covered, and additional tests are recommended.",
-  "modularity_score": 0.75
-}}
-"""
-
 grader_prompt = """
-You are an expert grader for programming assignments. Using all available data, please assign a final grade and provide detailed feedback on the submission.
+You are an expert programming assignment grader with 20 years of experience. Conduct a comprehensive evaluation of the submission using the multi-dimensional rubric below.
 
-**Submission Details:**
-- **Original Code:** 
+**Submission Analysis Framework**
+
+1. **Code Comprehension** (10%)
+- Does the code demonstrate understanding of core concepts?
+- Is there evidence of conceptual misunderstandings?
+
+2. **Functional Correctness** (30%)
+- Does the code solve the problem as specified?
+- Test case coverage (basic, edge, stress cases)
+- Error handling and robustness
+
+3. **Code Quality** (25%)
+- [Comments] Clarity, relevance, and density (aim for 20-30% comment ratio)
+- [Modularity] Logical decomposition, function length (<30 lines), DRY principle
+- [Readability] Naming conventions, spacing, structural organization
+
+4. **Technical Implementation** (25%)
+- Algorithm efficiency (time/space complexity)
+- Language feature appropriateness
+- Resource management (memory, files, connections)
+
+5. **Testing & Verification** (10%)
+- Test existence and quality (if required)
+- Input validation
+- Debugging evidence
+
+**Evaluation Context**
+- Submission Language: {language}
+- Lines of Code: {lines_of_code}
+- Number of Files: {num_files}
+- Program Output: {code_run_output}
+- Special Requirements: {rubrics}
+
+**Analysis Protocol**
+1. **Structural Scan**: Perform initial code structure evaluation
+2. **Semantic Analysis**: Cross-reference requirements with implementation
+3. **Defect Identification**: List technical and stylistic issues
+4. **Strength Recognition**: Highlight exemplary practices
+5. **Improvement Roadmap**: Create prioritized suggestions
+
+**Scoring Guidelines**
+- 90-100: Flawless implementation exceeding requirements
+- 80-89: Minor issues with excellent fundamentals
+- 70-79: Functional but needs quality improvements
+- 60-69: Partial solution with significant gaps
+- <60: Non-working or severely deficient
+
+**Output Schema**
+{{
+  "marks": <0-100>,
+  "feedback": str,
+}} 
+
+**Submission Code**
 {code}
 
-- **Language:**
-{language}
+**Evaluation Process**
+1. Analyze the code through multiple passes
+2. Cross-validate program output with implementation
+3. Compare against language best practices
+4. Generate scores using weighted rubric components
+5. Maintain strict but fair academic standards
 
-- **Grading Rubrics:** 
-{rubrics}
-
-- **Style Analysis Results:**
-  - **Comments Quality Feedback:** {comments_quality_feedback}
-  - **Code Coverage Feedback:** {code_coverage_feedback}
-  - **Modularity Score:** {modularity_score}
-
-- **Additional Metadata:**
-  - **Lines of Code:** {lines_of_code}
-  - **Number of Files:** {num_files}
-  - **Program Output (optional):** {code_run_output}
-
-**Instructions:**
-1. Review the original code, rubrics, style analysis, and additional metadata.
-2. Consider all factors (code correctness, style, testing, and execution behavior).
-3. Analyze the program output (if any) about any errors.
-4. Provide a final grade (for example, a percentage or score out of 100).
-5. Offer comprehensive feedback that highlights strengths, identifies weaknesses, and suggests areas for improvement.
-
-**Output Format:**
-Return your evaluation as a JSON object with the following keys:
-- `"marks"`: number
-- `"feedback"`: string
-
-Example:
-{{
-  "marks": 85,
-  "feedback": "The code is well-organized with clear comments. However, some edge cases in testing are missing and modularity could be improved by refactoring repeated code segments."
-}}
+**Special Instructions**
+- Penalize security risks severely (-10-20 points)
+- Reward innovative but appropriate solutions (+5-10 bonus)
+- Flag academic integrity concerns explicitly
+- Consider lines/file ratios in quality assessment
 """
+
+
+class GradeFeedback(BaseModel):
+    marks: str
+    feedback: str
 
 
 class LLM:
-    def __init__(self, model_name: str, prompt_template: str, system_prompt: str):
+    def __init__(
+        self,
+        model_name: str,
+        prompt_template: str,
+        system_prompt: str,
+        parser: JsonOutputParser | None = None,
+    ):
         self.llm = ChatGoogleGenerativeAI(
             model=model_name,
             temperature=0,
@@ -100,32 +106,22 @@ class LLM:
             ("system", system_prompt),
             ("user", self.unified_prompt_template),
         ])
-        self.chain = self.prompt_template | self.llm
+        if parser:
+            self.parser = parser
+            self.chain = self.prompt_template | self.llm | self.parser
+        else:
+            self.chain = self.prompt_template | self.llm
 
     def invoke(self, input: dict):
         return self.chain.invoke(input)
-
-    def analyze_and_grade(self, input: dict):
-        style_analyser = StyleAnalyserLLM()
-        style_analysis_result = style_analyser.invoke(input)
-
-        input.update(style_analysis_result)
-
-        grader = GraderLLM()
-        grading_result = grader.invoke(input)
-
-        return grading_result
-
-
-class StyleAnalyserLLM(LLM):
-    def __init__(self):
-        model_name = STYLE_ANALYZER_MODEL_NAME
-        system_prompt = "You are an expert in analysing code style and give feedback on comments quality, code coverage, and modularity."
-        super().__init__(model_name, style_analyser_prompt, system_prompt)
 
 
 class GraderLLM(LLM):
     def __init__(self):
         model_name = GRADER_MODEL_NAME
-        system_prompt = "You are an expert in giving grade and feedback with the code and the code comments quality + code coverage + modularity information."
-        super().__init__(model_name, grader_prompt, system_prompt)
+        system_prompt = """
+        **Role**: You are CodeGrader-ULTRA, an expert AI teaching assistant for programming courses.
+        Your task is to rigorously evaluate student submissions by combining software engineering best practices with pedagogical expertise.
+        """
+        parser = JsonOutputParser(pydantic_object=GradeFeedback)
+        super().__init__(model_name, grader_prompt, system_prompt, parser)
