@@ -1,0 +1,103 @@
+#include <stdio.h> 
+#define MAX 10
+
+// Input matrix data
+void inputMatrix(int rows, int cols, int matrix[rows][cols]) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            printf("Enter element [%d][%d]: ", i + 1, j + 1);
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+}
+
+// Print the matrix
+void printMatrix(int rows, int cols, int matrix[rows][cols]) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+// Add two matrices
+void addMatrices(int rows, int cols, int A[rows][cols], int B[rows][cols], int result[rows][cols]) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            result[i][j] = A[i][j] + B[i][j];
+        }
+    }
+}
+
+// Subtract two matrices
+void subtractMatrices(int rows, int cols, int A[rows][cols], int B[rows][cols], int result[rows][cols]) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            result[i][j] = A[i][j] - B[i][j];
+        }
+    }
+}
+
+// Transpose a matrix
+void transposeMatrix(int rows, int cols, int matrix[rows][cols], int result[cols][rows]) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            result[j][i] = matrix[i][j];
+        }
+    }
+}
+
+int main() {
+    int rows, cols;
+    int matrixA[MAX][MAX], matrixB[MAX][MAX];
+    int result[MAX][MAX];
+    int transposed[MAX][MAX];
+    int choice;
+
+    printf("Enter the number of rows (1-10): ");
+    scanf("%d", &rows);
+    printf("Enter the number of columns (1-10): ");
+    scanf("%d", &cols);
+
+    printf("Enter the data for Matrix A:\n");
+    inputMatrix(rows, cols, matrixA);
+    printf("Enter the data for Matrix B:\n");
+    inputMatrix(rows, cols, matrixB);
+
+    do {
+        printf("\nMenu:\n");
+        printf("1. Add Matrices\n2. Subtract Matrices\n3. Transpose Matrix A\n4. Transpose Matrix B\n5. Exit\nChoose an option: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addMatrices(rows, cols, matrixA, matrixB, result);
+                printf("Result of Matrix Addition:\n");
+                printMatrix(rows, cols, result);
+                break;
+            case 2:
+                subtractMatrices(rows, cols, matrixA, matrixB, result);
+                printf("Result of Matrix Subtraction:\n");
+                printMatrix(rows, cols, result);
+                break;
+            case 3:
+                transposeMatrix(rows, cols, matrixA, transposed);
+                printf("Transpose of Matrix A:\n");
+                printMatrix(cols, rows, transposed);
+                break;
+            case 4:
+                transposeMatrix(rows, cols, matrixB, transposed);
+                printf("Transpose of Matrix B:\n");
+                printMatrix(cols, rows, transposed);
+                break;
+            case 5:
+                printf("Exiting the program.\n");
+                break;
+            default:
+                printf("Invalid choice. Please try again!\n");
+        }
+    } while (choice != 5);
+
+    return 0;
+}

@@ -1,0 +1,229 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+
+#define MAX_ITEMS 100
+
+// Struct for a grocery item
+typedef struct {
+    char name[100];
+    char category[50];
+    int quantity;
+    float price;
+} GroceryItem;
+
+// Struct for inventory
+typedef struct {
+    GroceryItem items[MAX_ITEMS];
+    bool status[MAX_ITEMS];
+    int itemCount;
+} GroceryInventory;
+
+// Function prototypes
+int validInput();
+float validFloat();
+void add(GroceryInventory *inventory);
+void listItems(const GroceryInventory *inventory);
+void updateQuantity(GroceryInventory *inventory);
+void removeItem (GroceryInventory *inventory);
+
+int main() {
+    GroceryInventory inventory = {.itemCount = 0};
+    int choice;
+
+    do {
+        printf("\nGrocery Inventory Menu:\n");
+        printf("1. Add Grocery Item\n");
+        printf("2. List Grocery Items\n");
+        printf("3. Update Quantity of an Item\n");
+        printf("4. Remove Grocery Item\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        choice = validInput();
+
+        switch (choice) {
+            case 1:
+                add(&inventory);
+                break;
+            case 2:
+                listItems(&inventory);
+                break;
+            case 3:
+                updateQuantity(&inventory);
+                break;
+            case 4:
+                removeItem(&inventory);
+                break;
+            case 5:
+                printf("Exiting program...\n");
+                break;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    } while (choice != 5);
+
+    return 0;
+}
+
+int validInput() {
+    int value;
+    char buffer[100]; // Temporary buffer for invalid input
+
+    while (1) {
+        if (scanf("%d", &value) == 1) {
+            return value; // Valid input, return the value
+        } else {
+            printf("Invalid input! Please enter a numeric value: ");
+            while (getchar() != '\n');
+        }
+    }
+}
+
+float validFloat() {
+    float value;
+    char buffer[100]; // Temporary buffer for invalid input
+
+    while (1) {
+        if (scanf("%f", &value) == 1) {
+            return value; // Valid input, return the value
+        } else {
+            printf("Invalid input! Please enter a valid price (e.g., 10.50): ");
+            while (getchar() != '\n');
+        }
+    }
+}
+
+
+// Function to add a grocery item
+void add(GroceryInventory *inventory) {
+    if (inventory->itemCount >= MAX_ITEMS) {
+        printf("Inventory is full unable to add more items.\n");
+        return;
+    }
+
+    GroceryItem newItem;
+    printf("Enter name of the grocery item: ");
+    getchar();
+    fgets(newItem.name, sizeof(newItem.name), stdin);
+    newItem.name[strcspn(newItem.name, "\n")] = '\0'; // Remove trailing newline
+    
+    if (strlen(newItem.name) == 0) {
+    printf("Item name cannot be empty. Please try again.\n");
+    return;
+}
+    
+for (int i = 0; i < inventory->itemCount; i++) {
+    if (strcmp(inventory->items[i].name, newItem.name) == 0) {
+        printf("Item '%s' already exists in the inventory.\n", newItem.name);
+        return;
+    }
+  }
+
+    printf("Enter category: ");
+    fgets(newItem.category, sizeof(newItem.category), stdin);
+    newItem.category[strcspn(newItem.category, "\n")] = '\0';
+    
+    if (strlen(newItem.category) == 0) {
+    printf("Item category cannot be empty. Please try again.\n");
+    return;
+}
+
+do{
+    printf("Enter quantity: ");
+    newItem.quantity = validInput();
+    if (newItem.quantity < 0) {
+            printf("Quantity cannot be negative. Please try again.\n");
+        }
+    } while (newItem.quantity < 0);
+
+    do{
+    printf("Enter price: ");
+    newItem.price = validFloat();
+    if (newItem.price < 0) {
+            printf("Price cannot be negative. Please try again.\n");
+        }
+    } while (newItem.price < 0);
+    
+    inventory->items[inventory->itemCount] = newItem;
+    inventory->status[inventory->itemCount] = (newItem.quantity > 0);
+    inventory->itemCount++;
+
+    printf("Item '%s' added successfully!\n", newItem.name);
+}
+
+// Function to list all grocery items
+void listItems(const GroceryInventory *inventory) {
+    if (inventory->itemCount == 0) {
+        printf("Inventory is empty.\n");
+        return;
+    }
+
+    printf("\n%-20s %-20s %-10s %-10s %-10s\n", "Name", "Category", "Quantity", "Price", "Status");
+    printf("-------------------------------------------------------------------------------\n");
+    for (int i = 0; i < inventory->itemCount; i++) {
+        const GroceryItem *item = &inventory->items[i];
+        printf("%-20s %-20s %-10d %-10.2f %-10s\n",
+               item->name, item->category, item->quantity, item->price,
+               inventory->status[i] ? "In Stock" : "Out of Stock");
+    }
+}
+
+// Function to update the quantity of a grocery item
+void updateQuantity(GroceryInventory *inventory) {
+    if (inventory->itemCount == 0) {
+        printf("Inventory is empty.\n");
+        return;
+    }
+
+    char itemName[100];
+    printf("Enter the name of the item to update: ");
+    getchar();
+    fgets(itemName, sizeof(itemName), stdin);
+    itemName[strcspn(itemName, "\n")] = '\0'; // Remove trailing newline
+
+    for (int i = 0; i < inventory->itemCount; i++) {
+        if (strcmp(inventory->items[i].name, itemName) == 0) {
+            int newQuantity;
+            printf("Enter new quantity for '%s': ", inventory->items[i].name);
+            newQuantity = validInput();
+
+            inventory->items[i].quantity = newQuantity;
+            inventory->status[i] = (newQuantity > 0);
+
+            printf("Quantity updated successfully!\n");
+            return;
+        }
+    }
+
+    printf("Item '%s' not found in the inventory.\n", itemName);
+}
+
+// Function to remove a grocery item
+void removeItem (GroceryInventory *inventory) {
+    if (inventory->itemCount == 0) {
+        printf("Inventory is empty.\n");
+        return;
+    }
+
+    char itemName[100];
+    printf("Enter the name of the item to remove: ");
+    getchar();
+    fgets(itemName, sizeof(itemName), stdin);
+    itemName[strcspn(itemName, "\n")] = '\0'; // Remove trailing newline
+
+    for (int i = 0; i < inventory->itemCount; i++) {
+        if (strcmp(inventory->items[i].name, itemName) == 0) {
+            // Shift all subsequent items one step to the left
+            for (int j = i; j < inventory->itemCount - 1; j++) {
+                inventory->items[j] = inventory->items[j + 1];
+                inventory->status[j] = inventory->status[j + 1];
+            }
+            inventory->itemCount--;
+
+            printf("Item '%s' removed successfully!\n", itemName);
+            return;
+        }
+    }
+
+    printf("Item '%s' not found in the inventory.\n", itemName);
+}

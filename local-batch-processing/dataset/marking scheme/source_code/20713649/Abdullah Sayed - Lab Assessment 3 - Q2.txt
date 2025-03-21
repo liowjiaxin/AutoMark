@@ -1,0 +1,221 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+
+#define MAX_NAME_LENGTH 100
+#define MAX_CATEGORY_LENGTH 50
+#define MAX_ITEMS 100
+
+
+//Create Grocery Item struct
+typedef struct {
+    char Name[MAX_NAME_LENGTH];
+    char Category[MAX_CATEGORY_LENGTH];
+    int Quantity;
+    float Price;
+} GroceryItem;
+
+//Create Availability Status struct
+typedef struct {
+    bool inStock;
+    bool outofStock;
+} AvailabilityStatus;
+
+//User the above structs to create Grocery Inventory struct
+typedef struct {
+    GroceryItem Items[MAX_ITEMS];
+    AvailabilityStatus Statuses[MAX_ITEMS];
+    int TotalItems;
+} GroceryInventory;
+
+int main()
+{
+    //Clear Grocery Inventory
+    GroceryInventory Inventory = {0};
+    int UserInput;
+    
+    do {
+        //Display Menu
+        printf("\nGrocery Inventory Management Menu:\n");
+        printf("1. Add Grocery Item\n");
+        printf("2. List All Grocery Items\n");
+        printf("3. Update Quantity\n");
+        printf("4. Remove Grocery Item\n");
+        printf("5. Exit\n");
+        
+        //Get Input from user
+        printf("Enter your choice: ");
+        scanf("%d", &UserInput);
+        getchar();
+        
+        switch (UserInput) {
+            
+            case 1:
+                //Add Grocery Item function
+                //Check if inventory is full
+                if (Inventory.TotalItems >= MAX_ITEMS){
+                    printf ("\nInventory is full. Cannot add any more items.");
+                    break;
+                }
+                
+                //NewItem pointer points at next spot in Inventory
+                GroceryItem *NewItem = &Inventory.Items[Inventory.TotalItems];
+                AvailabilityStatus *NewItemStatus = &Inventory.Statuses[Inventory.TotalItems];        //Pointer to status of new Items
+                
+                //Get item info from user
+                printf("\nEnter Item Name: ");
+                fgets(NewItem->Name, MAX_NAME_LENGTH, stdin);
+                
+                printf("\nEnter Item Category: ");
+                fgets(NewItem->Category, MAX_CATEGORY_LENGTH, stdin);
+                
+                printf("\nEnter Item Quantity: ");
+                scanf("%d", &NewItem->Quantity);
+                
+                printf("\nEnter Item Price: ");
+                scanf("%f", &NewItem->Price);
+                
+                if (NewItem->Quantity > 0) {
+                    NewItemStatus->inStock = 1;
+                } else {
+                    NewItemStatus->inStock = 0;
+                }
+                
+                NewItemStatus->outofStock = !(NewItemStatus->inStock);
+                
+                Inventory.TotalItems++;
+                
+                printf("\nItem has been added successfully.\n");
+                
+                break;
+                
+            case 2:
+                //List All Grocery Items function
+                //Check if Inventory is empty
+                if (Inventory.TotalItems == 0){
+                    printf("\nInventory is Empty\n");
+                    break;
+                }
+                
+                printf("\nGrocery Items List:\n");
+                
+                for (int count = 0; count < Inventory.TotalItems; count++){
+                    
+                    //Get Item Info and Availability Status
+                    GroceryItem *ItemInfo = &Inventory.Items[count];
+                    AvailabilityStatus *NewItemStatus = &Inventory.Statuses[count];
+                    
+                    //Print Item Info
+                    printf("\nItem %d:\n Name: %s Category: %s Quantity: %d\n Price: %.2f\n Availability Status: %s\n", count + 1, ItemInfo->Name, ItemInfo->Category, ItemInfo->Quantity, ItemInfo->Price, NewItemStatus->inStock ? "In Stock" : "Out of Stock");
+                }
+                
+                break;
+                
+            case 3:
+                //Update Item Quantity
+                //Check if Inventory is empty
+                if (Inventory.TotalItems == 0){
+                    printf("\nInventory is Empty\n");
+                    break;
+                }
+                
+                //Get Name of Item from user
+                int count;
+                GroceryItem *QuantityItemInfo = &Inventory.Items[count];
+                AvailabilityStatus *QuantityItemStatus = &Inventory.Statuses[count];
+                char QuantityItemName[MAX_NAME_LENGTH];
+                int ItemFound = 0;
+                
+                printf("\nEnter Name of grocery item to update quantity: ");
+                fgets(QuantityItemName, MAX_NAME_LENGTH, stdin);
+                
+                //Search for item in Inventory
+                for (int count = 0; count < Inventory.TotalItems; count++) {
+                    if (strcmp(QuantityItemName, QuantityItemInfo->Name) == 0) {
+                        
+                        printf("\nEnter New Quantity for %s ", QuantityItemName);
+                        scanf("%d", &QuantityItemInfo->Quantity);            //Prompt user for new Quantity value
+                        getchar();
+                        
+                        //Update Item Status
+                        if (QuantityItemInfo->Quantity > 0) {
+                            QuantityItemStatus->inStock = 1;
+                        } else {
+                            QuantityItemStatus->inStock = 0;
+                        }
+                        
+                        QuantityItemStatus->outofStock = !(QuantityItemStatus->inStock);
+                        
+                        ItemFound = 1;
+                        
+                        printf("\nQuantity Updated Successfully\n");
+                        break;
+                    }
+                }
+                
+                //Error message in case item not found
+                if (ItemFound == 0) {
+                    printf("\nItem Not Found\n");
+                }
+                
+                break;
+                
+            case 4:
+                //Remove Item Function
+                //Check if Inventory is empty
+                if (Inventory.TotalItems == 0){
+                    printf("\nInventory is Empty\n");
+                    break;
+                }
+                
+                //Get Name of Item from user
+                int count2;
+                GroceryItem *RemoveItemInfo = &Inventory.Items[count2];
+                AvailabilityStatus *RemoveItemStatus = &Inventory.Statuses[count2];
+                char RemoveItemName[MAX_NAME_LENGTH];
+                int ItemFound2 = 0;
+                
+                printf("\nEnter Name of grocery item to delete: ");
+                fgets(RemoveItemName, MAX_NAME_LENGTH, stdin);
+                
+                //Search for item in Inventory
+                for (int count2 = 0; count2 < Inventory.TotalItems; count2++) {
+                    
+                    if (strcmp(RemoveItemName, RemoveItemInfo->Name) == 0) {
+                        
+                        //Delete Item
+                        for (int i = count2; i < Inventory.TotalItems - 1; i++) {
+                            Inventory.Items[i] = Inventory.Items[i + 1];
+                            Inventory.Statuses[i] = Inventory.Statuses[i + 1];
+                        }
+                        
+                        Inventory.TotalItems--;
+                        ItemFound2 = 1;
+                        
+                        printf("\nItem Deleted Successfully\n");
+                        break;
+                    }
+                }
+                
+                //Error message in case item not found
+                if (ItemFound2 == 0) {
+                    printf("\nItem Not Found\n");
+                }
+                
+                break;
+                
+            case 5:
+                //Exit Program
+                printf("\nExiting Program");
+                break;
+                
+            default:
+                //Default case
+                printf("\nError: Invalid Input\n");
+                break;
+        }
+    } while (UserInput != 5);
+
+    return 0;
+}

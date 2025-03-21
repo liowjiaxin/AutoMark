@@ -1,0 +1,220 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX_SIZE 10
+
+
+void input(int *matrix, int rows, int cols, char matrixName);
+void display(int *matrix, int rows, int cols);
+void add(int *A, int *B, int *C, int rows, int cols);
+void subtract(int *A, int *B, int *C, int rows, int cols);
+void transpose(int *original, int *transposed, int rows, int cols);
+int valDim(int dim);
+int valInput();
+
+
+int main()
+{
+    // Dynamic memory allocation for matrices
+    int *A = (int *)malloc(MAX_SIZE * MAX_SIZE * sizeof(int));
+    int *B = (int *)malloc(MAX_SIZE * MAX_SIZE * sizeof(int));
+    int *C = (int *)malloc(MAX_SIZE * MAX_SIZE * sizeof(int));
+    int rowsA, colsA, rowsB, colsB, choice;
+    
+    // Input dimensions for Matrix A
+    printf("Enrter dimensions for Matrix A:\n");
+    printf("Enter number of rows (1~10): ");
+    rowsA =valInput();
+    while(!valDim(rowsA)){
+        printf("Invalid input. Enter number of raws(1~10): ");
+        rowsA = valInput();
+    }
+    
+    printf("Enter number of columns (1-10): ");
+    colsA = valInput();
+    while (!valDim(colsA)) {
+        printf("Invalid input. Enter number of columns (1-10): ");
+        colsA = valInput();
+    }
+    
+    // Input dimensions for Matrix B
+    printf("\nEnter dimensions for Matrix B:\n");
+    printf("Enter number of rows (1-10): ");
+    rowsB = valInput();
+    while (!valDim(rowsB)) {
+        printf("Invalid input. Enter number of rows (1-10): ");
+        rowsB = valInput();
+    }
+    
+    printf("Enter number of columns (1-10): ");
+    colsB = valInput();
+    while (!valDim(colsB)) {
+        printf("Invalid input. Enter number of columns (1-10): ");
+        colsB = valInput();
+    }
+    
+    // Input matrices
+    printf("\nEnter elements of Matrix A:\n");
+    input(A, rowsA, colsA, 'A');
+    printf("\nEnter elements of Matrix B:\n");
+    input(B, rowsB, colsB, 'B');
+    
+    while (1) {
+        printf("\nMatrix Operations Menu:\n");
+        printf("1. Add Matrices\n");
+        printf("2. Subtract Matrices\n");
+        printf("3. Transpose Matrix A\n");
+        printf("4. Transpose Matrix B\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        choice = valInput();
+        
+        switch (choice) {
+            case 1:
+                if (rowsA != rowsB || colsA != colsB) {
+                    printf("\nMatrix addition is not possible. Matrices must have same dimensions.\n");
+                    printf("Matrix A: %dx%d, Matrix B: %dx%d\n", rowsA, colsA, rowsB, colsB);
+                } else {
+                    add(A, B, C, rowsA, colsA);
+                    printf("\nResult of Matrix A + Matrix B:\n");
+                    display(C, rowsA, colsA);
+                }
+                break;
+                
+            case 2:
+                if (rowsA != rowsB || colsA != colsB) {
+                    printf("\nMatrix subtraction is not possible. Matrices must have same dimensions.\n");
+                    printf("Matrix A: %dx%d, Matrix B: %dx%d\n", rowsA, colsA, rowsB, colsB);
+                } else {
+                    subtract(A, B, C, rowsA, colsA);
+                    printf("\nResult of Matrix A - Matrix B:\n");
+                    display(C, rowsA, colsA);
+                }
+                break;
+                
+            case 3:
+                transpose(A, C, rowsA, colsA);
+                printf("\nTranspose of Matrix A:\n");
+                display(C, colsA, rowsA);
+                break;
+                
+            case 4:
+                transpose(B, C, rowsB, colsB);
+                printf("\nTranspose of Matrix B:\n");
+                display(C, colsB, rowsB);
+                break;
+                
+            case 5:
+                free(A);
+                free(B);
+                free(C);
+                printf("Program terminated.\n");
+                return 0;
+                
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}
+
+//Read matrix elemennts from user input
+void input(int *matrix, int rows, int cols, char matrixName) {
+    // Iterate through each row
+    for (int i = 0; i < rows; i++) {
+        // Iterate through each column
+        for (int j = 0; j < cols; j++) {
+            
+            while (1) {
+                printf("Enter element %c[%d][%d]: ", matrixName, i+1, j+1);
+                
+                int num;
+                if (scanf("%d", &num) == 1) {
+                    *(matrix + i * cols + j) = num;
+                    while (getchar() != '\n');  // Clear remaining buffer
+                    break;
+                } else {
+                    while (getchar() != '\n');  // Clear invalid input
+                    printf("Invalid input. Please enter a number.\n");
+                }
+            }
+
+        }
+    }
+}
+
+
+void display(int *matrix, int rows, int cols) {
+    // Iterate through each row
+    for (int i = 0; i < rows; i++) {
+        // Iterate through each column
+        for (int j = 0; j < cols; j++) {
+            // Print element at calculated position
+            printf("%d ", *(matrix + i * cols + j));
+        }
+        // Move to next line after each row
+        printf("\n");
+    }
+}
+
+void add(int *A, int *B, int *C, int rows, int cols) {
+    // Iterate through each row
+    for (int i = 0; i < rows; i++) {
+        // Iterate through each column
+        for (int j = 0; j < cols; j++) {
+            // Add corresponding elements and store in result matrix
+            *(C + i * cols + j) = *(A + i * cols + j) + *(B + i * cols + j);
+        }
+    }
+}
+
+void subtract(int *A, int *B, int *C, int rows, int cols) {
+    // Iterate through each row
+    for (int i = 0; i < rows; i++) {
+        // Iterate through each column
+        for (int j = 0; j < cols; j++) {
+            // Subtract corresponding elements and store in result matrix
+            *(C + i * cols + j) = *(A + i * cols + j) - *(B + i * cols + j);
+        }
+    }
+}
+
+void transpose(int *original, int *transposed, int rows, int cols) {
+    // Iterate through each row
+    for (int i = 0; i < rows; i++) {
+        // Iterate through each column
+        for (int j = 0; j < cols; j++) {
+            // Swap rows and columns while copying elements
+            *(transposed + j * rows + i) = *(original + i * cols + j);
+        }
+    }
+}
+
+
+
+int valDim(int dim) {
+    // Check if dimension is within valid range
+    return (dim > 0 && dim <= MAX_SIZE);
+}
+
+int valInput() {
+    int num;
+    if (scanf("%d", &num) == 1) {
+        while (getchar() != '\n');  // Clear buffer
+        return num;
+    } else {
+        while (getchar() != '\n');  // Clear invalid input
+        return -1;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+

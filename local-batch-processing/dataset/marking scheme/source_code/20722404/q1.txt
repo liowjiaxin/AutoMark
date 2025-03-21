@@ -1,0 +1,202 @@
+#include <stdio.h>
+#define MAX_SIZE 10
+
+
+// function prototypes
+void getMatrix(int matrix[MAX_SIZE][MAX_SIZE], int rows, int cols, char name);
+void addMatrices(int matrixA[MAX_SIZE][MAX_SIZE], int matrixB[MAX_SIZE][MAX_SIZE], int matrixC[MAX_SIZE][MAX_SIZE], int rows, int cols);
+void subtractMatrices(int matrixA[MAX_SIZE][MAX_SIZE], int matrixB[MAX_SIZE][MAX_SIZE], int matrixC[MAX_SIZE][MAX_SIZE], int rows, int cols);
+void transposeMatrix(int matrix[MAX_SIZE][MAX_SIZE], int transposed[MAX_SIZE][MAX_SIZE], int rows, int cols);
+void displayMatrix(int matrix[MAX_SIZE][MAX_SIZE], int rows, int cols);
+
+
+int main()
+{
+    // declare & initialise rows and columns
+    int rowsA, colsA, rowsB, colsB = 0;
+
+    // declare & initialise array to store elements of Matrix A,B,C
+    int matrixA[MAX_SIZE][MAX_SIZE];
+    int matrixB[MAX_SIZE][MAX_SIZE];
+    int matrixC[MAX_SIZE][MAX_SIZE];
+    int transposed[MAX_SIZE][MAX_SIZE];
+
+    //declare choice for operation
+    int choice = 0;
+
+    // prompt user to enter dimensions for Matrix A
+    do
+    {
+        printf("Enter dimensions for Matrix A (rows and columns): ");
+        scanf("%d %d", &rowsA, &colsA);
+
+        // check if dimensions are not exceeding maximum size (10x10)
+        if (rowsA > MAX_SIZE || colsA > MAX_SIZE)
+        {
+            // if exceed, print error message & allow user to enter dimensions again
+            printf("ERROR: Matrix dimensions exceed maximum size (10x10)\n\n");
+        } else
+        {
+            // if did not exceed, exit loop & move on
+            break;
+        }
+    } while (1);
+
+    // get elements of MatrixA
+    getMatrix(matrixA, rowsA, colsA, 'A');
+
+    // prompt user to enter dimensions for Matrix A
+    do
+    {
+        printf("Enter dimensions for Matrix B (rows and columns): ");
+        scanf("%d %d", &rowsB, &colsB);
+
+        // check if dimensions are not exceeding maximum size (10x10)
+        if (rowsB > MAX_SIZE || colsB > MAX_SIZE)
+        {
+            // if exceed, print error message & allow user to enter dimensions again
+            printf("ERROR: Matrix dimensions exceed maximum size (10x10)\n\n");
+        } else
+        {
+            // if did not exceed, exit loop & move on
+            break;
+        }
+    } while (1);
+
+    // get elements of MatrixB
+    getMatrix(matrixB, rowsB, colsB, 'B');
+
+    do
+    {
+        // menu to choose an operation
+        printf("Matrix Operations Menu:\n");
+        printf("1. Add Matrices\n");
+        printf("2. Subtract Matrices\n");
+        printf("3. Transpose Matrix A\n");
+        printf("4. Transpose Matrix B\n");
+        printf("5. Exit\n");
+
+        // prompt user to enter choice of operation
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        // switch..case to handle user's choice of operation
+        switch (choice)
+        {
+            case 1:
+                // check if matrices have same dimensions
+                if (rowsA == rowsB && colsA == colsB)
+                {
+                    // if yes, add matrices & display result
+                    addMatrices(matrixA, matrixB, matrixC, rowsA, colsA);
+                    printf("Result of Matrix A + Matrix B\n");
+                    displayMatrix(matrixC, rowsA, colsA);
+                } else
+                {   // if no, display error message
+                    printf("ERROR: Invalid addition as matrices have different dimensions\n\n");
+                }
+                break;
+            case 2:
+                // check if matrices have same dimensions
+                if (rowsA == rowsB && colsA == colsB)
+                {
+                    // if yes, subtract matrices & display result
+                    subtractMatrices(matrixA, matrixB, matrixC, rowsA, colsA);
+                    printf("Result of Matrix A - Matrix B\n");
+                    displayMatrix(matrixC, rowsA, colsA);
+                } else
+                {
+                    // if no, display error message
+                    printf("ERROR: Invalid subtraction as matrices have different dimensions\n\n");
+                }
+                break;
+            case 3:
+                // transpose Matrix A & display result
+                transposeMatrix(matrixA, transposed, rowsA, colsA);
+                printf("Transpose of Matrix A:\n");
+                displayMatrix(transposed, colsA, rowsA);
+                break;
+            case 4:
+                // transpose Matrix B & display result
+                transposeMatrix(matrixB, transposed, rowsB, colsB);
+                printf("Transpose of Matrix B:\n");
+                displayMatrix(transposed, colsB, rowsB);
+                break;
+            case 5:
+                // exit program
+                printf("Exiting...\n");
+                return 0;
+            default:
+                printf("Invalid choice\n");
+        }
+    } while (1);    // repeatedly display menu until user chooses to exit
+
+    return 0;
+}
+
+
+// function to get matrices A & B
+void getMatrix(int matrix[MAX_SIZE][MAX_SIZE], int rows, int cols, char name)
+{
+    // prompt user to enter elements for Matrix A
+    printf("Enter elements for Matrix %c:\n", name);
+    for (int i=0; i<rows; i++)
+    {
+        for (int j=0; j<cols; j++)
+        {
+            printf("Element [%d][%d]: ", i+1, j+1);
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+    printf("\n");
+}
+
+// function to add matrices
+void addMatrices(int matrixA[MAX_SIZE][MAX_SIZE], int matrixB[MAX_SIZE][MAX_SIZE], int matrixC[MAX_SIZE][MAX_SIZE], int rows, int cols)
+{
+    for (int i=0; i<rows; i++)
+    {
+        for (int j=0; j<cols; j++)
+        {
+            matrixC[i][j] = matrixA[i][j] + matrixB[i][j];
+        }
+    }
+}
+
+// function to subtract matrices
+void subtractMatrices(int matrixA[MAX_SIZE][MAX_SIZE], int matrixB[MAX_SIZE][MAX_SIZE], int matrixC[MAX_SIZE][MAX_SIZE], int rows, int cols)
+{
+    for (int i=0; i<rows; i++)
+    {
+        for (int j=0; j<cols; j++)
+        {
+            matrixC[i][j] = matrixA[i][j] - matrixB[i][j];
+        }
+    }
+}
+
+// function to transpose matrix
+void transposeMatrix(int matrix[MAX_SIZE][MAX_SIZE], int transposed[MAX_SIZE][MAX_SIZE], int rows, int cols)
+{
+    for (int i=0; i<rows; i++)
+    {
+        for (int j=0; j<cols; j++)
+        {
+            transposed[j][i] = matrix[i][j];
+        }
+    }
+}
+
+// function to display matrix
+void displayMatrix(int matrix[MAX_SIZE][MAX_SIZE], int rows, int cols)
+{
+    for (int i=0; i<rows; i++)
+    {
+        for (int j=0; j<cols; j++)
+        {
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}

@@ -1,0 +1,261 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_NAME 100
+
+// Student structure
+typedef struct Student {
+    char name[MAX_NAME];
+    int id;
+    float grade;
+    struct Student* next;
+} Student;
+
+// Global pointer to head of list
+Student* head = NULL;
+
+
+Student* createStudent(const char* name, int id, float grade);
+void insertStudent(const char* name, int id, float grade);
+void displayStudents();
+Student* searchStudentByID(int id);
+void deleteList();
+void freeMemory();
+void sortStudents();
+int nameExists(const char* name);
+
+
+int main() {
+    // Variables for storing student information
+    int choice, id;
+    char name[MAX_NAME];
+    float grade;
+
+    // Main program loop
+    do {
+        // Display menu options
+        printf("\n1. Insert Student Record\n");
+        printf("2. Display Student Records\n");
+        printf("3. Sort Records \n");
+        printf("4. Search Record by ID\n");
+        printf("5. Delete List\n");
+        printf("6. Exit\n");
+        printf("Enter your choice: ");
+        
+        // Validate user input for menu choice
+        if (scanf("%d", &choice) != 1) {
+            while (getchar() != '\n');  // Clear input buffer
+            printf("Invalid input. Please enter a number.\n");
+            continue;
+        }
+        getchar();  // Clear newline character from buffer
+        
+        // Process user choice
+        switch (choice) {
+            case 1:  // Insert new student record
+                printf("Enter student name: ");
+                fgets(name, MAX_NAME, stdin);
+                name[strcspn(name, "\n")] = '\0';  // Remove trailing newline
+                
+                printf("Enter student ID: ");
+                scanf("%d", &id);
+                
+                printf("Enter grade: ");
+                scanf("%f", &grade);
+                
+                insertStudent(name, id, grade);
+                break;
+                
+            case 2:  // Display all student records
+                displayStudents();
+                break;
+                
+            case 3:  // Sort records by grade
+                sortStudents();
+                printf("Records sorted by grade.\n");
+                break;
+                
+            case 4:  // Search for student by ID
+                printf("Enter student ID to search: ");
+                scanf("%d", &id);
+                Student* found = searchStudentByID(id);
+                if (found) {
+                    printf("\nStudent found:\n");
+                    printf("Name: %s\n", found->name);
+                    printf("ID: %d\n", found->id);
+                    printf("Grade: %.2f\n", found->grade);
+                } else {
+                    printf("Student not found.\n");
+                }
+                break;
+                
+            case 5:  // Delete all records
+                deleteList();
+                printf("All records deleted.\n");
+                break;
+                
+            case 6:  // Exit program
+                freeMemory();
+                printf("Program terminated.\n");
+                break;
+                
+            default:  // Handle invalid menu choices
+                printf("Invalid choice. Please try again.\n");
+        }
+    } while (choice != 6);  // Continue until user chooses to exit
+    
+    return 0;
+}
+
+
+
+
+
+// Function to create a new student node 
+Student* createStudent(const char* name, int id, float grade) {
+    Student* newStudent = (Student*)malloc(sizeof(Student));
+    if (newStudent == NULL) {
+        printf("Memory allocation failed!\n");
+        return NULL;
+    }
+    strncpy(newStudent->name, name, MAX_NAME - 1);
+    newStudent->name[MAX_NAME - 1] = '\0';
+    newStudent->id = id;
+    newStudent->grade = grade;
+    newStudent->next = NULL;
+    return newStudent;
+}
+
+
+
+
+// Function to check if name already exists
+int nameExists(const char* name) {
+    Student* current = head;
+    while (current != NULL) {
+        if (strcmp(current->name, name) == 0) {
+            return 1;  // Name exists
+        }
+        current = current->next;
+    }
+    return 0;  // Name doesn't exist
+}
+
+
+
+// Function to insert a new student record
+void insertStudent(const char* name, int id, float grade) {
+    // Check if name already exists
+    if (nameExists(name)) {
+        printf("Error: A student with the name '%s' already exists!\n", name);
+        return;
+    }
+
+    Student* newStudent = createStudent(name, id, grade);
+    if (newStudent == NULL) return;
+
+    if (head == NULL) {
+        head = newStudent;
+    } else {
+        Student* current = head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newStudent;
+    }
+    printf("Student record added successfully!\n");
+}
+
+
+
+// Function to display all student records 
+void displayStudents() {
+    if (head == NULL) {
+        printf("No records to display.\n");
+        return;
+    }
+
+    printf("\nStudent Records:\n");
+    printf("%-20s %-10s %-10s\n", "Name", "ID", "Grade");
+    printf("----------------------------------------\n");
+    
+    Student* current = head;
+    while (current != NULL) {
+        printf("%-20s %-10d %-10.2f\n", 
+               current->name, current->id, current->grade);
+        current = current->next;
+    }
+}
+
+// Function to sort students by grade using Bubble Sort algorithm
+void sortStudents() {
+    // Return if list is empty or has only one node
+    if (head == NULL || head->next == NULL) return;
+
+    int swapped;              // Flag to track if any swapping occurred
+    Student* current;         // Pointer to traverse through the list
+    Student* last = NULL;     // Marks the last sorted element
+
+    do {
+        swapped = 0;
+        current = head;
+
+        // Compare adjacent nodes until last sorted element
+        while (current->next != last) {
+            // If current grade is higher than next grade, swap their data
+            if (current->grade > current->next->grade) {
+                // Store current node's data in temporary variables
+                float tempGrade = current->grade;
+                int tempId = current->id;
+                char tempName[MAX_NAME];
+                strcpy(tempName, current->name);
+
+                // Copy next node's data to current node
+                current->grade = current->next->grade;
+                current->id = current->next->id;
+                strcpy(current->name, current->next->name);
+
+                // Copy temporary data to next node
+                current->next->grade = tempGrade;
+                current->next->id = tempId;
+                strcpy(current->next->name, tempName);
+
+                swapped = 1;   // Mark that a swap occurred
+            }
+            current = current->next;  // Move to next node
+        }
+        last = current;       // Update last sorted element
+    } while (swapped);       // Continue until no swaps occur
+}
+
+
+
+
+
+// Function to search for a student by ID
+Student* searchStudentByID(int id) {
+    Student* current = head;
+    while (current != NULL) {
+        if (current->id == id) {
+            return current;
+        }
+        current = current->next;
+    }
+    return NULL;
+}
+
+// Function to delete the entire list
+void deleteList() {
+    Student* current = head;
+    while (current != NULL) {
+        Student* next = current->next;
+        free(current);
+        current = next;
+    }
+    head = NULL;
+}
+
+void freeMemory() {
+    deleteList();
+}
