@@ -3,11 +3,15 @@ from typing import Dict, Any
 from helper import read_code, read_pdf
 from grader import GraderRAG  # Import your actual grader class
 import os
+import logging
 
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Automated Code Grader")
-    parser.add_argument("-c", "--codedir", required=True, help="Path to code directory")
+    parser.add_argument("-c", "--code", required=True, help="Path to code file or directory")
     parser.add_argument(
         "-l",
         "--language",
@@ -24,10 +28,9 @@ def parse_arguments():
     )
     return parser.parse_args()
 
-
 def validate_inputs(args):
-    if not os.path.isdir(args.codedir):
-        raise FileNotFoundError(f"Code Directory not found: {args.codedir}")
+    if not (os.path.isfile(args.code) or os.path.isdir(args.code)):
+        raise FileNotFoundError(f"Code file or directory not found: {args.code}")
 
     if not args.marking_scheme.endswith(".pdf"):
         raise ValueError("Marking scheme must be a PDF file")
@@ -38,17 +41,23 @@ def validate_inputs(args):
     if not os.path.isdir(args.dataset):
         raise FileNotFoundError(f"Dataset not found: {args.dataset}")
 
-
 def main():
     args = parse_arguments()
+    logger.info("Arguments parsed successfully")
     validate_inputs(args)
+    logger.info("Input validation passed")
 
     # Read inputs
     try:
-        code_str, num_files = read_code(args.codedir, args.language)
+        logger.info("Reading code files...")
+        code_str, num_files = read_code(args.code, args.language)
+        logger.info(f"Read {num_files} code files successfully")
+        
+        logger.info("Reading marking scheme PDF...")
         rubrics = read_pdf(args.marking_scheme)
+        logger.info("PDF read successfully")
     except Exception as e:
-        print(f"Error processing inputs: {str(e)}")
+        logger.error(f"Error processing inputs: {str(e)}")
         return
 
     # Prepare grading context
@@ -59,22 +68,25 @@ def main():
         "num_files": num_files,
         "rubrics": rubrics,
     }
+    logger.info("Grading context prepared")
 
     try:
         model = args.modelname
     except Exception:
         model = "gemini"
+    logger.info(f"Using model: {model}")
 
     # Initialize and run grader
     try:
+        logger.info("Initializing grader...")
         grader = GraderRAG(args.dataset, model_type=model)
+        logger.info("Grader initialized, starting grading process...")
         result = grader.grade(grading_context)
         print("\nGrading Results:")
         print(f"Score: {result['marks']}/100")
         print(f"Feedback:\n{result['feedback']}")
     except Exception as e:
-        print(f"Grading failed: {str(e)}")
-
+        logger.error(f"Grading failed: {str(e)}", exc_info=True)
 
 if __name__ == "__main__":
     main()

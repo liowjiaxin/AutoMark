@@ -21,31 +21,38 @@ class DatasetLoader:
     def _load_examples(self) -> List[Dict[str, str]]:
         """Load dataset from Excel and code folders"""
         try:
-            # Read and validate Excel data
-            df = pd.read_excel(self.excel_path, sheet_name="Lab Test 3")
-            self._validate_excel(df)
-
-            # Filter and process records
-            valid_students = df[df["Score"] > 0]
+            # Read Excel data
+            logger.info(f"Reading Excel file from {self.excel_path}")
+            df = pd.read_excel(self.excel_path)
+            logger.info(f"Excel file loaded with {len(df)} rows")
+            
+            # Get all code files from source_code directory
+            logger.info("Reading code files...")
+            code, num_files = read_code(self.code_base, "C")
+            logger.info(f"Read {num_files} code files")
+            
+            if not code:
+                logger.warning("No code files found in source_code directory")
+                return []
+                
+            # Create examples from the first row of feedback
             examples = []
-
-            for _, row in valid_students.iterrows():
-                try:
-                    # avoid NaN values
-                    int(row["ID"])
-                except:
-                    continue
-                student_id = str(int(row["ID"]))
-                feedback = str(row["Feedback"])
-                code = self._get_student_code(student_id)
-
-                if code:
+            for _, row in df.iterrows():
+                if "Feedback" in row:
+                    feedback = str(row["Feedback"])
                     examples.append({"code": code, "feedback": feedback})
-
+                    logger.info("Created example with feedback")
+                    break  # Only use the first row for now
+            
+            if not examples:
+                logger.warning("No valid examples created from Excel data")
+                return []
+                
+            logger.info(f"Successfully loaded {len(examples)} examples")
             return examples
 
         except Exception as e:
-            logger.error(f"Failed to load dataset: {str(e)}")
+            logger.error(f"Failed to load dataset: {str(e)}", exc_info=True)
             raise
 
     def _validate_excel(self, df: pd.DataFrame):
@@ -55,16 +62,11 @@ class DatasetLoader:
         if missing:
             raise ValueError(f"Excel missing required columns: {', '.join(missing)}")
 
-    def _get_student_code(self, student_id: str) -> str:
-        """Get code for a student"""
-        student_dir = os.path.join(self.code_base, student_id)
-        if not os.path.exists(student_dir):
-            # logger.warning(f"No code directory for student {student_id}")
-            return ""
-
+    def _get_all_code(self) -> str:
+        """Get all code from source_code directory"""
         try:
-            code, _ = read_code(student_dir, "C")
+            code, _ = read_code(self.code_base, "C")
             return code
         except Exception as e:
-            logger.warning(f"Failed to read code for {student_id}: {str(e)}")
+            logger.warning(f"Failed to read code: {str(e)}")
             return ""

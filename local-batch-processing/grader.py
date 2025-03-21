@@ -7,16 +7,19 @@ from pydantic import BaseModel
 from langchain_core.prompts import ChatPromptTemplate
 from load_dataset import DatasetLoader
 from typing import Literal
-import pickle
 import os
+import logging
 
 from dotenv import load_dotenv
 
 load_dotenv()
 
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-GRADER_MODEL_NAME = os.environ.get("GRADER_MODEL_NAME", "gemini-1.5-flash")
-VECTOR_STORE_PATH = "c_dataset_faiss.pkl"
+GRADER_MODEL_NAME = "models/gemini-1.5-pro"  # Updated model name
+VECTOR_STORE_PATH = "c_dataset_faiss"  # Directory for FAISS index
 
 system_prompt = """
 **Role**: You are CodeGrader-ULTRA, an expert AI teaching assistant for programming courses.
@@ -104,17 +107,35 @@ class GraderRAG:
     def __init__(
         self, dataset_path: str, model_type: Literal["gemini", "deepseek"] = "gemini"
     ):
+        logger.info(f"Initializing GraderRAG with model_type={model_type}")
         self.model_type = model_type
-        self.embedder: Embeddings = GoogleGenerativeAIEmbeddings(
-            model="models/embedding-001"
-        )
+        
+        # Initialize embeddings based on model type
+        logger.info("Initializing embeddings model...")
+        if self.model_type == "gemini":
+            self.embedder: Embeddings = GoogleGenerativeAIEmbeddings(
+                model="models/embedding-001"
+            )
+        else:
+            from langchain_huggingface import HuggingFaceEmbeddings
+            self.embedder = HuggingFaceEmbeddings(
+                model_name="BAAI/bge-large-en-v1.5"
+            )
+        logger.info("Embeddings model initialized")
+        
         self.dataset_path = dataset_path
+        logger.info("Loading vector store...")
         self.vector_store = self._load_or_create_vector_store()
+        logger.info("Vector store loaded")
 
+        logger.info("Initializing LLM...")
         self.llm = self._initialize_llm()
+        logger.info("LLM initialized")
 
         # Initialize grader chain
+        logger.info("Creating grader chain...")
         self.grader = self._create_grader_chain()
+        logger.info("Grader chain created")
 
     def _initialize_llm(self):
         """Initialize the LLM based on selected model type"""
@@ -125,29 +146,38 @@ class GraderRAG:
                 model=GRADER_MODEL_NAME,
                 temperature=0,
                 max_tokens=None,
-                timeout=None,
-                max_retries=2,
+                max_retries=1,
+                timeout=30,
             )
         elif self.model_type == "deepseek":
             from langchain_deepseek import ChatDeepSeek
 
+            api_key = os.getenv("DEEPSEEK_API_KEY")
+            if not api_key:
+                raise ValueError("DEEPSEEK_API_KEY environment variable not set")
+
             return ChatDeepSeek(
-                model="deepseek-chat",
+                model_kwargs={"api_key": api_key},
+                model_name="deepseek-coder-33b-instruct",
                 temperature=0,
-                max_tokens=None,
-                timeout=None,
-                max_retries=2,
+                max_tokens=4096,
+                request_timeout=30
             )
         else:
             raise ValueError(f"Unsupported model type: {self.model_type}")
 
     def _load_or_create_vector_store(self) -> FAISS:
-        if os.path.exists(VECTOR_STORE_PATH):
-            print(f"Loading vector store from {VECTOR_STORE_PATH}")
-            with open(VECTOR_STORE_PATH, "rb") as f:
-                return pickle.load(f)
-        else:
-            print(f"Creating vector store from {self.dataset_path}")
+        try:
+            if os.path.exists(VECTOR_STORE_PATH):
+                logger.info(f"Loading vector store from {VECTOR_STORE_PATH}")
+                return FAISS.load_local(VECTOR_STORE_PATH, self.embedder, allow_dangerous_deserialization=True)
+            else:
+                logger.info(f"Creating vector store from {self.dataset_path}")
+                vector_store = self._initialize_vector_store(self.dataset_path)
+                self._save_vector_store(vector_store)
+                return vector_store
+        except Exception as e:
+            logger.warning(f"Failed to load vector store, creating new one: {str(e)}")
             vector_store = self._initialize_vector_store(self.dataset_path)
             self._save_vector_store(vector_store)
             return vector_store
@@ -161,10 +191,11 @@ class GraderRAG:
         return FAISS.from_texts(texts, self.embedder)
 
     def _save_vector_store(self, vector_store: FAISS):
-        return
-        with open(VECTOR_STORE_PATH, "wb") as f:
-            pickle.dump(vector_store, f)
-        print(f"Vector store saved to {VECTOR_STORE_PATH}")
+        try:
+            vector_store.save_local(VECTOR_STORE_PATH)
+            logger.info(f"Vector store saved to {VECTOR_STORE_PATH}")
+        except Exception as e:
+            logger.error(f"Failed to save vector store: {str(e)}")
 
     def _load_examples(self, path: str) -> list:
         loader = DatasetLoader(path)
@@ -203,11 +234,17 @@ class GraderRAG:
         )
 
     def grade(self, input_data: dict) -> dict:
+        logger.info("Starting grading process...")
         # Perform RAG retrieval
+        logger.info("Retrieving similar examples...")
         examples = self._retrieve_examples(input_data["code"])
+        logger.info("Examples retrieved")
 
         # Add examples to input
         input_data["examples"] = examples
 
         # Invoke grading chain
-        return self.grader.invoke(input_data)
+        logger.info("Invoking grading chain...")
+        result = self.grader.invoke(input_data)
+        logger.info("Grading completed")
+        return result
