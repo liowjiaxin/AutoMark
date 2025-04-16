@@ -1,0 +1,70 @@
+{
+    "questions": [
+        {
+            "id": "Q1",
+            "title": "Bubble Sort Implementation",
+            "max_marks": 30,
+            "criteria": [
+                {
+                    "id": "Q1.1",
+                    "description": "Correct implementation of Bubble Sort algorithm",
+                    "max_marks": 15
+                },
+                {
+                    "id": "Q1.2",
+                    "description": "Proper handling of edge cases",
+                    "max_marks": 10
+                },
+                {
+                    "id": "Q1.3",
+                    "description": "Code documentation and comments",
+                    "max_marks": 5
+                }
+            ]
+        },
+        {
+            "id": "Q2",
+            "title": "Algorithm Analysis",
+            "max_marks": 30,
+            "criteria": [
+                {
+                    "id": "Q2.1",
+                    "description": "Correct time complexity analysis",
+                    "max_marks": 15
+                },
+                {
+                    "id": "Q2.2",
+                    "description": "Space complexity analysis",
+                    "max_marks": 10
+                },
+                {
+                    "id": "Q2.3",
+                    "description": "Comparison with other sorting algorithms",
+                    "max_marks": 5
+                }
+            ]
+        },
+        {
+            "id": "Q3",
+            "title": "Code Quality",
+            "max_marks": 40,
+            "criteria": [
+                {
+                    "id": "Q3.1",
+                    "description": "Code organization and structure",
+                    "max_marks": 15
+                },
+                {
+                    "id": "Q3.2",
+                    "description": "Variable naming and readability",
+                    "max_marks": 15
+                },
+                {
+                    "id": "Q3.3",
+                    "description": "Error handling and robustness",
+                    "max_marks": 10
+                }
+            ]
+        }
+    ]
+} 

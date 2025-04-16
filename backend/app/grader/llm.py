@@ -113,7 +113,11 @@ class LLM:
             self.chain = self.prompt_template | self.llm
 
     def invoke(self, input: dict):
-        return self.chain.invoke(input)
+        try:
+            return self.chain.invoke(input)
+        except Exception as e:
+            print(f"Error invoking LLM: {str(e)}")
+            return {"marks": 0, "feedback": f"Error during grading: {str(e)}"}
 
 
 class GraderLLM(LLM):

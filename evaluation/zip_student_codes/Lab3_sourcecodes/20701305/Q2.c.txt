@@ -1,0 +1,152 @@
+#include <stdio.h>
+#include <string.h>
+
+// Define constants
+#define MAX_NAME_LENGTH 100
+#define MAX_CATEGORY_LENGTH 50
+#define MAX_INVENTORY_SIZE 10
+
+// Structure to represent a grocery item
+typedef struct {
+    char name[MAX_NAME_LENGTH];
+    char category[MAX_CATEGORY_LENGTH];
+    int quantity;
+    float price;
+    int inStock; // 1 for in stock, 0 for out of stock
+} GroceryItem;
+
+// Global inventory array and item count
+GroceryItem inventory[MAX_INVENTORY_SIZE];
+int itemCount = 0;
+
+// Function prototypes
+void addGroceryItem();
+void listGroceryItems();
+void updateQuantity();
+void removeGroceryItem();
+
+int main() {
+    int choice;
+    
+    do {
+        // Display menu options
+        printf("\nGrocery Inventory System\n");
+        printf("1. Add Grocery Item\n");
+        printf("2. List All Grocery Items\n");
+        printf("3. Update Quantity of a Grocery Item\n");
+        printf("4. Remove Grocery Item\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        // Execute the corresponding function based on the user's choice
+        switch (choice) {
+            case 1:
+                addGroceryItem();
+                break;
+            case 2:
+                listGroceryItems();
+                break;
+            case 3:
+                updateQuantity();
+                break;
+            case 4:
+                removeGroceryItem();
+                break;
+            case 5:
+                printf("Exiting program.\n");
+                break;
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    } while (choice != 5);
+
+    return 0;
+}
+
+// Function to add a grocery item
+void addGroceryItem() {
+    if (itemCount >= MAX_INVENTORY_SIZE) {
+        printf("Inventory is full. Cannot add more items.\n");
+        return;
+    }
+
+    GroceryItem newItem;
+    printf("Enter item name: ");
+    getchar(); // To consume the leftover newline from previous input
+    fgets(newItem.name, MAX_NAME_LENGTH, stdin);
+    newItem.name[strcspn(newItem.name, "\n")] = 0; // Remove newline character
+
+    printf("Enter item category: ");
+    fgets(newItem.category, MAX_CATEGORY_LENGTH, stdin);
+    newItem.category[strcspn(newItem.category, "\n")] = 0;
+
+    printf("Enter item quantity: ");
+    scanf("%d", &newItem.quantity);
+
+    printf("Enter item price: ");
+    scanf("%f", &newItem.price);
+
+    newItem.inStock = newItem.quantity > 0 ? 1 : 0; // if quantity > 0
+
+    inventory[itemCount] = newItem;
+    itemCount++;
+
+    printf("Item added successfully.\n");
+}
+
+// Function to list all grocery items
+void listGroceryItems() {
+    if (itemCount == 0) {
+        printf("No items in the inventory.\n");
+        return;
+    }
+
+    printf("\nGrocery Inventory:\n");
+    for (int i = 0; i < itemCount; i++) {
+        printf("%d. Name: %s, Category: %s, Quantity: %d, Price: %.2f, Status: %s\n",
+               i + 1, inventory[i].name, inventory[i].category,
+               inventory[i].quantity, inventory[i].price,
+               inventory[i].inStock ? "In Stock" : "Out of Stock");
+    }
+}
+
+// Function to update the quantity of a grocery item
+void updateQuantity() {
+    int index;
+    printf("Enter the item number to update quantity: ");
+    scanf("%d", &index);
+
+    if (index < 1 || index > itemCount) {
+        printf("Invalid item number.\n");
+        return;
+    }
+
+    index--; // Convert to zero-based index
+    printf("Enter new quantity for %s: ", inventory[index].name);
+    scanf("%d", &inventory[index].quantity);
+
+    inventory[index].inStock = inventory[index].quantity > 0 ? 1 : 0;
+    printf("Quantity updated successfully.\n");
+}
+
+// Function to remove a grocery item from the inventory
+void removeGroceryItem() {
+    int index;
+    printf("Enter the item number to remove: ");
+    scanf("%d", &index);
+
+    if (index < 1 || index > itemCount) {
+        printf("Invalid item number.\n");
+        return;
+    }
+
+    index--; // Convert to zero-based index
+    // Shift items after the removed item to fill the blank
+    for (int i = index; i < itemCount - 1; i++) {
+        inventory[i] = inventory[i + 1];
+    }
+
+    itemCount--;
+    printf("Item removed successfully.\n");
+}

@@ -1,0 +1,240 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+
+// Structure for Student
+typedef struct Student {
+ char name[100];
+ int id;
+ float grade;
+ struct Student* next;
+} Student;
+
+Student* head = NULL;
+
+// Function to create a new student node
+Student* createStudent(const char* name, int id, float grade) {
+    Student* newStudent = (Student*)malloc(sizeof(Student));
+    if (newStudent == NULL) {
+        printf("Memory allocation failed.\n");
+        exit(1);
+    }
+    strcpy(newStudent->name, name);
+    newStudent->id = id;
+    newStudent->grade = grade;
+    newStudent->next = NULL; // Initialize the next pointer to NULL
+    return newStudent;
+}
+
+int validName(const char* name) {
+    for (int i = 0; name[i] != '\0'; i++) {
+        if (!isalpha(name[i]) && !isspace(name[i])) {
+            return 0; // Invalid character found
+        }
+    }
+    return 1; // Valid name
+}
+//grade and id should be non negative integers
+int validID(int id) {
+    return id >= 0;
+}
+
+int validGrade(float grade) {
+    return grade >= 0; 
+}
+
+
+// Function to insert a new student record
+void insertStudent(const char* name, int id, float grade) {
+    Student* newStudent = createStudent(name, id, grade);
+
+    if (head == NULL) {
+        head = newStudent; // If the list is empty, the new student becomes the head
+    } else {
+        Student* temp = head;
+        while (temp->next != NULL) {
+            temp = temp->next; // Traverse to the end of the list
+        }
+        temp->next = newStudent; // Append the new student at the end
+    }
+    printf("Student record added successfully.\n");
+}
+
+
+// Function to display all student records
+void displayStudents() {
+    if (head == NULL) {
+        printf("No student records found.\n");
+        return;
+    }
+
+    printf("\n%-20s %-10s %-10s\n", "Name", "ID", "Grade");
+    printf("----------------------------------------\n");
+    Student* temp = head;
+    while (temp != NULL) {
+        printf("%-20s %-10d %-10.2f\n", temp->name, temp->id, temp->grade);
+        temp = temp->next;
+    }
+}
+
+// Function to search for a student by ID
+Student* searchStudentByID(int id) {
+    Student* temp = head;
+    while (temp != NULL) {
+        if (temp->id == id) {
+            return temp; // Return the found student
+        }
+        temp = temp->next;
+    }
+    return NULL;
+}
+
+// Function to delete the entire list
+void deleteList() {
+ Student* current = head;
+ Student* next;
+ //loop through all the list until all nodes are deleted
+ while (current != NULL) {
+ next = current->next;
+ free(current);
+ current = next;
+ }
+ head = NULL;
+ printf("All student records have been deleted.\n");
+} 
+
+
+void freeMemory() {
+ deleteList();
+}
+
+// Sort function to sort the student records by grade based on an algorithim of ur choice
+void sortStudents() {
+    if (head == NULL || head->next == NULL) {
+        printf("Not enough records to sort.\n");
+        return;
+    }
+
+    int swapped;  //Variable that keeps track of any swaps made in the current pass
+    Student* ptr; //pointer to transverse the linked list
+    Student* lptr = NULL;//pointer to the end of the unsorted position of the list
+
+    do {
+        swapped = 0;
+        ptr = head;
+
+    //inner loop transverse the list
+    //lptr will move one step backward after each pass to exclude the last sorted node
+        while (ptr->next != lptr) {
+            if (ptr->grade > ptr->next->grade) {
+                char tempName[100];
+                int tempID;
+                float tempGrade;
+
+                // Swap names
+                strcpy(tempName, ptr->name);
+                strcpy(ptr->name, ptr->next->name);
+                strcpy(ptr->next->name, tempName);
+
+                // Swap IDs
+                tempID = ptr->id;
+                ptr->id = ptr->next->id;
+                ptr->next->id = tempID;
+
+                // Swap grades
+                tempGrade = ptr->grade;
+                ptr->grade = ptr->next->grade;
+                ptr->next->grade = tempGrade;
+
+                swapped = 1;
+            }
+            ptr = ptr->next;
+        }
+        lptr = ptr;
+    } while (swapped);
+
+    printf("Student records sorted by grade.\n");
+}
+
+
+int main() {
+ 
+ int choice, id;
+ char name[100];
+ float grade;
+
+ do {
+ printf("\n1. Insert Student Record\n");
+ printf("2. Display Student Records\n");
+ printf("3. Sort Records (choose sorting method)\n");
+ printf("4. Search Record by ID\n");
+ printf("5. Delete List\n");
+ printf("6. Exit\n");
+ printf("Enter your choice: ");
+ scanf("%d", &choice);
+ getchar(); // To consume the newline character
+ 
+ switch (choice) {
+    case 1:
+        printf("Enter Name: ");
+        fgets(name, sizeof(name), stdin);
+        strtok(name, "\n");
+        if (!validName(name)) {
+            printf("Invalid name! Names can only contain alphabets and spaces.\n");
+            break;
+        }
+       
+        printf("Enter ID: ");
+        scanf("%d", &id);
+        if (!validID(id)) {
+            printf("Invalid ID! Please try again.\n");
+            break;
+        }
+
+        printf("Enter Grade: ");
+        scanf("%f", &grade);
+        if (!validGrade(grade)) {
+                printf("Invalid grade! Grades must be non-negative.\n");
+                break;
+                }
+        
+        insertStudent(name, id, grade);
+        break;
+    
+    case 2:
+        displayStudents();
+        break;
+    
+    case 3:
+        sortStudents();
+        break;
+    
+    case 4:
+        printf("Enter ID to search: ");
+        scanf("%d", &id);
+        Student* found = searchStudentByID(id);
+        if (found) {
+            printf("Found: Name: %s, ID: %d, Grade: %.2f\n",
+            found->name, found->id, found->grade);
+        } else {
+            printf("Student not found.\n");
+        }
+        break;
+    
+    case 5:
+        deleteList();
+        printf("List deleted.\n");
+        break;
+    
+    case 6:
+        freeMemory();
+        printf("Exiting...\n");
+        break;
+    default:
+        printf("Invalid choice! Please try again.\n");
+    }
+ } while (choice != 6);
+ return 0;
+}

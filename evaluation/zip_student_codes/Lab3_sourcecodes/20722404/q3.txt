@@ -1,0 +1,246 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Structure for Student
+typedef struct Student {
+    char name[100];
+    int id;
+    float grade;
+    struct Student* next;
+} Student;
+
+Student* head = NULL;       // head represent first node in linked list
+
+// function prototypes
+Student* createStudent(const char* name, int id, float grade);
+void insertStudent(const char* name, int id, float grade);
+void displayStudents();
+Student* searchStudentByID(int id);
+void deleteList();
+void freeMemory();
+void sortStudents();
+
+
+// Function to create a new student node
+Student* createStudent(const char* name, int id, float grade) 
+{
+    Student* newStudent = (Student*)malloc(sizeof(Student));        // allocate memory dynamically for Student
+    
+    // check for memory allocation failure
+    if (newStudent == NULL)
+    {
+        printf("Memory allocation failed\n");
+        exit(1);
+    }
+
+    strcpy(newStudent->name, name); // copy student's name
+    newStudent->id = id;            // set id
+    newStudent->grade= grade;       // set grade
+    newStudent->next = NULL;        // initialise next pointer
+    return newStudent;              // return newStudent node
+}
+
+// Function to insert a new student record
+void insertStudent(const char* name, int id, float grade) 
+{
+    // create a new student node
+    Student* newStudent = createStudent(name, id, grade);
+
+    // insert at the beginning
+    newStudent->next = head;
+    head = newStudent;
+}
+
+// Function to display all student records
+void displayStudents() 
+{
+    // check if list has records
+    if (head == NULL)
+    {
+        // if list has no records, print message saying list is empty
+        printf("List is empty\n");
+        return;
+    } else
+    {
+        // initialise current pointer
+        Student* current = head;
+
+        // print student record
+        while (current != NULL)
+        {
+            printf("Name: %s, ID: %d, Grade: %.2f\n", current->name, current->id, current->grade);
+            current = current->next;
+        }
+    }
+}
+
+// Function to search for a student by ID
+Student* searchStudentByID(int id) 
+{
+    // initialise current pointer
+    Student* current = head;
+
+        // loop until match found or end of list is reached
+    while (current != NULL)
+    {
+        // check for student with matching id
+        if (current->id == id)
+        {
+            // if found, return pointer to student node
+            return current;
+        }
+        current = current->next;      // move to next node
+    }
+
+    // return NULL if student not found
+    return NULL;
+}
+
+// Function to delete the entire list
+void deleteList() 
+{
+    Student* current = head;
+    Student* next;
+    while (current != NULL) 
+    {
+        next = current->next;
+        free(current);
+        current = next;
+    }
+    head = NULL;
+}
+
+// Function to ensure that all memory is freed when the program exits
+void freeMemory() 
+{
+    deleteList();
+}
+
+// Sort function to sort the student records by grade using Bubble Sort
+// Reason: Bubble sort is simple to implement and works efficiently for a small dataset
+void sortStudents() 
+{
+    // check if list is empty
+    if (head == NULL)
+    {
+        // if yes, print message saying list is empty
+        printf("List is empty\n");
+        return;
+    }
+
+    int swapped;                        // declare "swapped" to track if any swaps were made
+    Student* current;                   // declare pointer "current" which points to current node
+    Student* lastSorted = NULL;         // declare pointer "last" which points to last node of sorted portion of list
+
+    do
+    {
+        swapped = 0;                    // initialise "swapped" to no swaps made
+        current = head;                 // current pointer points at start of list
+
+        // loop to sort records until last sorted node is reached or until no swaps made
+        while (current->next != lastSorted)
+        {
+            // check if current grade > next grade
+            if (current->grade > current->next->grade)
+            {
+                // if yes, swap nodes to move higher grade towards end of list
+                Student* temp = current->next;      // store current node's next pointer in temp
+                current->next = temp->next;         // current node's next pointer is updated to point to node after temp
+                temp->next = current;               // temp node's next pointer is updated to point to current node
+
+                // check if current node is the first node of the list
+                if (current == head)
+                {
+                    // if yes, update head pointer to point to temp
+                    head = temp;
+                } else
+                {
+                    // if no, find node before current node to update next pointer
+                    Student* previous = head;               // initialise "previous" to point to start of the list
+
+                    // loop until "previous" points to node before "current"
+                    while (previous->next != current)
+                    {
+                        previous = previous->next;      // move "previous" to next node
+                    }
+                    previous->next = temp;              // "previous" point to "temp"
+                }
+                swapped = 1;        // update swapped flag
+            } else
+            {
+                // if no swap, move current node to next node in list
+                current = current->next;
+            }
+        }
+        lastSorted = current;       // update last sorted node to current node
+    } while (swapped);
+
+    printf("Records sorted by grade using Bubble Sort\n");
+}
+
+// Main function to drive the program
+int main() 
+{
+    int choice, id;
+    char name[100];
+    float grade;
+
+    do
+    {
+        printf("\n1. Insert Student Record\n");
+        printf("2. Display Student Records\n");
+        printf("3. Sort Records by Grade\n");
+        printf("4. Search Record by ID\n");
+        printf("5. Delete List\n");
+        printf("6. Exit\n");
+
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        getchar(); // To consume the newline character
+                
+        switch (choice) 
+        {
+            case 1:
+                printf("Enter Name: ");
+                fgets(name, sizeof(name), stdin);
+                strtok(name, "\n");
+                printf("Enter ID: ");
+                scanf("%d", &id);
+                printf("Enter Grade: ");
+                scanf("%f", &grade);
+                insertStudent(name, id, grade);
+                break;
+            case 2:
+                displayStudents();
+                break;
+            case 3:
+            sortStudents();
+                break;
+            case 4:
+                printf("Enter ID to search: ");
+                scanf("%d", &id);
+                Student* found = searchStudentByID(id);
+                if (found) 
+                {
+                    printf("Found: Name: %s, ID: %d, Grade: %.2f\n", found->name, found->id, found->grade);
+                } else 
+                {
+                    printf("Student not found.\n");
+                }
+                break;
+            case 5:
+                deleteList();
+                printf("List deleted.\n");
+                break;
+            case 6:
+                freeMemory();
+                printf("Exiting...\n");
+                break;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    } while (choice != 6);
+    
+    return 0; 
+}

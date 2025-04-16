@@ -4,6 +4,9 @@ from helper import read_code, read_pdf
 from grader import GraderRAG  # Import your actual grader class
 import os
 import logging
+import time
+import random
+from google.api_core.exceptions import ResourceExhausted
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -76,15 +79,28 @@ def main():
         model = "gemini"
     logger.info(f"Using model: {model}")
 
-    # Initialize and run grader
+    # Initialize and run grader with retry logic
     try:
         logger.info("Initializing grader...")
         grader = GraderRAG(args.dataset, model_type=model)
         logger.info("Grader initialized, starting grading process...")
-        result = grader.grade(grading_context)
-        print("\nGrading Results:")
-        print(f"Score: {result['marks']}/100")
-        print(f"Feedback:\n{result['feedback']}")
+        
+        max_retries = 5
+        for attempt in range(max_retries):
+            try:
+                result = grader.grade(grading_context)
+                print("\nGrading Results:")
+                print(f"Score: {result['marks']}/100")
+                print(f"Feedback:\n{result['feedback']}")
+                break
+            except ResourceExhausted as e:
+                if attempt < max_retries - 1:
+                    retry_delay = 15 * (2 ** attempt) + random.uniform(0, 1)
+                    logger.warning(f"Quota exceeded. Retrying in {retry_delay:.2f} seconds...")
+                    time.sleep(retry_delay)
+                else:
+                    logger.error("Max retries reached. Grading failed due to quota limits.")
+                    raise e
     except Exception as e:
         logger.error(f"Grading failed: {str(e)}", exc_info=True)
 

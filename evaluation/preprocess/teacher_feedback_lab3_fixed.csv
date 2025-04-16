@@ -1,0 +1,1763 @@
+student_id,total_marks,total_marks_100,overall_feedback
+20409676,14.0,93.33333333333333,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-The AvailabilityStatus struct is defined with two boolean members (inStock and outOfStock), but only one of them is needed. This could lead to confusion about the availability status. A single boolean (e.g., isAvailable) or using a Union would suffice.
+
+Q3: q3-Bubble Sort is a simple but inefficient sorting algorithm with a time complexity of O(n²) in the worst and average cases. It is not ideal for larger datasets. While it is correctly implemented here, a more efficient algorithm like Quick Sort or Merge Sort would be preferable for better performance.
+
+Overall Score: 14.0 out of 15.0 (93.3%)"
+20480891,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The bubble sort implementation effectively sorts student records by grade. However, bubble sort has a time complexity of O(n²), which can be inefficient for larger datasets. For improved performance, consider using more efficient sorting algorithms, such as Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20488702,14.0,93.33333333333333,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-In the displayMenu function, there is a typo: rpintf should be corrected to printf.The removeGroceryitem function is referenced in the main function but is not defined anywhere in the code, leading to a compilation error.
+
+Q3: q3-The sorting function is currently empty. Once implemented, Insertion Sort is a reasonable choice for sorting linked lists as it can efficiently handle small datasets and maintains a sorted list without requiring additional memory.
+
+Overall Score: 14.0 out of 15.0 (93.3%)"
+20505065,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The implementation uses Bubble Sort to sort student records by grade. While it is simple and functional, it has a time complexity of O(n²), which may not be efficient for larger datasets. For better performance, consider using more efficient sorting algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20506128,0.0,0.0,"Lab 3 Assessment:
+
+Q1: q1-No submission
+
+Q2: q2-No submission
+
+Q3: q3-No submission
+
+Overall Score: 0.0 out of 15.0 (0.0%)"
+20509169,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly, but it has a time complexity of O(n²), which can be inefficient for larger datasets. For better performance, consider using more efficient algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20511126,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly and sorts the student records by grade in descending order. While Bubble Sort is straightforward, its time complexity of O(n²) can be inefficient for larger datasets. For better performance, consider using more efficient algorithms such as Quick Sort or Merge Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20573337,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The recursive implementation of Bubble Sort is correctly utilized to sort student records by grade in ascending order. While Bubble Sort is simple and easy to understand, it has a time complexity of O(n²), which can be inefficient for larger datasets. For larger lists, consider using more efficient algorithms like Quick Sort or Merge Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20574289,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is well-implemented and sorts the student records by grade in ascending order. While Bubble Sort is simple and effective for small datasets, it has a time complexity of O(n²), which might not be efficient for larger datasets. Consider using more efficient algorithms like Merge Sort or Quick Sort for better scalability.
+4. Final Mark
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20576624,14.0,93.33333333333333,"Lab 3 Assessment:
+
+Q1: q1-In the transposeMatrix function, the output should use the correct dimensions of the transposed matrix. When printing the transposed matrix, the loops should iterate using columns for rows and rows for columns.
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly, but it has a time complexity of O(n²), which can be inefficient for larger datasets. For better performance, consider using algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 14.0 out of 15.0 (93.3%)"
+20577892,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2- The variable search_index is initialized to 0 but is not set to a valid index if the item is not found. This can lead to incorrect behavior when checking if the item was found. Instead, it should be initialized to -1 or -1 should be used as a flag to indicate that the item was not found.
+
+Q3: q3-All required functions are correctly implemented
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20579147,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The program implements bubble sort to sort student records by grade. While this method works correctly, it has a time complexity of O(n²), which can be inefficient for larger datasets. Consider using a more efficient sorting algorithm, such as Quick Sort or Merge Sort, for improved performance.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20580127,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-Meet requirement. 
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20581109,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-While the inStock field is appropriately set when adding an item and updating the quantity, the logic for determining stock status could be improved. If the quantity is updated to zero, the status should reflect ""Out of Stock,"" but the program does not prompt the user or display the updated status in the listItems function.
+
+Q3: q3-All required functions are correctly implemented
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20585127,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly to sort student records by grade in descending order. While it is simple and effective for small datasets, it has a time complexity of O(n²), which can be inefficient for larger datasets. For larger lists, consider using more efficient sorting algorithms like Quick Sort or Merge Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20590120,13.5,90.0,"Lab 3 Assessment:
+
+Q1: q1-In the input section for Matrix B, you should use rowB and columnB instead of rowA and columnA. For displaying the transposed matrices, you should use transposeA and transposeB instead of total
+
+Q2: q2-The AvailabilityStatus struct is used to track both inStock and outStock, but you only need one status indicator. You can simplify the logic to use a single boolean for availability (e.g., isInStock) or union. In the removeGroceryItem function, after shifting the items left upon removal, the last item in the array is not cleared or reset. This could lead to displaying stale data if the last item is accessed.
+
+Q3: q3-    The bubble sort implementation effectively sorts student records by grade. However, bubble sort has a time complexity of O(n²), which may not be efficient for larger datasets. Consider using more efficient algorithms, like Merge Sort or Quick Sort, especially for larger collections of student records.
+
+Overall Score: 13.5 out of 15.0 (90.0%)"
+20590530,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-In the displayStudents function, the check for an empty list is after the loop. It should be placed before the loop to notify the user immediately if the list is empty.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20590531,14.0,93.33333333333333,"Lab 3 Assessment:
+
+Q1: q1-In the dimension validation for Matrix B, the condition incorrectly checks colsA instead of colsB. 
+
+Q2: q2-The choice variable in the main function is used without being initialized. This can cause undefined behavior when the program first checks the condition in the while loop. It should be initialized to a value (e.g., 0) before the loop begins.
+
+Q3: q3-    The bubble sort implementation correctly sorts the student records by grade. However, bubble sort has a time complexity of O(n²), making it inefficient for larger datasets. For better performance, consider using a more efficient sorting algorithm, such as Quick Sort or Merge Sort.
+
+Overall Score: 14.0 out of 15.0 (93.3%)"
+20590645,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-All required functions are correctly implemented
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20590948,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-Bubble Sort is simple and works well for small lists. Its time complexity of O(n²) can lead to inefficiencies with larger datasets. For improved performance, consider implementing more efficient algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20591632,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-In the removeGroceryItem function, the success message incorrectly attempts to print inventory.items instead of the specific item name. It should be name instead.
+
+Q3: q3-The sortStudents function implements Bubble Sort to arrange student records by grade. While Bubble Sort is straightforward and easy to understand, it has a time complexity of O(n²), which may become inefficient with larger datasets. For better performance, consider using more efficient algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20592884,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The use of qsort is appropriate for sorting student records by grade. It offers average performance with a time complexity of O(n log n), making it more efficient than Bubble Sort for larger datasets. This choice is well justified.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20593018,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3- The sortStudents function uses a nested loop to swap student records based on their grades. This method effectively sorts the list, but it has a time complexity of O(n²), which can be inefficient for larger datasets. Consider using a more efficient sorting algorithm like Merge Sort or Quick Sort for better performance.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20593212,5.0,33.33333333333333,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-No submission
+
+Q3: q3-No submission
+
+Overall Score: 5.0 out of 15.0 (33.3%)"
+20593889,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The program uses bubble sort to sort student records by grade. While this method is simple and effective for small datasets, it has a time complexity of O(n²), which can be inefficient for larger lists. Consider using a more efficient sorting algorithm, such as Quick Sort or Merge Sort, for better performance.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20595032,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-Bubble Sort is implemented correctly. While it works for small datasets and is easy to understand, it has a time complexity of O(n²), making it inefficient for larger datasets. For better performance, consider using a more efficient algorithm like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20595191,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The program implements bubble sort to sort student records by grade. While bubble sort is functional, it has a time complexity of O(n²), making it inefficient for larger datasets. Consider using a more efficient sorting algorithm like Quick Sort or Merge Sort for improved performance.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20595218,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sorting algorithm is efficient for linked lists, operating in O(n²) in the worst case but is appropriate for smaller datasets. The implementation correctly handles the insertion of nodes in sorted order based on grades.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20595637,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The implementation correctly uses Bubble Sort for sorting student records by grade. However, Bubble Sort has a time complexity of O(n²), which can be inefficient for larger datasets. Consider using more efficient algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20596548,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sortStudents function uses Bubble Sort to sort the student records by grade. While this algorithm is easy to implement, it has a time complexity of O(n²), making it inefficient for larger datasets. Consider using a more efficient sorting algorithm, like Merge Sort or Quick Sort, for improved performance.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20596870,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The program uses bubble sort to sort student records by grade. While this method is straightforward and sufficient for small datasets, it has a time complexity of O(n²), which can lead to inefficiencies with larger datasets. For better performance, consider using a more efficient sorting algorithm like Quick Sort or Merge Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20598080,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sortStudents function utilizes Bubble Sort to organize student records by grade. While this algorithm is straightforward and works well for small datasets, it has a time complexity of O(n²). For larger datasets, consider more efficient sorting algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20598184,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-The function tranposeMatrix incorrectly assigns values when transposing. The assignment should be c[j][i] = a[i][j] to properly transpose the matrix.
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The program uses bubble sort to sort student records by grade. While bubble sort is simple and straightforward, it has a time complexity of O(n²), making it inefficient for large datasets. Consider implementing a more efficient sorting algorithm, such as Quick Sort or Merge Sort, for better performance.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20598255,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-the include directive for string manipulation should be #include <string.h> instead of #include <string.h.> 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The bubble sort implementation successfully sorts student records by grade. While bubble sort is easy to understand and implement, its time complexity of O(n²) can lead to inefficiency with larger datasets. For improved performance, consider using more efficient sorting algorithms, like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20599269,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The choice of Bubble Sort is appropriate for simplicity, especially for small datasets. However, it has a time complexity of O(n²), which may not be efficient for larger datasets. Consider implementing more efficient sorting algorithms like Quick Sort or Merge Sort for scalability.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20599677,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-Bubble Sort is suitable for small datasets due to its simplicity, but it has a time complexity of O(n²). For larger datasets, consider implementing more efficient sorting algorithms like Quick Sort or Merge Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20601157,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-   Transpose Output Dimensions: In the transpose output loops, the dimensions used in the inner loop should match the transposed matrix dimensions (i.e., swap rows with columns).
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sortStudents function implements Bubble Sort to sort student records by grade. While Bubble Sort is simple, it has a time complexity of O(n²), which can be inefficient for larger datasets. Consider using a more efficient algorithm like Merge Sort or Quick Sort for better performance.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20601165,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sortStudents function implements Bubble Sort to sort student records by grade. While this algorithm is simple and understandable, it has a time complexity of O(n²), which can be inefficient for larger datasets. For better performance, consider using more efficient sorting algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20602511,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sortStudents function uses Bubble Sort to arrange student records by grade. While this algorithm is straightforward, it has a time complexity of O(n²), which may not be efficient for larger datasets. For a more optimal solution, consider using algorithms like Quick Sort or Merge Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20603953,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Merge Sort algorithm is implemented correctly. It has a time complexity of O(n log n), which makes it suitable for larger datasets compared to Bubble Sort. The splitting and merging functions are well-structured and effectively sort the linked list.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20604119,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The bubble sort implementation correctly sorts student records by grade. While bubble sort is simple and effective for small datasets, it has a time complexity of O(n²), which can lead to inefficiency with larger datasets. For better performance, consider using more efficient sorting algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20604846,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sortStudents function implements Bubble Sort to arrange student records by grade. While this algorithm is easy to understand and works correctly, it has a time complexity of O(n²), which could be inefficient for larger datasets. Consider using more efficient algorithms like Merge Sort or Quick Sort in future implementations.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20605542,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The program utilizes the bubble sort algorithm to sort student records by grade. While this method is straightforward, it has a time complexity of O(n²), which can lead to inefficiencies with larger datasets. For better performance, consider implementing a more efficient sorting algorithm such as Quick Sort or Merge Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20606861,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The implementation correctly uses Bubble Sort to sort student records by grade. While it works, Bubble Sort has a time complexity of O(n²), which may not be efficient for larger datasets. For better performance, consider using more efficient algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20606888,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-The dimensions for the transposed matrices are incorrectly used when printing. In transposeMatrixA and transposeMatrixB, the loops for printing should use the transposed dimensions (i.e., c for rows and r for columns).The variable r and c are reused for both matrices, which can lead to confusion. It's better to define separate variables for the dimensions of matrix A and B.
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly but has a time complexity of O(n²), which can be inefficient for larger datasets. For better performance, consider using more efficient algorithms like Merge Sort or Quick Sort, especially for linked lists.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20607094,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-The displayMatrix function is called in the addMatrices and subtractMatrices functions after calculating results, but the result matrix is not initialized or declared in the right scope.
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The program uses Bubble Sort to sort student records by grade. While functional, Bubble Sort has a time complexity of O(n²), which can be inefficient for larger datasets. For enhanced efficiency, consider implementing more advanced sorting algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20607620,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-Bubble Sort is used here for sorting student records by grade. While it's straightforward and easy to implement, it has a time complexity of O(n²), making it inefficient for larger datasets. For better performance, consider more efficient algorithms like Merge Sort or Quick Sort, especially if the number of records increases.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20607863,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sortStudents function implements Merge Sort to sort student records by grade. This choice is effective as Merge Sort has a time complexity of O(n log n) and is stable, making it suitable for linked lists. The implementation demonstrates a good understanding of sorting algorithms.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20607904,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-    The line if (first_time = 0) should use == for comparison instead of =. This is present in the matrix dimension input loops. The matrix_max_i and matrix_max_j variables are reused for both matrices. This could lead to confusion or errors since the dimensions of the second matrix are based on the first matrix's dimensions.
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The program uses bubble sort to sort student records by grade. While this algorithm works, it has a time complexity of O(n²), which can be inefficient for larger datasets. Consider using a more efficient algorithm like Quick Sort or Merge Sort for better performance.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20609412,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The return NULL; statement in the searchStudentByID function is incorrectly placed inside the loop. It should be outside the while loop to ensure it only executes if the end of the list is reached without finding a match.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20609660,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The program uses Bubble Sort to sort student records by grade. While functional, this algorithm has a time complexity of O(n²), which may not scale well for larger datasets. For improved performance, consider more efficient sorting algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20609983,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sortStudents function implements Bubble Sort to sort student records by grade. While it effectively sorts the list, Bubble Sort has a time complexity of O(n²) and is not the most efficient choice for larger datasets. Consider using more efficient algorithms, like Merge Sort or Quick Sort, for better performance.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20610050,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly and efficiently handles sorting student records by grade. However, its time complexity of O(n²) can be inefficient for larger datasets. Consider using more efficient algorithms like Merge Sort or Quick Sort for better performance.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20610102,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sortStudents function implements Bubble Sort to arrange student records by grade. While this algorithm is straightforward and easy to implement, it has a time complexity of O(n²), making it less efficient for larger datasets. For improved performance, consider using a more efficient sorting algorithm like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20610427,14.0,93.33333333333333,"Lab 3 Assessment:
+
+Q1: q1-Transpose Printing Order: In the Transpose_Matrix_A and Transpose_Matrix_B functions, the printing order should reference the transposed matrix correctly. The nested loops should iterate over the columns first and then the rows
+
+Q2: q2-The InStock status is not initialized when adding a new grocery item. Although the Update_Stock_Status function is called after setting the quantity, it should also be invoked when listing items to ensure that the status reflects the current quantity.
+
+Q3: q3-    The implementation of bubble sort is straightforward and works correctly for sorting student records by grade. However, bubble sort has a time complexity of O(n²), which can be inefficient for larger datasets. Consider using more efficient algorithms, such as Merge Sort or Quick Sort, for better performance in practice.
+
+Overall Score: 14.0 out of 15.0 (93.3%)"
+20611068,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The implementation uses Bubble Sort to sort student records by grade. This algorithm is simple and effective for small datasets, but it has a time complexity of O(n²), which may not perform well with larger datasets. For efficiency, consider using more advanced sorting algorithms like Quick Sort or Merge Sort in future implementations.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20611251,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-All required functions are correctly implemented
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20611298,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-The program does not handle cases where the quantity is updated to zero correctly. While it sets the in_stock status, it should also ensure that the item is marked as ""Out of Stock"" in the output when listed.In the Remove_Item function, the program does not properly handle the case where the last item is removed. The loop that shifts items does not account for the fact that the last item is being removed, which may lead to accessing uninitialized memory in the statuses array.
+
+Q3: q3-    Bubble Sort is correctly implemented, but it is inefficient for larger datasets, with a time complexity of O(n²). While it works for small lists, a more efficient sorting algorithm, such as Quick Sort or Merge Sort, would be more suitable for larger datasets.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20611302,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The implementation of Merge Sort is appropriate for linked lists due to its efficiency and stability. It effectively handles large datasets with a time complexity of O(n log n), which is an improvement over simpler sorting algorithms like Bubble Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20611325,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sortStudents function uses Bubble Sort to arrange student records by grade. While this method is simple and works correctly, it has a time complexity of O(n²), which may not be efficient for larger datasets. For better performance, consider using more efficient algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20611327,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly to sort student records by grade in ascending order. While Bubble Sort is straightforward for small datasets, it has a time complexity of O(n²), which can be inefficient for larger datasets. For larger lists, consider using more efficient algorithms like Quick Sort or Merge Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20611470,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sortStudents function uses Bubble Sort to arrange student records by grade. While this algorithm is straightforward, it has a time complexity of O(n²), which may not be efficient for larger datasets. For a more optimal solution, consider using algorithms like Quick Sort or Merge Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20611605,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-In the removeGroceryItem function, after removing an item, the code does not reset the last item in the array to prevent potential access to uninitialized memory. This could lead to undefined behavior if the last item's data is accessed after removal.
+
+Q3: q3-    The bubble sort implementation correctly sorts the student records by grade. However, bubble sort has a time complexity of O(n²), which can be inefficient for larger datasets. While it's suitable for small sample sizes, consider using a more efficient algorithm like Quick Sort or Merge Sort for scalability.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20611657,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The implementation uses Bubble Sort to sort student records by grade. While this is simple and works correctly, it has a time complexity of O(n²), which may not be efficient for larger datasets. For better performance, consider more efficient algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20612258,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sortStudents function uses Bubble Sort to sort the student records by grade. While this algorithm is straightforward, it has a time complexity of O(n²), making it inefficient for larger datasets. For improved performance, consider implementing a more efficient sorting algorithm like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20612400,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The sorting method effectively sorts student records based on grades. However, the nested loop structure resembles a bubble sort, which has a time complexity of O(n²). For larger datasets, consider using more efficient algorithms like Merge Sort or Quick Sort for better performance.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20612641,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-In the removeItem function, the message ""No grocery ite"" is truncated and should indicate that there are no grocery items to remove.
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly and sorts the student records by grade in ascending order. While this algorithm works well for small datasets, it has a time complexity of O(n²), making it inefficient for larger lists. For better performance, consider using more efficient algorithms like Quick Sort or Merge Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20612661,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The sort function correctly implements bubble sort to arrange student records by grade. While effective, bubble sort has a time complexity of O(n²), which can be inefficient for larger datasets. Consider using more efficient algorithms like Merge Sort or Quick Sort for improved performance.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20612781,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sortStudents function implements Bubble Sort to sort the student records by grade. This algorithm is simple and works well for small lists, but it has a time complexity of O(n²), which may not be efficient for larger datasets. Consider using a more efficient sorting algorithm like Merge Sort or Quick Sort for better performance.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20612918,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-Meet requirement. 
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20612945,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The implementation uses Bubble Sort to sort student records by grade. While it works correctly, Bubble Sort has a time complexity of O(n²), which may not be efficient for larger datasets. For better performance, consider using more efficient algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20612965,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The implementation uses Bubble Sort to sort student records by grade. While it works properly, it has a time complexity of O(n²), which may not be efficient for larger datasets. Consider using more efficient sorting algorithms like Merge Sort or Quick Sort for better performance in future implementations.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20613019,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The bubble sort implementation correctly sorts student records by grade. While bubble sort is simple and effective for small datasets, it has a time complexity of O(n²), which can lead to inefficiency with larger datasets. For improved performance, consider using more efficient algorithms such as Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20613139,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-In the transposeMatrix function, the displayMatrix call after transposing uses colsA and rowsA instead of the correct dimensions of the transposed matrix. It should display with the new dimensions, which are swapped.
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly but has a time complexity of O(n²), making it inefficient for larger datasets. For better performance, consider using algorithms like Merge Sort or Quick Sort, which have better average-case complexities.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20613250,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-The checkIndex function is not correctly implemented to return the count of valid grocery items. It should return total instead of the index of the first empty slot.The status array is used to track availability but does not accurately reflect changes in item count when items are added or removed. This could lead to incorrect status reporting.
+
+Q3: q3-The current code inserts new student records at the end of the linked list, which is less efficient than inserting at the beginning. The function should allow insertion at the head for better performance.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20613314,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-In the delete_item function, the condition if (to_insert = array) should use == for comparison instead of = for assignment. This will always evaluate to true, leading to incorrect behavior.
+
+Q3: q3-    The program implements Quick Sort effectively to sort student records by grade. This is a suitable choice as Quick Sort has an average time complexity of O(n log n), which is efficient for larger datasets.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20614355,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-In the remove_grocery_item function, after decrementing item_count, the loop should iterate up to item_count (not item_count - 1). This can lead to accessing uninitialized memory.
+
+Q3: q3- The implementation uses Bubble Sort to sort student records by grade. While it is straightforward, it has a time complexity of O(n²), which may not be efficient for larger datasets. Consider using more efficient algorithms like Merge Sort or Quick Sort for better performance.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20614437,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3- The implementation correctly uses Merge Sort, which is efficient with a time complexity of O(n log n). This makes it suitable for sorting larger datasets in linked lists, as it does not require random access and maintains stability.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20614522,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The sorting function implements bubble sort correctly, swapping student records based on their grades. While this method works, it has a time complexity of O(n²). For larger datasets, consider using more efficient sorting algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20615031,14.0,93.33333333333333,"Lab 3 Assessment:
+
+Q1: q1-In the inputMatrix function, the parameter types are not declared correctly in the function prototype. Function prototypes should match their definitions. In the menu option for transposing Matrix B, the printed message incorrectly indicates ""Transpose of Matrix A"" instead of ""Transpose of Matrix B"".
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is correctly implemented and sorts the student records by grade in ascending order. While it is simple to understand, its time complexity of O(n²) can be inefficient for larger datasets. Consider implementing more efficient algorithms like Quick Sort or Merge Sort for better performance.
+
+Overall Score: 14.0 out of 15.0 (93.3%)"
+20615047,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-    In the list function, the check for empty inventory is not executed correctly. The condition to check if no items are read (fread(&new_item, sizeof(struct GroceryItem), 1, fPtr) == 0) is incorrectly placed inside the loop, leading to potential misreporting of inventory status.
+    In the update function, if the item is found and updated, it does not write the updated item back to the temporary file unless it is found in the inventory.
+
+Q3: q3-The program uses Selection Sort to sort student records by grade. While it is simple and easy to follow, Selection Sort has a time complexity of O(n²), which may not be efficient for larger datasets. For better performance, consider implementing more efficient algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20615192,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sortStudents function uses Bubble Sort to sort student records by grade. While this method is straightforward, it has a time complexity of O(n²), which can be inefficient for larger datasets. For improved performance, consider using more efficient sorting algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20615279,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sortStudents function uses Bubble Sort to arrange student records by grade. Although this algorithm is simple and easy to implement, it has a time complexity of O(n²), which may not be efficient for large datasets. Consider using a more efficient sorting algorithm, such as Quick Sort or Merge Sort, for better performance.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20616849,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-In the deleteItem function, the confirmation message incorrectly references inventoryList[i].itemName after the item has been removed. It should instead use removedItemName, which holds the name of the item that was deleted.
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly and sorts the student records by grade in ascending order. While Bubble Sort is straightforward, it has a time complexity of O(n²), which can be inefficient for larger datasets. For improved performance, consider using more efficient sorting algorithms like Quick Sort or Merge Sort.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20617520,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-The result matrices in AddMatrix, SubtractMatrix, and TransposeMatrix functions are declared but not initialized or returned, which may lead to unintended behavior if used without being filled.
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-Using Bubble Sort is suitable for small datasets, as the program suggests. However, for larger datasets, you might consider more efficient algorithms like Quick Sort or Merge Sort due to Bubble Sort's O(n²) time complexity.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20617662,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-While Bubble Sort is straightforward and works well for small datasets, its time complexity of O(n²) can lead to inefficiencies with larger lists. For better performance, consider implementing more efficient algorithms like Merge Sort or Quick Sort in future versions.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20618167,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly. However, it has a time complexity of O(n²), which can be inefficient for larger datasets. Consider using more efficient algorithms like Merge Sort or Quick Sort for better performance.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20618300,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-Bubble Sort is a straightforward choice for sorting small datasets. However, it has a time complexity of O(n²), which may not be efficient for larger datasets. Consider using more efficient algorithms like Quick Sort or Merge Sort for better performance on larger lists.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20618336,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly and sorts the student records by grade in ascending order. While Bubble Sort is easy to understand and implement, it has a time complexity of O(n²), which can be inefficient for larger datasets. For better performance, consider using more efficient algorithms like Quick Sort or Merge Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20618865,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Merge Sort algorithm is implemented correctly to sort student records by grade in ascending order. This algorithm is efficient with a time complexity of O(n log n), making it suitable for larger datasets compared to simpler algorithms like Bubble Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20619015,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sortStudents function uses Bubble Sort to arrange student records by grade. While effective for small datasets, Bubble Sort has a time complexity of O(n²), making it inefficient for larger datasets. For scalability, consider more efficient algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20619091,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-While Bubble Sort is simple and works for small datasets, it has a time complexity of O(n²), making it inefficient for larger lists. If performance is a concern, more efficient algorithms (like Quick Sort or Merge Sort) could be considered for future implementations.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20619473,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly to sort student records by grade in ascending order. While it is simple and effective for small datasets, it has a time complexity of O(n²), which can be inefficient for larger datasets. For larger lists, consider using more efficient sorting algorithms like Quick Sort or Merge Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20619586,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-    In the update quantity function, the loop condition should iterate until i < total_items instead of i <= total_items. This can lead to accessing an uninitialized element when trying to compare names.    In the remove item function, the loop that shifts items should also use j < total_items - 1 to avoid accessing out-of-bounds elements after the last item has been removed.
+
+Q3: q3-The implementation of Insertion Sort for sorting student records by grade is efficient for linked lists. It effectively maintains the sorted order with minimal additional memory usage. The approach is appropriate given the context.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20620220,12.0,80.0,"Lab 3 Assessment:
+
+Q1: q1-The scanf statements for dimensions include an extra newline character (\n), which can cause issues when reading input.     The loops for reading matrix elements do not properly limit the input to the specified dimensions provided by the user.    Transposing assumes the matrix is always N x N, which may not hold true if the user enters different dimensions.
+
+Q2: q2-    In the main function, the menu loop is missing. After displaying the options and taking input, it should repeat until the user chooses to exit.   The initialization of GroceryInventory inventory = {0}; is correct, but count is unused and unnecessary.
+
+Q3: q3-The displayStudents function has an infinite loop because it does not check if current is NULL before dereferencing it. This can lead to a crash or undefined behavior.
+
+Overall Score: 12.0 out of 15.0 (80.0%)"
+20620222,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-The program incorrectly defines the result array inside the add and subtract functions using i and j without initializing them. This can lead to undefined behavior. The result array should be defined with fixed dimensions or as a parameter to the function. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly. It has a time complexity of O(n²), which can be inefficient for larger datasets. For better performance, consider using more efficient algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20621249,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The program uses bubble sort to sort student records by grade. While bubble sort is straightforward and easy to implement, it has a time complexity of O(n²), which can be inefficient for larger datasets. For enhanced performance, consider using more efficient algorithms like Quick Sort or Merge Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20621408,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sortStudents function uses Bubble Sort to arrange student records by grade. While this algorithm is easy to implement and understand, it has a time complexity of O(n²), making it inefficient for large datasets. Consider using a more efficient sorting algorithm, such as Merge Sort or Quick Sort, for better performance.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20673433,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is used to sort student records by grade. While it works correctly for this purpose, Bubble Sort has a time complexity of O(n²), which can lead to inefficiencies with larger datasets. For better performance, consider using more efficient sorting algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20677103,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly to sort student records by grade. While Bubble Sort is simple and effective for small datasets, it has a time complexity of O(n²), which may be inefficient for larger datasets. For larger lists, consider using more efficient algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20677174,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-    In the addMatrices and subtractMatrices functions, result.matrix is incorrectly assigned using *resultVals. This should be dynamically allocated memory instead of attempting to assign a pointer to an array that is out of scope.     The memcpy function in the transposeMatrices function attempts to copy a variable-length array resultVals without proper dynamic memory allocation, which can lead to undefined behavior.
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-Merge Sort is efficient with a time complexity of O(n log n) and is well-suited for linked lists, as it doesn't require random access. This choice is more efficient than Bubble Sort for larger datasets.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20678343,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-     The program uses bubble sort to sort student records by grade. While bubble sort is straightforward, it has a time complexity of O(n²), which can be inefficient for larger datasets. For better performance, consider using more efficient sorting algorithms like Quick Sort or Merge Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20682988,14.0,93.33333333333333,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sortStudents function is currently empty. You need to implement a sorting algorithm (e.g., Bubble Sort, Merge Sort) to sort the student records by grade.
+
+Overall Score: 14.0 out of 15.0 (93.3%)"
+20683106,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The mergesort function is implemented to sort student records by grade. This is an efficient choice for linked lists, as it has a time complexity of O(n log n) and works well with sequential data access.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20687076,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-Meet requirement. 
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20690297,14.0,93.33333333333333,"Lab 3 Assessment:
+
+Q1: q1-The variable choice is initialized to -1, which leads to the menu not displaying on the first iteration. It should be initialized to 1 or the loop condition should be changed.
+
+Q2: q2-The logic for reading the inventory from the file uses EOF incorrectly in the while loop condition. It should check the return value of fscanf against the number of items successfully read, not against EOF.
+
+Q3: q3- The sortStudents function uses Merge Sort, which efficiently sorts the linked list with a time complexity of O(n log n). This is a suitable choice for sorting student records by grade, especially for larger datasets.
+
+Overall Score: 14.0 out of 15.0 (93.3%)"
+20690629,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The implementation of bubble sort correctly sorts student records by grade. While bubble sort is straightforward and easy to implement, its O(n²) time complexity can be inefficient for larger datasets. For better performance, consider using more efficient algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20697136,12.0,80.0,"Lab 3 Assessment:
+
+Q1: q1-The transposeA and transposeB functions incorrectly access the matrix elements. The loop indices should be swapped when printing the transposed values.
+
+Q2: q2-In the deleteItem function, after deleting an item, the remaining items are not properly shifted. The loop only shifts one item, which can lead to data inconsistency. It should shift all items from the deleted index to the end of the list.
+
+Q3: q3-    Memory Management: The createStudent function reassigns head every time it's called, which means only the last student created will be referenced in the list. You should append new students instead of overwriting head.    Display Function: In the displayStudents function, the wrong pointer is used (head instead of current) to print student details.    Search Function: The searchStudentByID function only checks against the head's ID. It should iterate through the entire list to find the student.    Sorting Function: The sortStudents function is incomplete and lacks implementation.Sorting Algorithm: None implemented yet.
+
+Overall Score: 12.0 out of 15.0 (80.0%)"
+20697931,12.5,83.33333333333334,"Lab 3 Assessment:
+
+Q1: q1-The function signature for main should return an int, not void. It should be defined as int main().     The Sub_Matrices function is incorrectly performing addition instead of subtraction. It should be using the matrixA[i][j] - matrixB[i][j] operation.     The Add_Matrices and Sub_Matrices functions do not return a value, even though they are declared to return an int. You should change their return type to void if they are not meant to return anything.
+    The program lacks validation for matrix dimensions, which could lead to issues if the user inputs invalid dimensions (greater than 10 or non-positive values).
+
+Q2: q2-    In Add_GroceryItem, the check for inventory capacity uses total_items_num == 1000, but the inventory is defined with a maximum of 1000 items. The message should reflect that the inventory is full.
+    In Remove_GroceryItem, the method of removing an item by clearing its fields does not correctly shift the remaining items in the array. As a result, the last item will not be removed from the inventory effectively.
+
+Q3: q3-In the insertStudent function, if the linked list is empty, the new student should be added as the head. However, if the list is not empty, the insertion logic does not correctly handle the case where the list is traversed but no addition happens at the end. Although it doesn't cause a crash, it may lead to incorrect behavior if there is an attempt to insert a duplicate ID.
+
+Overall Score: 12.5 out of 15.0 (83.3%)"
+20698118,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Merge Sort algorithm is implemented correctly to sort student records by grade in ascending order. This algorithm is efficient, with a time complexity of O(n log n), making it suitable for larger datasets compared to simpler algorithms like Bubble Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20698295,14.0,93.33333333333333,"Lab 3 Assessment:
+
+Q1: q1- The transposematrix function does not initialize the transposedmat array. This could lead to undefined behavior if the matrix is not fully populated.
+
+Q2: q2-    In the additem function, the check for inventory fullness uses >= instead of >, which could allow adding one more item than intended if the maximum is reached.    In the main function, the inventory (Inventory) is not initialized before use, which may lead to undefined behavior when accessing itemcount.
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly and sorts the student records by grade in ascending order. While Bubble Sort works for small datasets, its time complexity of O(n²) can be inefficient for larger lists. For better performance, consider using more efficient algorithms like Quick Sort or Merge Sort.
+
+Overall Score: 14.0 out of 15.0 (93.3%)"
+20699501,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The program uses Bubble Sort to sort student records by grade. While this method is straightforward, it has a time complexity of O(n²), making it less efficient for larger datasets. For improved performance, consider implementing a more efficient algorithm like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20700412,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-The arithmetic operations in the Arimatrices function incorrectly use the loop indices when accessing the matrix elements. The correct formula for accessing the elements should account for both row and column indices properly.
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    Sorting Algorithm: Selection Sort (referred to as ""Linear Sort"" in the menu).The sorting algorithm is implemented correctly. However, while it works, the time complexity is O(n²), which may not be efficient for larger datasets. Consider using more efficient algorithms like Merge Sort or Quick Sort for better performance.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20700473,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3- Bubble Sort is straightforward and easy to implement but has a time complexity of O(n²). While it works for small datasets, it may not be efficient for larger ones. Consider implementing a more efficient sorting algorithm like Merge Sort or Quick Sort for better performance.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20700664,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is correctly implemented, and it sorts the student records by grade in ascending order. However, Bubble Sort has a time complexity of O(n²), which can be inefficient for larger datasets. Consider more efficient algorithms like Merge Sort or Quick Sort for better performance.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20701283,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly. However, it has a time complexity of O(n²), which can be inefficient for larger datasets. Consider using more efficient algorithms like Merge Sort or Quick Sort for improved performance.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20701305,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly. However, it has a time complexity of O(n²), which can be inefficient for larger datasets. Consider using more efficient algorithms like Merge Sort or Quick Sort for better performance.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20701396,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The mergeSort function implements Merge Sort, which is efficient for linked lists with a time complexity of O(n log n). This is a good choice for sorting student records by grade, especially for larger datasets.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20701571,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-All required functions are correctly implemented
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20701628,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-When prompting for the dimensions of Matrix B, the prompt message incorrectly states ""Enter rows for Matrix A"" instead of ""Enter rows for Matrix B"".
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sorting algorithm is implemented correctly. However, it has a time complexity of O(n²), which may be inefficient for larger datasets. Consider using more efficient algorithms like Merge Sort or Quick Sort for better performance.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20701680,14.0,93.33333333333333,"Lab 3 Assessment:
+
+Q1: q1-The variable sum is reused in both the add and sub functions. While this does not cause a syntax error, it may lead to confusion as it should be named appropriately (e.g., result for clarity).
+
+Q2: q2-In the update function, the message ""Item does not exist"" is printed for every item that doesn't match the input name, rather than just once after the loop if no matches are found.In the removeitem function, the count is decremented after the item is removed, but it doesn't handle the last item properly, which could lead to accessing invalid memory. The last item should be set to a ""null"" state.The inStock and outofStock fields in the AvailabilityStatus struct are not updated correctly when the quantity is changed. The logic should ensure that only one of these fields is true at any time.
+
+Q3: q3-Bubble Sort is implemented correctly, but it is inefficient for larger datasets, with a time complexity of O(n²). While suitable for educational purposes, it would be beneficial to consider a more efficient sorting algorithm, such as Quick Sort or Merge Sort, especially as the number of records increases.
+
+Overall Score: 14.0 out of 15.0 (93.3%)"
+20702811,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1- In the second for loop for inputting elements of Matrix B, the loop condition should iterate based on rowsB and columnsB, but there is a mistake in the transposing section where rowsA is used instead of rowsB for printing the transposed Matrix B.
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is used to sort student records by grade. While this method works correctly for small datasets, it has a time complexity of O(n²), which can lead to inefficiencies with larger datasets. For better performance, consider using more efficient algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20702950,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The program uses a bubble sort approach to sort student records by grade. While this is a simple and clear method, it has a time complexity of O(n²), which can lead to inefficiencies with larger datasets. For improved performance, consider using a more efficient sorting algorithm like Quick Sort or Merge Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20703088,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The bubble sort implementation correctly sorts student records by grade. While bubble sort is simple and effective for small datasets, its time complexity of O(n²) can be inefficient for larger datasets. It may be beneficial to consider more efficient sorting algorithms like Merge Sort or Quick Sort for better performance on larger lists.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20703544,13.5,90.0,"Lab 3 Assessment:
+
+Q1: q1-The message printed after the subtraction operation incorrectly states ""The result of the added matrix"" instead of ""The result of the subtracted matrix."" In the tranMatrix function, the transposed matrix is printed incorrectly. The dimensions in the print loop should reflect the new dimensions after transposition.
+
+Q2: q2-    In the case 2 section, the logic for checking if no items exist appears twice, leading to potential misinterpretation of the inventory being empty.
+    In the case 3 and case 4, the use of fwrite should occur after reading and processing the record. The program might not update the quantity or remove items correctly if the file read stops prematurely.
+
+Q3: q3-In the displayStudents function, the format specifier for the name should use %s instead of %-s. The Selection Sort algorithm is implemented correctly and sorts the student records by grade in ascending order. While Selection Sort works well for small datasets, it has a time complexity of O(n²), which can be inefficient for larger lists. For improved efficiency, consider using algorithms like Quick Sort or Merge Sort.
+
+Overall Score: 13.5 out of 15.0 (90.0%)"
+20703971,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    In the sortStudents function, sorting is done by swapping entire student structures. This approach can lead to incorrect behavior since it does not properly manage the linked list's next pointers, which can cause data corruption.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20704636,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-The code does not validate the dimensions of the matrices after getting the values. If the user inputs invalid dimensions (e.g., negative values), it may lead to undefined behavior during matrix operations.
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly to sort student records by grade. While Bubble Sort is straightforward, it has a time complexity of O(n²), which can be inefficient for larger datasets. If performance becomes an issue, consider using more efficient sorting algorithms like Quick Sort or Merge Sort, especially for larger lists.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20704944,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sortStudents function implements Bubble Sort to arrange student records by grade. While this algorithm is easy to understand and implement, it has a time complexity of O(n²), which may not be efficient for larger datasets. Consider implementing a more efficient sorting algorithm like Merge Sort or Quick Sort for improved performance.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20705220,0.0,0.0,"Lab 3 Assessment:
+
+Q1: q1-No submission
+
+Q2: q2-No submission
+
+Q3: q3-No submission
+
+Overall Score: 0.0 out of 15.0 (0.0%)"
+20705228,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly. However, it has a time complexity of O(n²), which can be inefficient for larger datasets. For better performance, consider using more efficient algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20705519,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-In the addItem function, the status of in_stock is not set if the quantity is greater than zero. It should explicitly set both in_stock and outof_stock based on the quantity.
+
+Q3: q3-The use of Merge Sort is advantageous due to its O(n log n) time complexity, making it efficient for larger datasets. The implementation appears well-structured, effectively dividing and combining the student records.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20705878,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The bubble sort implementation correctly sorts student records by grade. While bubble sort is straightforward, its time complexity of O(n²) can be inefficient for larger datasets. Consider using more efficient algorithms like Merge Sort or Quick Sort for better performance in larger applications.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20705922,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The program uses Bubble Sort to sort student records by grade. While this method is simple to implement, it has a time complexity of O(n²), which can become inefficient with larger datasets. For better efficiency, consider using more advanced algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20705932,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-Bubble Sort is straightforward and works for small datasets, but its time complexity of O(n²) can lead to inefficiencies with larger lists. For better performance, consider implementing more efficient algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20706147,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The bubble sort implementation correctly sorts student records by grade. While bubble sort is simple and easy to understand, it has a time complexity of O(n²), which can be inefficient for larger datasets. For improved performance, consider using more efficient algorithms such as Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20706721,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sortStudents function effectively implements Insertion Sort to arrange student records by grade. This method is suitable for linked lists, as it maintains the order while efficiently sorting.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20706838,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The program uses bubble sort to sort student records by grade. While bubble sort is easy to implement, it has a time complexity of O(n²), which can be inefficient for larger datasets. Consider using a more efficient sorting algorithm such as Quick Sort or Merge Sort for better performance.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20706981,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-In addGroceryItem, the price should be entered after checking for a valid quantity, but the program first prompts for quantity and then for price. If the quantity is 0, it still allows entering a price, which should not occur if the item is out of stock.
+
+Q3: q3-In the sortStudents function, the swapping of nodes does not correctly adjust the list structure when nodes are swapped. This can lead to incorrect ordering or segmentation faults.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20710617,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The sorting function correctly implements a bubble sort algorithm to arrange student records based on grades. While it works well, bubble sort has a time complexity of O(n²). For larger datasets, you might consider more efficient algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20711819,14.0,93.33333333333333,"Lab 3 Assessment:
+
+Q1: q1-The way matrix dimensions are calculated using sizeof will not work as intended for dynamically allocated matrices. You need to pass dimensions explicitly.Memory allocation for the matrix should be done correctly to ensure space is allocated for both rows and columns.
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-in the searchStudent function where the condition strcmp(hold, temp->student->id) == 1 should be strcmp(hold, temp->student->id) == 0 for successful ID matching.) 
+    The program uses bubble sort to sort student records by grade. While bubble sort is simple, it has a time complexity of O(n²), which may not be efficient for large datasets. For better performance, consider using more efficient algorithms like Quick Sort or Merge Sort.
+
+Overall Score: 14.0 out of 15.0 (93.3%)"
+20712132,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-All required functions are correctly implemented
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20712242,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly and sorts the student records by grade in ascending order. While Bubble Sort is straightforward and functional, its time complexity of O(n²) can be inefficient for larger datasets. For better performance, consider using more efficient algorithms such as Quick Sort or Merge Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20712310,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-The dimensions for matrix B are reused for input and operations. When calling the transpose function for matrix B, the dimensions should reflect its actual rows and cols, which were set initially for matrix A.
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly. However, it has a time complexity of O(n²), which can be inefficient for larger datasets. For better performance, consider using more efficient algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20712314,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-The addition and subtraction functions use dimensionsB for looping instead of dimensionsA for the result matrix. This can lead to incorrect results if the dimensions of the two matrices differ.
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is correctly implemented and sorts the student records by grade in ascending order. While Bubble Sort is easy to understand and implement, it has a time complexity of O(n²), which may not be efficient for larger datasets. For better performance, consider using more efficient algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20712881,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The program employs a Bubble Sort algorithm to sort student records by grade. While this method works correctly, it has a time complexity of O(n²), which can lead to inefficiencies with larger datasets. For better performance, consider using more efficient sorting algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20713310,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The mergeSort function implements Merge Sort, which is efficient for linked lists with a time complexity of O(n log n). This is a good choice for sorting student records by grade, especially for larger datasets.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20713555,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The bubble sort implementation effectively sorts the student records by grade. However, bubble sort has a time complexity of O(n²), which may not be efficient for larger datasets. For better performance, consider implementing more efficient sorting algorithms, such as Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20713649,14.0,93.33333333333333,"Lab 3 Assessment:
+
+Q1: q1-To improve, ensure that the dimensions used for printing the transposed matrices in cases 3 and 4 reflect the correct number of rows and columns after transposition. Specifically, when printing the transposed matrix, swap the row and column dimensions in the print loop. Overall, the program is well-structured and functions as intended.
+
+Q2: q2-    Uninitialized Pointer Usage: In the updateQuantity and removeItem functions, the pointers QuantityItemInfo and RemoveItemInfo are declared but not initialized before use. This leads to undefined behavior when accessing the item data.    Inefficient Search: The program uses a linear search when updating and removing items, which is acceptable, but it may lead to inefficiencies for large inventories. Consider using a more efficient data structure if performance is a concern.
+
+Q3: q3-All required functions are correctly implemented
+
+Overall Score: 14.0 out of 15.0 (93.3%)"
+20713670,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-   The bubble sort implementation correctly sorts student records by grade. While bubble sort is simple and easy to understand, its O(n²) time complexity can be inefficient for larger datasets. Consider using more efficient algorithms like Merge Sort or Quick Sort for better performance with larger lists.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20713727,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2- In the removeGroceryItem function, when shifting items after removal, the loop should run until inventory->totalItems - 1, but it currently runs until inventory->totalItems, which can lead to accessing out of bounds.
+
+Q3: q3-     The program uses bubble sort to sort student records by grade. While this method works correctly, it has a time complexity of O(n²), which can become inefficient for larger datasets. For improved performance, consider implementing a more efficient sorting algorithm like Quick Sort or Merge Sort.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20713832,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-Bubble Sort is simple and works well for small datasets, but its time complexity of O(n²) can lead to inefficiencies with larger lists. For better performance, consider using more efficient sorting algorithms like Quick Sort or Merge Sort in future implementations.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20714140,14.0,93.33333333333333,"Lab 3 Assessment:
+
+Q1: q1-In the AddorSub function, the output for subtraction is incorrect. The subtraction should be A - B, but the function does not properly handle cases where one matrix might be larger than the other. The implementation currently outputs 0 for missing elements without clear indication.
+
+Q2: q2-The UpdateQuantity function does not update the item's status based on the new quantity. Even though the code changes the quantity, it does not reflect whether the item is ""In Stock"" or ""Out of Stock"" after the update.
+
+Q3: q3-    The bubble sort implementation correctly sorts the student records by grade. While it is a straightforward algorithm, bubble sort has a time complexity of O(n²), making it inefficient for larger datasets. Consider using a more efficient sorting algorithm, like Merge Sort or Quick Sort, especially for larger lists of students.
+
+Overall Score: 14.0 out of 15.0 (93.3%)"
+20714680,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-The variable choice in main() is uninitialized before being used in the condition of the while loop. This can lead to undefined behavior. It should be initialized to a default value, such as 0.
+
+Q3: q3-The program uses Bubble Sort to sort student records by grade. While this algorithm is simple and easy to implement, it has a time complexity of O(n²), making it inefficient for larger datasets. For better performance, consider implementing a more efficient algorithm such as Merge Sort or Quick Sort.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20714775,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly. However, it has a time complexity of O(n²), which can be inefficient for larger datasets. Consider using more efficient algorithms like Merge Sort or Quick Sort for better performance.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20715036,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-In the transposeMatrix function, the logic to swap the rows and columns is incorrect when accessing the elements. The loop should iterate based on the original dimensions of the matrix, not the swapped dimensions. Therefore, using the original rows and cols when filling the result matrix is necessary.
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly, but it has a time complexity of O(n²), which is inefficient for larger datasets. For improved performance, consider using more efficient algorithms such as Merge Sort or Quick Sort.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20715043,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The program uses bubble sort to sort student records by grade. While bubble sort is simple and effective for small datasets, it has a time complexity of O(n²), which can become inefficient as the number of records increases. For larger datasets, consider using more efficient algorithms such as Quick Sort or Merge Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20715623,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The implementation of bubble sort correctly sorts student records by grade. While bubble sort is easy to implement, it has a time complexity of O(n²), which can lead to inefficiency with larger datasets. For better performance, consider using more efficient algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20715960,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-The transposition logic in the transposeMatrix function and its use in the main function is incorrect. The loop indices for printing the transposed matrix should be reversed. The outer loop should iterate over cols, and the inner loop should iterate over rows.
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The program uses a nested loop structure similar to Bubble Sort to sort student records by grade. While simple and effective for small datasets, it has a time complexity of O(n²), which can be inefficient for larger datasets. For better efficiency, consider using algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20715999,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The bubble sort implementation effectively sorts student records by grade. While bubble sort is straightforward and easy to implement, its time complexity of O(n²) can lead to inefficiency with larger datasets. For better performance, consider using more efficient sorting algorithms, such as Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20716304,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The bubble sort implementation correctly sorts student records by grade. While bubble sort is easy to implement, its time complexity of O(n²) can be inefficient for larger datasets. Consider using more efficient algorithms like Merge Sort or Quick Sort for better performance.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20717101,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is correctly implemented, but it is not efficient for larger datasets due to its O(n²) time complexity. For better performance, consider using more efficient algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20717304,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sortStudents function uses Bubble Sort to arrange student records by grade. While Bubble Sort is straightforward and suitable for small datasets, it has a time complexity of O(n²), which can be inefficient for larger lists. For better performance, consider using more efficient algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20717489,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-The AvailabilityStatus struct contains both inStock and outOfStock fields, which are redundant. Only one status is necessary. This could lead to confusion about the actual availability state since both values can be true or false independently. In the updateQuantity function, if an item with the specified name is not found, the code does not check if the item count is zero before searching. This could lead to unnecessary iterations through the inventory.
+
+Q3: q3-   Bubble Sort is correctly implemented, but it is inefficient for larger datasets, with a time complexity of O(n²). While functional for small lists, consider using a more efficient sorting algorithm, like Quick Sort or Merge Sort, for better performance with larger datasets.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20717554,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-Bubble Sort is simple and works well for small datasets but has a time complexity of O(n²). For larger datasets, consider implementing more efficient sorting algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20718385,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-    In the transposeB function case within the switch statement, the call to transposeA should be transposeB. This results in trying to transpose Matrix A instead of Matrix B.
+    The condition for the exit loop (while(choice != 5)) uses an uninitialized variable choice, which may lead to undefined behavior. It should be initialized before the loop starts.
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-While Bubble Sort is straightforward, it has a time complexity of O(n²) and is inefficient for larger datasets. The sortStudents function is currently a placeholder and needs to be implemented.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20718606,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-All required functions are correctly implemented
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20718618,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The implementation of Bubble Sort is straightforward and correctly swaps student records based on grades. However, it has a time complexity of O(n²), which is not efficient for larger datasets. For better performance, consider using more efficient algorithms like Quick Sort or Merge Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20718629,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-The program uses 1-based indexing for the arrays (starting from 1), which can lead to undefined behavior when accessing arrA[0][0] or arrB[0][0] if those indices are accessed. Arrays in C are indexed from 0. The transposed matrices transposeA and transposeB are printed with swapped dimensions, but the loop for printing does not accurately reflect the transposed dimensions, which can lead to incorrect output.
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly and sorts the student records by grade in ascending order. While Bubble Sort is easy to understand and implement, its time complexity of O(n²) can be inefficient for larger datasets. For better performance, consider using more efficient algorithms such as Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20718864,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-The code does not handle the case where an item with the same name exists multiple times. Removing one instance may lead to confusion about which item was removed if duplicates are present.
+
+Q3: q3-All required functions are correctly implemented
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20718893,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-In the Update_Quantity function, the loop condition should be i < inventory->Counter instead of i <= inventory->Counter to avoid accessing out-of-bounds memory.
+
+Q3: q3-The sorting mechanism in the sortStudents function uses a bubble sort that sorts in descending order. If ascending order is required, the comparison operator should be reversed.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20718938,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-The AvailabilityStatus struct is used to track the in-stock and out-of-stock status, but it is redundant. This information can be derived directly from the quantity field in the GroceryItem struct or using Union. Additionally, the removeGroceryItem function does not reset the last item's status after removal, which could lead to displaying outdated information.
+
+Q3: q3-    The sorting function uses a nested loop to compare and swap elements, which is characteristic of bubble sort. This algorithm has a time complexity of O(n²), which can become inefficient for larger datasets. For improved performance, consider using more efficient sorting algorithms like Merge Sort or Quick Sort, especially for larger lists.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20720333,0.0,0.0,"Lab 3 Assessment:
+
+Q1: q1-No submission
+
+Q2: q2-No submission
+
+Q3: q3-No submission
+
+Overall Score: 0.0 out of 15.0 (0.0%)"
+20720379,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-In the updateQuantity function, the prompt for entering the item name is misleading. It should ask for the item index instead of the name.
+
+Q3: q3-The Bubble Sort algorithm is implemented correctly and sorts the student records by grade in ascending order. While simple and straightforward, Bubble Sort has a time complexity of O(n²), making it inefficient for larger datasets. For improved efficiency, consider using more efficient algorithms like Quick Sort or Merge Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20720830,14.0,93.33333333333333,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-In the removeGroceryItem function, the message printf(""Grocery item '%s' removed successfully\n"", inven.item[i].Name); should be updated to reflect the correct item name after removal.
+
+Q3: q3-There is a logic error in the sortStudents function regarding the swapping of nodes. The swapping mechanism does not correctly update the links between nodes when they are swapped, which can lead to inconsistent list states.
+
+Overall Score: 14.0 out of 15.0 (93.3%)"
+20720901,14.0,93.33333333333333,"Lab 3 Assessment:
+
+Q1: q1-The condition for checking dimensions in the second matrix input is incorrect.  This should check rowsB and columnsB instead.
+
+Q2: q2-In the removeGrocery function, when shifting items after removal, the loop should run until inventoryItem->count - 1 to prevent accessing out of bounds.
+
+Q3: q3-    The program implements bubble sort to sort student records by grade. While the algorithm is effective for small datasets, its time complexity of O(n²) makes it inefficient for larger datasets. Consider implementing a more efficient sorting algorithm, such as Quick Sort or Merge Sort, for better performance.
+
+Overall Score: 14.0 out of 15.0 (93.3%)"
+20721435,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-    The bubble sort implementation effectively sorts student records by grade. While bubble sort is easy to understand and implement, its time complexity of O(n²) can lead to inefficiency with larger datasets. For improved performance, consider using more efficient sorting algorithms, such as Merge Sort or Quick Sort.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20722250,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-All required functions are correctly implemented
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20722371,14.0,93.33333333333333,"Lab 3 Assessment:
+
+Q1: q1-The inner loop for reading matrix B should use columns instead of rows for the second dimension.
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-The sortStudents function uses a selection sort method to sort students by grade. This method is appropriate for small datasets but has a time complexity of O(n²), which may not be efficient for larger datasets. For improved performance, consider using algorithms such as Merge Sort or Quick Sort.
+
+Overall Score: 14.0 out of 15.0 (93.3%)"
+20722404,15.0,100.0,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-Meet requirement. 
+
+Q3: q3-Bubble Sort is straightforward and works well for small datasets but has a time complexity of O(n²). This can lead to inefficiency for larger lists. For improved performance, consider implementing more efficient algorithms like Merge Sort or Quick Sort in the future.
+
+Overall Score: 15.0 out of 15.0 (100.0%)"
+20722972,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-In the remove_item function, after shifting items to fill the gap left by the removed item, the name and category pointers for the last item are set to NULL. This does not free the allocated memory properly, which can lead to memory leaks.
+
+Q3: q3-The Merge Sort algorithm is correctly implemented and is efficient with a time complexity of O(n log n). This is suitable for linked lists and larger datasets, making it a good choice for sorting student records.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20723677,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement. 
+
+Q2: q2-In the updateItemQuantity function, the condition used to check for the item name (if (strcspn(item->name, name) == 0)) is incorrect. It should use strcmp to compare the names instead. The current method may lead to incorrect behavior when checking for matches. In the removeGroceryItem function, similar to the previous error, the check for item name should also use strcmp. The current method may not correctly identify items to be removed, which can lead to items not being found.
+
+Q3: q3-    The bubble sort implementation correctly sorts the student records by grade. However, it is inefficient for larger datasets, with a time complexity of O(n²). For better performance on larger lists, consider using a more efficient sorting algorithm, such as Quick Sort or Merge Sort.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20723718,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-The isPos function checks if a string represents a positive number but does not handle negative numbers correctly. It incorrectly allows decimal points in quantity, which should be integers. The status of each item is determined during listing but is not stored persistently. The inStock boolean is set based on quantity during listing instead of during item addition or quantity updates, which could lead to discrepancies in status reporting.
+
+Q3: q3-    The bubble sort implementation is correct and sorts the students by name. However, its time complexity of O(n²) makes it inefficient for larger datasets. For better performance, consider using a more efficient sorting algorithm, such as Quick Sort or Merge Sort.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+20723819,0.0,0.0,"Lab 3 Assessment:
+
+Q1: q1-No submission
+
+Q2: q2-No submission
+
+Q3: q3-No submission
+
+Overall Score: 0.0 out of 15.0 (0.0%)"
+20723870,14.0,93.33333333333333,"Lab 3 Assessment:
+
+Q1: q1- In the inputMatrix function, the initial values of *rows and *cols are uninitialized. This could lead to an infinite loop if the values are not set properly before input validation checks.
+
+Q2: q2-The variable choice in main() is not initialized before use, which could lead to unpredictable behavior. It should be initialized to a default value, such as 0 or 5.
+
+Q3: q3-The program uses Bubble Sort to sort student records by grade. While this algorithm is straightforward and easy to understand, it has a time complexity of O(n²), making it inefficient for larger datasets. For improved performance, consider implementing more efficient sorting algorithms like Merge Sort or Quick Sort.
+
+Overall Score: 14.0 out of 15.0 (93.3%)"
+20724197,9.5,63.33333333333333,"Lab 3 Assessment:
+
+Q1: q1-The condition in the second while loop for inputting Matrix B incorrectly combines validation of matrix dimensions with the input validation. As a result, it may exit the loop prematurely without ensuring that both matrices have been validated for dimensions. To improve, ensure that the validation for Matrix B's dimensions is correctly separated from the input validation. This will prevent the loop from exiting prematurely and ensure that the user is prompted for valid matrix dimensions appropriately. 
+
+Q2: q2-    Ensure the status of items is updated correctly after modifying quantities, especially when items go out of stock.  Consider adding more validation for user input, especially for quantity and price, to prevent invalid values (like negative numbers).
+
+Q3: q3-all key functions are not implemented
+
+Overall Score: 9.5 out of 15.0 (63.3%)"
+20724220,14.5,96.66666666666667,"Lab 3 Assessment:
+
+Q1: q1-Meet requirement
+
+Q2: q2-The AvailabilityStatus struct is defined but not necessary. You can determine if an item is in stock based solely on the quantity. You can simplify the code by removing this struct and using a boolean derived from the quantity in the GroceryItem struct or use a union. In the removeGrocery function, after shifting the items left, the last item in the array is left unchanged. This could lead to accessing outdated or invalid data if the last item was previously removed.
+
+Q3: q3-    The merge sort implementation is well-suited for linked lists, as it operates in O(n log n) time complexity, which is efficient compared to bubble sort. It is stable and works well with the sequential nature of linked lists.
+
+Overall Score: 14.5 out of 15.0 (96.7%)"
+,0.0,0.0,"Lab 3 Assessment:
+
+Q1: No feedback available for Q1
+
+Q2: No feedback available for Q2
+
+Q3: No feedback available for Q3
+
+Overall Score: nan out of 15.0 (nan%)"
+,0.0,0.0,"Lab 3 Assessment:
+
+Q1: No feedback available for Q1
+
+Q2: No feedback available for Q2
+
+Q3: No feedback available for Q3
+
+Overall Score: nan out of 15.0 (nan%)"
+,0.0,0.0,"Lab 3 Assessment:
+
+Q1: No feedback available for Q1
+
+Q2: No feedback available for Q2
+
+Q3: No feedback available for Q3
+
+Overall Score: nan out of 15.0 (nan%)"
+,0.0,0.0,"Lab 3 Assessment:
+
+Q1: No feedback available for Q1
+
+Q2: No feedback available for Q2
+
+Q3: No feedback available for Q3
+
+Overall Score: nan out of 15.0 (nan%)"
+,0.0,0.0,"Lab 3 Assessment:
+
+Q1: No feedback available for Q1
+
+Q2: No feedback available for Q2
+
+Q3: No feedback available for Q3
+
+Overall Score: nan out of 15.0 (nan%)"
+,14.336021505376344,95.57347670250897,"Lab 3 Assessment:
+
+Q1: No feedback available for Q1
+
+Q2: No feedback available for Q2
+
+Q3: No feedback available for Q3
+
+Overall Score: 14.3 out of 15.0 (95.6%)"
+,2.3293064225957556,15.528709483971703,"Lab 3 Assessment:
+
+Q1: No feedback available for Q1
+
+Q2: No feedback available for Q2
+
+Q3: No feedback available for Q3
+
+Overall Score: 2.3 out of 15.0 (15.5%)"
+,0.0,0.0,"Lab 3 Assessment:
+
+Q1: No feedback available for Q1
+
+Q2: No feedback available for Q2
+
+Q3: No feedback available for Q3
+
+Overall Score: 0.0 out of 15.0 (0.0%)"
+,15.0,100.0,"Lab 3 Assessment:
+
+Q1: No feedback available for Q1
+
+Q2: No feedback available for Q2
+
+Q3: No feedback available for Q3
+
+Overall Score: 15.0 out of 15.0 (100.0%)"

@@ -1,0 +1,181 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_MATRIX_SIZE 10
+
+int main(){
+    int rowsA, columnsA, rowsB, columnsB;
+    int MatrixA[MAX_MATRIX_SIZE][MAX_MATRIX_SIZE], MatrixB[MAX_MATRIX_SIZE][MAX_MATRIX_SIZE], resultMatrix[MAX_MATRIX_SIZE][MAX_MATRIX_SIZE];
+    int UserInput;
+
+    //Error checking for matrix size
+    do {
+        //Input dimensions of Matrix A
+        printf("\nEnter the dimensions of Matrix A, rows and columns (max 10x10): ");
+        scanf("%d %d", &rowsA, &columnsA);
+        
+        if (rowsA > MAX_MATRIX_SIZE || columnsA > MAX_MATRIX_SIZE){
+            printf("\nError: Input size exceeds maximum Matrix size (10x10)");
+        }
+    } while(rowsA > MAX_MATRIX_SIZE || columnsA > MAX_MATRIX_SIZE);
+    
+    do {
+        //Input dimensions of Matrix B
+        printf("\nEnter the dimensions of Matrix B, rows and columns (max 10x10): ");
+        scanf("%d %d", &rowsB, &columnsB);
+        
+        if (rowsB > MAX_MATRIX_SIZE || columnsB > MAX_MATRIX_SIZE){
+            printf("\nError: Input size exceeds maximum Matrix size (10x10)");
+        }
+    } while (rowsB > MAX_MATRIX_SIZE || columnsB > MAX_MATRIX_SIZE);
+
+    // Input elements for both matrices
+    printf("\nEnter elements for Matrix A:\n");
+
+    for (int rowcount = 0; rowcount < rowsA; rowcount++){
+        for (int columncount = 0; columncount < columnsA; columncount++) {
+            printf("Enter Element [%d][%d] = ", rowcount + 1, columncount + 1);
+            scanf("%d", &MatrixA[rowcount][columncount]);
+        }
+    }
+
+    printf("\nEnter elements for Matrix B:\n");
+
+    for (int rowcount = 0; rowcount < rowsB; rowcount++){
+        for (int columncount = 0; columncount < columnsB; columncount++) {
+            printf("Enter Element [%d][%d] = ", rowcount + 1, columncount + 1);
+            scanf("%d", &MatrixB[rowcount][columncount]);
+        }
+    }
+
+    do {
+        //Operations Menu for user to choose
+        printf("\nOperations Menu:\n");
+        printf("1. Add Matrices\n");
+        printf("2. Subtract Matrices\n");
+        printf("3. Transpose Matrix A\n");
+        printf("4. Transpose Matrix B\n");
+        printf("5. Exit\n");
+
+        //Request user input
+        printf("Please enter your choice: ");
+        scanf("%d", &UserInput);
+
+        switch(UserInput) {
+
+            case 1:
+                // Addition Operation
+                if (rowsA == rowsB && columnsA == columnsB) {
+
+                    for (int rowcount = 0; rowcount < rowsA; rowcount++){
+
+                        for (int columncount = 0; columncount < columnsA; columncount++) {
+                            resultMatrix[rowcount][columncount] = MatrixA[rowcount][columncount] + MatrixB[rowcount][columncount];
+                        }
+                    }
+
+                    //Print result
+                    printf("\nResult: \n");
+
+                    for (int rowcount = 0; rowcount < rowsA; rowcount++){
+
+                        for (int columncount = 0; columncount < columnsA; columncount++) {
+                            printf("%d ", resultMatrix[rowcount][columncount]);
+                        }
+
+                        printf("\n");
+                    }
+
+                } else {
+                    printf("Error: Matrices must have same dimension to perform addition.\n");      //Error checking
+                }
+
+                break;
+
+            case 2:
+                //Subtraction Operation
+                if (rowsA == rowsB && columnsA == columnsB) {
+
+                    for (int rowcount = 0; rowcount < rowsA; rowcount++){
+
+                        for (int columncount = 0; columncount < columnsA; columncount++) {
+                            resultMatrix[rowcount][columncount] = MatrixA[rowcount][columncount] - MatrixB[rowcount][columncount];
+                        }
+                    }
+
+                    //Print Result
+                    printf("\nResult: \n");
+
+                    for (int rowcount = 0; rowcount < rowsA; rowcount++){
+
+                        for (int columncount = 0; columncount < columnsA; columncount++) {
+                            printf("%d ", resultMatrix[rowcount][columncount]);
+                        }
+
+                        printf("\n");
+                    }
+
+                } else {
+                    printf("Error: Matrices must have same dimension to perform subtraction.\n");      //Error checking
+                }
+                
+                break;
+
+            case 3:
+                //Transpose Matrix A Operation
+                for (int rowcount = 0; rowcount < rowsA; rowcount++){
+                    for (int columncount = 0; columncount < columnsA; columncount++) {
+                        resultMatrix[columncount][rowcount] = MatrixA[rowcount][columncount];
+                    }
+                }
+
+                //Print Result
+                printf("\nResult: \n");
+
+                for (int rowcount = 0; rowcount < rowsA; rowcount++){
+
+                    for (int columncount = 0; columncount < columnsA; columncount++) {
+                        printf("%d ", resultMatrix[rowcount][columncount]);
+                    }
+
+                    printf("\n");
+                }
+
+                break;
+
+            case 4:
+                //Transpose Matrix B Operation
+                for (int rowcount = 0; rowcount < rowsB; rowcount++){
+                    for (int columncount = 0; columncount < columnsB; columncount++) {
+                        resultMatrix[columncount][rowcount] = MatrixB[rowcount][columncount];
+                    }
+                }
+
+                //Print Result
+                printf("\nResult: \n");
+
+                for (int rowcount = 0; rowcount < rowsB; rowcount++){
+
+                    for (int columncount = 0; columncount < columnsB; columncount++) {
+                        printf("%d ", resultMatrix[rowcount][columncount]);
+                    }
+
+                    printf("\n");
+                }
+
+                break;
+
+            case 5:
+                //Exit Operation
+                printf("Exiting Program");
+                break;
+
+            default:
+                //Default in case of invalid input
+                printf("Error: Invalid Input");
+                break;
+        }
+    } while (UserInput != 5);
+
+    return 0;
+}

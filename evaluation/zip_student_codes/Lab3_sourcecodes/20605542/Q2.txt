@@ -1,0 +1,219 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_NAME 100
+#define MAX_CATEGORY 50
+#define MAX_ITEMS 100
+
+// Structure for grocery item
+typedef struct {
+    char name[MAX_NAME];
+    char category[MAX_CATEGORY];
+    int quantity;
+    float price;
+} GroceryItem;
+
+// Union for availability status
+typedef union {
+    struct {
+        int inStock;
+        int outOfStock;
+    } status;
+    int stockStatus;  // 1 for in stock, 0 for out of stock
+} Status;
+
+// Structure for inventory
+typedef struct {
+    GroceryItem items[MAX_ITEMS];
+    Status availability[MAX_ITEMS];
+    int totalItems;
+} Inventory;
+
+
+void addItem(Inventory *inventory);
+void listItems(Inventory *inventory);
+void updateQuantity(Inventory *inventory);
+void removeItem(Inventory *inventory);
+
+int main() {
+    Inventory inventory = {0};  // Initialize inventory
+    int choice;
+
+    while (1) {
+        // Display menu options
+        printf("\nGrocery Inventory Management\n");
+        printf("1. Add Grocery Item\n");
+        printf("2. List All Items\n");
+        printf("3. Update Quantity\n");
+        printf("4. Remove Item\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        
+        // Validate user input for menu choice
+        if (scanf("%d", &choice) != 1) {
+            while (getchar() != '\n'); // Clear input buffer
+            printf("Invalid input. Please enter a number.\n");
+            continue;
+        }
+        getchar();  // Clear newline
+
+        // Process user choice
+        switch (choice) {
+            case 1:
+                addItem(&inventory);
+                break;
+            case 2:
+                listItems(&inventory);
+                break;
+            case 3:
+                updateQuantity(&inventory);
+                break;
+            case 4:
+                removeItem(&inventory);
+                break;
+            case 5:
+                printf("Program terminated.\n");
+                return 0;
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    }
+    return 0;
+}
+
+// Function to add a new item to the inventory
+void addItem(Inventory *inventory) {
+    // Check if inventory has reached maximum capacity
+    if (inventory->totalItems >= MAX_ITEMS) {
+        printf("Inventory is full!\n");
+        return;
+    }
+
+    // Create a temporary item structure for new entry
+    GroceryItem newItem;
+    
+    // Get item name from user input
+    printf("Enter item name: ");
+    if (fgets(newItem.name, MAX_NAME, stdin) == NULL) {
+        printf("Error reading input.\n");
+        return;
+    }
+    newItem.name[strcspn(newItem.name, "\n")] = '\0';  // Remove trailing newline
+
+    // Get item category from user input
+    printf("Enter category: ");
+    if (fgets(newItem.category, MAX_CATEGORY, stdin) == NULL) {
+        printf("Error reading input.\n");
+        return;
+    }
+    newItem.category[strcspn(newItem.category, "\n")] = '\0';  // Remove trailing newline
+
+    // Get and validate item quantity (must be non-negative)
+    do {
+        printf("Enter quantity (0 or positive number): ");
+        if (scanf("%d", &newItem.quantity) != 1 || newItem.quantity < 0) {
+            printf("Invalid input. Please enter a valid number.\n");
+            while (getchar() != '\n');  // Clear input buffer
+            continue;
+        }
+        break;
+    } while (1);
+
+    // Get and validate item price (must be non-negative)
+    do {
+        printf("Enter price (positive number): ");
+        if (scanf("%f", &newItem.price) != 1 || newItem.price < 0) {
+            printf("Invalid input. Please enter a valid price.\n");
+            while (getchar() != '\n');  // Clear input buffer
+            continue;
+        }
+        break;
+    } while (1);
+
+    // Add new item to inventory array
+    inventory->items[inventory->totalItems] = newItem;
+    // Set availability status based on quantity
+    inventory->availability[inventory->totalItems].stockStatus = (newItem.quantity > 0);
+    // Increment total number of items
+    inventory->totalItems++;
+
+    // Display success message
+    printf("\nItem added successfully!\n");
+}
+
+
+
+
+
+
+
+
+
+
+
+// Function to display all items in inventory
+void listItems(Inventory *inventory) {
+    if (inventory->totalItems == 0) {
+        printf("No items in inventory.\n");
+        return;
+    }
+
+    // Display header
+    printf("\nGrocery Items List:\n");
+    printf("%-20s %-15s %-10s %-10s %-10s\n", "Name", "Category", "Quantity", "Price", "Status");
+    printf("------------------------------------------------------------\n");
+    // Display each item
+    for (int i = 0; i < inventory->totalItems; i++) {
+        printf("%-20s %-15s %-10d $%-9.2f %s\n",
+            inventory->items[i].name,
+            inventory->items[i].category,
+            inventory->items[i].quantity,
+            inventory->items[i].price,
+            inventory->availability[i].stockStatus ? "In Stock" : "Out of Stock");
+    }
+}
+
+// Function to update quantity of an existing item
+void updateQuantity(Inventory *inventory) {
+    char name[MAX_NAME];
+    printf("Enter item name to update: ");
+    fgets(name, MAX_NAME, stdin);
+    name[strcspn(name, "\n")] = '\0';
+
+    // Search for item and update quantity
+    for (int i = 0; i < inventory->totalItems; i++) {
+        if (strcmp(inventory->items[i].name, name) == 0) {
+            printf("Current quantity: %d\n", inventory->items[i].quantity);
+            printf("Enter new quantity: ");
+            scanf("%d", &inventory->items[i].quantity);
+            inventory->availability[i].stockStatus = (inventory->items[i].quantity > 0) ? 1 : 0;
+            printf("Quantity updated successfully!\n");
+            return;
+        }
+    }
+    printf("Item not found!\n");
+}
+
+// Function to remove an item from inventory
+void removeItem(Inventory *inventory) {
+    char name[MAX_NAME];
+    printf("Enter item name to remove: ");
+    fgets(name, MAX_NAME, stdin);
+    name[strcspn(name, "\n")] = '\0';
+
+    // Search for item and remove if found
+    for (int i = 0; i < inventory->totalItems; i++) {
+        if (strcmp(inventory->items[i].name, name) == 0) {
+            // Shift remaining items to fill the gap
+            for (int j = i; j < inventory->totalItems - 1; j++) {
+                inventory->items[j] = inventory->items[j + 1];
+                inventory->availability[j] = inventory->availability[j + 1];
+            }
+            inventory->totalItems--;
+            printf("Item removed successfully!\n");
+            return;
+        }
+    }
+    printf("Item not found!\n");
+}

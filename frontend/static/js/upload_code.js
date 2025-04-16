@@ -110,7 +110,14 @@ function submitAssignment() {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
   })
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        return response.text().then(text => {
+          throw new Error(`Server error (${response.status}): ${text}`);
+        });
+      }
+      return response.json();
+    })
     .then(data => {
       console.log("Received Data:", data); // Debugging: Ensure data is received correctly
 
@@ -122,7 +129,11 @@ function submitAssignment() {
       if (marksElement && feedbackElement && gradeElement) {
         marksElement.innerText = data.marks;
         gradeElement.innerText = data.grade || calculateGrade(data.marks);
-        feedbackElement.innerHTML = formatFeedback(data.feedback);
+        if (data.feedback) {
+          feedbackElement.innerHTML = formatFeedback(data.feedback);
+        } else {
+          feedbackElement.innerHTML = "<p>No feedback available</p>";
+        }
       } else {
         console.error("Error: Result card elements not found!");
         alert("Error displaying the results. Please check the result card elements.");
@@ -133,9 +144,9 @@ function submitAssignment() {
     })
     .catch(error => {
       console.error("Error:", error);
-      alert("An error occurred while submitting the assignment. Please try again.");
+      alert("An error occurred while submitting the assignment: " + error.message);
+      setButtonLoading(submitBtn, false);
     });
-
 }
 
 function stopRunCode() {

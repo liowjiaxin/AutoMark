@@ -1,0 +1,168 @@
+#include <stdio.h>
+
+int rowsA, columnA, rowsB, columnB;
+int A[10][10],B[10][10];
+
+void add();
+void inputMatrices(int matrix[10][10], char name);
+void printMatrix(int matrix[10][10], int rows, int columns);
+void subtract();
+void transposeA();
+void transposeB();
+int getValidatedInput();
+
+int main() {
+int numChoice; 
+    
+    inputMatrices(A, 'A');
+    inputMatrices(B, 'B');   
+
+do {
+        printf("\nChose operation\n");
+        printf("1. Add Matrices\n");
+        printf("2. Subtract Matrices\n"); 
+        printf("3. Transpose Matrix A\n");
+        printf("4. Transpose Matrix B\n");
+        printf("5. Exit\n");
+        printf("Enter number to choose (1-5): ");
+
+        scanf("%d", &numChoice);
+        getchar();  // Clear newline character
+
+        switch (numChoice) {
+            case 1:
+                add();
+                break;
+            case 2:
+               subtract();
+                break;
+            case 3:
+                transposeA();
+                break;
+            case 4:
+                transposeB();
+                break;
+            case 5:
+                printf("Exiting the program...\n");
+                break;
+            default:
+                printf("Invalid option. Please select a number between 1 and 5.\n");
+        }
+    } while (numChoice != 5);
+
+  
+
+  return 0;
+}
+
+int getValidatedInput() {
+    int value;
+    char buffer[20]; // Temporary buffer for invalid inputs
+
+    while (1) {
+        if (scanf("%d", &value) == 1) {
+            return value; // If valid integer, return the value
+        } else {
+            // Clear invalid input from buffer
+            printf("Invalid input! Please enter a numeric value: ");
+            while (getchar() != '\n');
+        }
+    }
+}
+
+void inputMatrices(int matrix[10][10], char name) {
+    // Input dimensions for Matrix A
+    if (name == 'A') {
+    do {
+    printf("Enter dimensions for Matrix A (rows and columns): ");
+    rowsA = getValidatedInput();
+    columnA = getValidatedInput();
+    if (rowsA < 1 || rowsA > 10 || columnA < 1 || columnA > 10) {
+        printf("Error: Rows and columns must be between 1 and 10.\n");
+    }
+    } while(rowsA < 1 || rowsA > 10 || columnA < 1 || columnA > 10);
+
+    // Input elements for Matrix A
+    printf("\nEnter elements of Matrix A: \n");
+    for (int i = 0; i < rowsA; ++i) {
+        for (int j = 0; j < columnA; ++j) {
+            printf("Enter element [%d][%d]: ", i + 1, j + 1);
+            A[i][j] = getValidatedInput();
+        }
+    }
+    }else if (name == 'B') {
+    // Input dimensions for Matrix B
+    do{
+    printf("\nEnter dimensions for Matrix B (rows and columns between 1 and 10): ");
+    rowsB = getValidatedInput();
+    columnB = getValidatedInput();
+    if (rowsB < 1 || rowsB > 10 || columnB < 1 || columnB > 10 || rowsA != rowsB || columnA != columnB) {
+        printf("Error: Matrix B must have the same dimensions as Matrix A and rows and columns must be between 1 and 10.\n");
+    }
+    }while(rowsB < 1 || rowsB > 10 || columnB < 1 || columnB > 10 || rowsA != rowsB || columnA != columnB);
+
+    // Input elements for Matrix B
+    printf("\nEnter elements of Matrix B: \n");
+    for (int i = 0; i < rowsB; ++i) {
+        for (int j = 0; j < columnB; ++j) {
+            printf("Enter element [%d][%d]: ", i + 1, j + 1);
+            B[i][j] = getValidatedInput();
+        }
+    }
+}
+}
+void printMatrix(int matrix[10][10], int rows, int column) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < column; j++) {
+            printf("%4d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+void add(){
+    int sum[10][10];
+ 
+  // adding two matrices
+  for (int i = 0; i < rowsA; ++i)
+    for (int j = 0; j < columnA; ++j) {
+      sum[i][j] = A[i][j] + B[i][j];
+    }
+
+  // printing the result
+  printf("Result of Matrix A + Matrix B:\n");
+  printMatrix(sum, rowsA, columnA);
+  }
+
+  void subtract() {
+    int diff[10][10];
+
+    for (int i = 0; i < rowsA; ++i)
+    for (int j = 0; j < columnA; ++j) {
+      diff[i][j] = A[i][j] - B[i][j];
+    }  
+
+    printf("Result of Matrix A - Matrix B:\n");
+    printMatrix(diff, rowsA, columnA);
+}
+
+void transposeA() {
+    int transpose[10][10];
+    for (int i = 0; i < columnA; i++) {
+        for (int j = 0; j < rowsA; j++) {
+            transpose[i][j] = A[j][i];
+        }
+    }
+    printf("Transpose of Matrix A:\n");
+    printMatrix(transpose, columnA, rowsA);
+}
+
+void transposeB() {
+    int transpose[10][10];
+    for (int i = 0; i < columnB; i++) {
+        for (int j = 0; j < rowsB; j++) {
+            transpose[i][j] = B[j][i];
+        }
+    }
+  printf("Transpose of Matrix B:\n");
+  printMatrix(transpose, columnB, rowsB);
+}

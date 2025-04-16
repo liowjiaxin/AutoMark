@@ -62,19 +62,34 @@ class Grader:
         rubrics: str,
         code_run_output: str = "",
     ) -> tuple[int, str]:
-        metadata, code = self._preprocess(extract_path, code_files)
-        result = self.grader_llm.invoke({
-            "code": code,
-            "language": language,
-            "rubrics": rubrics,
-            "lines_of_code": metadata.lines_of_code,
-            "num_files": metadata.num_files,
-            "code_run_output": code_run_output,
-        })
+        try:
+            metadata, code = self._preprocess(extract_path, code_files)
+            result = self.grader_llm.invoke({
+                "code": code,
+                "language": language,
+                "rubrics": rubrics,
+                "lines_of_code": metadata.lines_of_code,
+                "num_files": metadata.num_files,
+                "code_run_output": code_run_output,
+            })
 
-        marks = result.get("marks", 0)
-        feedback = result.get("feedback", "no feedback")
+            marks = result.get("marks", 0)
+            feedback = result.get("feedback", "No feedback available")
 
-        print(result)
+            # Ensure feedback is a string
+            if not isinstance(feedback, str):
+                feedback = str(feedback) if feedback is not None else "No feedback available"
 
-        return marks, feedback.strip()
+            print(result)
+            
+            # Convert marks to int if it's a string
+            if isinstance(marks, str):
+                try:
+                    marks = int(marks)
+                except ValueError:
+                    marks = 0
+
+            return marks, feedback.strip()
+        except Exception as e:
+            print(f"Error in grading: {str(e)}")
+            return 0, f"An error occurred during grading: {str(e)}"

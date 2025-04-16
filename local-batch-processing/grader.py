@@ -103,47 +103,59 @@ class GradeFeedback(BaseModel):
     feedback: str
 
 
+class GradingOutput(BaseModel):
+    code_comprehension: float  # 10% of 15 = 1.5 marks
+    functional_correctness: float  # 30% of 15 = 4.5 marks
+    code_quality: float  # 25% of 15 = 3.75 marks
+    technical_implementation: float  # 25% of 15 = 3.75 marks
+    testing_verification: float  # 10% of 15 = 1.5 marks
+    feedback: str
+    total_mark: float  # Will be scaled to 15
+
+    def calculate_total(self):
+        # Scale each component to 15% total
+        self.total_mark = (
+            (self.code_comprehension * 0.015) +  # 10% of 15
+            (self.functional_correctness * 0.045) +  # 30% of 15
+            (self.code_quality * 0.0375) +  # 25% of 15
+            (self.technical_implementation * 0.0375) +  # 25% of 15
+            (self.testing_verification * 0.015)  # 10% of 15
+        )
+        return self.total_mark
+
+
 class GraderRAG:
-    def __init__(
-        self, dataset_path: str, model_type: Literal["gemini", "deepseek"] = "gemini"
-    ):
+    def __init__(self, dataset_path: str, model_type: str = GRADER_MODEL_NAME):
         logger.info(f"Initializing GraderRAG with model_type={model_type}")
         self.model_type = model_type
         
-        # Initialize embeddings based on model type
+        # Initialize embeddings
         logger.info("Initializing embeddings model...")
-        if self.model_type == "gemini":
-            self.embedder: Embeddings = GoogleGenerativeAIEmbeddings(
-                model="models/embedding-001"
-            )
-        else:
-            from langchain_huggingface import HuggingFaceEmbeddings
-            self.embedder = HuggingFaceEmbeddings(
-                model_name="BAAI/bge-large-en-v1.5"
-            )
+        self.embedder = GoogleGenerativeAIEmbeddings(
+            model="models/embedding-001"
+        )
         logger.info("Embeddings model initialized")
         
-        self.dataset_path = dataset_path
+        # Load or create vector store
         logger.info("Loading vector store...")
         self.vector_store = self._load_or_create_vector_store()
-        logger.info("Vector store loaded")
-
+        
+        # Initialize LLM
         logger.info("Initializing LLM...")
         self.llm = self._initialize_llm()
-        logger.info("LLM initialized")
-
-        # Initialize grader chain
+        
+        # Create grader chain
         logger.info("Creating grader chain...")
         self.grader = self._create_grader_chain()
         logger.info("Grader chain created")
 
     def _initialize_llm(self):
         """Initialize the LLM based on selected model type"""
-        if self.model_type == "gemini":
+        if "gemini" in self.model_type.lower():
             from langchain_google_genai import ChatGoogleGenerativeAI
 
             return ChatGoogleGenerativeAI(
-                model=GRADER_MODEL_NAME,
+                model=self.model_type if "models/" in self.model_type else GRADER_MODEL_NAME,
                 temperature=0,
                 max_tokens=None,
                 max_retries=1,
@@ -226,25 +238,48 @@ class GraderRAG:
             prompt_template | self.llm | JsonOutputParser(pydantic_object=GradeFeedback)
         )
 
-    def _retrieve_examples(self, code: str, k: int = 3) -> str:
-        # Retrieve similar code examples
-        docs = self.vector_store.similarity_search(code, k=k)
-        return "\n\n".join(
-            f"Example {i + 1}:\n{d.page_content}" for i, d in enumerate(docs)
-        )
+    def _retrieve_examples(self, code: str, k: int = 5):
+        logger = logging.getLogger(__name__)
+        logger.info("Retrieving similar examples from vector store...")
+        
+        # Generate the query vector
+        query_vector = self.embedder.embed_query(code)  # Replace with the correct embedding method
+        logger.debug(f"Query vector dimension: {len(query_vector)}")
+        logger.debug(f"FAISS index dimension: {self.vector_store.index.d}")
+        
+        # Perform similarity search
+        try:
+            docs = self.vector_store.similarity_search_by_vector(query_vector, k=k)
+            return docs
+        except AssertionError as e:
+            logger.error("Dimensionality mismatch between query vector and FAISS index.")
+            raise e
 
-    def grade(self, input_data: dict) -> dict:
+    def grade(self, code: str, language: str = "C", lines_of_code: int = 0, num_files: int = 1, rubrics: str = "") -> dict:
         logger.info("Starting grading process...")
-        # Perform RAG retrieval
+        
+        # Retrieve similar examples
         logger.info("Retrieving similar examples...")
-        examples = self._retrieve_examples(input_data["code"])
+        examples = self._retrieve_examples(code)
         logger.info("Examples retrieved")
-
-        # Add examples to input
-        input_data["examples"] = examples
-
+        
+        # Prepare input for grading
+        input_data = {
+            "code": code,
+            "language": language,
+            "lines_of_code": lines_of_code,
+            "num_files": num_files,
+            "rubrics": rubrics,
+            "examples": examples
+        }
+        
         # Invoke grading chain
         logger.info("Invoking grading chain...")
         result = self.grader.invoke(input_data)
         logger.info("Grading completed")
+        
+        # Scale the total mark to 15%
+        if isinstance(result, dict) and "total_mark" in result:
+            result["total_mark"] = result["total_mark"] * 0.15
+        
         return result

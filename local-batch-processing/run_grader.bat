@@ -1,2 +1,2 @@
 @echo off
-python batch_grader.py -s "dataset/marking scheme/source_code" -m "dataset/marking scheme/Lab Assessment 1 PGA - 2425 - sample answer.pdf" -d "dataset" --modelname deepseek 
+python batch_grader.py -s "dataset/marking scheme/source_code" -m "dataset/marking scheme/Lab Assessment 3 PGA - 2425 - sample answer.pdf" -d "dataset/marking scheme/source_code" --modelname "models/gemini-1.5-pro" --batch-size 1 --delay-between-files 10.0 --delay-between-batches 60 

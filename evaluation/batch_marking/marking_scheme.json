@@ -1,0 +1,30 @@
+{
+  "name": "Lab 3 Assessment",
+  "total_marks": 15,
+  "criteria": [
+    {
+      "name": "Question 1",
+      "max_marks": 3,
+      "subcriteria": [
+        { "name": "Code functionality", "max_marks": 1.5 },
+        { "name": "Code quality", "max_marks": 1.5 }
+      ]
+    },
+    {
+      "name": "Question 2",
+      "max_marks": 4,
+      "subcriteria": [
+        { "name": "Code functionality", "max_marks": 2 },
+        { "name": "Code quality", "max_marks": 2 }
+      ]
+    },
+    {
+      "name": "Question 3",
+      "max_marks": 8,
+      "subcriteria": [
+        { "name": "Implementation", "max_marks": 5 },
+        { "name": "Efficiency", "max_marks": 3 }
+      ]
+    }
+  ]
+} 
