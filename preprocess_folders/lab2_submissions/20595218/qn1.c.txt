@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int N;  
+    int *array;  
+    int index1, index2;  
+
+    do {
+        printf("Enter the size of the array (N >= 5): ");
+        scanf("%d", &N);
+        if (N < 5) {
+            printf("Error: Size must be at least 5.\n");
+        }
+    } while (N < 5);
+
+    array = (int *)malloc(N * sizeof(int));
+    if (array == NULL) {
+        printf("Error\n");
+        return 1;
+    }
+
+    printf("Enter %d elements of the array:\n", N);
+    for (int i = 0; i < N; i++) {
+        printf("Element %d: ", i);
+        scanf("%d", &array[i]);
+    }
+
+    do {
+        printf("Enter the first index (0 to %d): ", N - 1);
+        scanf("%d", &index1);
+        printf("Enter the second index (0 to %d): ", N - 1);
+        scanf("%d", &index2);
+
+        if (index1 < 0 || index1 >= N) {
+            printf("Error: First index is out of range. Please try again.\n");
+            continue;
+        }
+        if (index2 < 0 || index2 >= N) {
+            printf("Error: Second index is out of range. Please try again.\n");
+            continue;
+        }
+
+        break;
+    } while (1);
+
+    int sum = array[index1] + array[index2];
+    printf("The sum of elements at indices %d and %d is: %d\n", index1, index2, sum);
+
+    
+    free(array);
+
+    return 0;
+}

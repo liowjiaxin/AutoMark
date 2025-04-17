@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int N;  // Array size, entered by the user
+    int *array;  // Pointer to dynamically allocated array
+    int pointer1, pointer2;  // Indices entered by the user
+    int sum;  // The sum of the two selected array elements
+
+    printf("Enter the size of the array (at least 5): ");
+    scanf("%d", &N);
+    if (N < 5) {
+        printf("Array size must be at least 5. Exiting program.\n");
+        return 1;   // Exit if the array size is invalid
+    }
+
+    // Dynamically allocate memory for the array
+    array = (int*)malloc(N * sizeof(int));
+    if (array == NULL) {
+        printf("Memory allocation failed! Exiting program.\n");
+        return 1;  // Exit if memory allocation fails
+    }
+
+    printf("Enter the elements of the array:\n");
+    for (int i = 0; i < N; i++) {
+        printf("Element %d: ", i + 1);
+        scanf("%d", &array[i]);  // Store each element in the array
+    }
+
+    printf("Enter two indices between 0 and %d:\n", N - 1);
+    scanf("%d %d", &pointer1, &pointer2);
+    
+    if (pointer1 < 0 || pointer1 >= N || pointer2 < 0 || pointer2 >= N) {
+        printf("Invalid

@@ -1,0 +1,18 @@
+1. Sequential Logic and Iteration Logic (Repetitive Flow)
+   Input row and column first.
+   Print '*' in horizontal line which less than row, then print the vertical line by  repeat the horizontal line until it reach the limit which less the column.
+
+
+2. Sequential Logic and Selection Logic (Multiple Alternatives)
+   Input three integer.
+   Check the condition.
+   only one way can be execute. 
+   Choose the only way to execute the program. 
+   Display the result
+
+3. Iteration Logic and Selection Logic Multiple Alternatives
+   Input choice from user.
+   Then, choose only one way to rum the program if condition is meet.
+   Between the chosen way, execute the calculation.
+   Break from the loop.
+   Print the result.

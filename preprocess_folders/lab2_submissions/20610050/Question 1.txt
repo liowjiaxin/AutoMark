@@ -1,0 +1,41 @@
+Question 1
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int N, index1, index2;
+    int *array;
+//  inform the user to enter the size of the array and validate it
+    do {
+        printf("Enter the size of the array (N >= 5): ");
+        scanf("%d", &N);
+        if (N < 5) {
+            printf("Size must be at least 5. Please try again.\n"); }
+    } while (N < 5);
+    array = (int *)malloc(N * sizeof(int));
+    if (array == NULL) {
+        printf("Memory allocation failed.\n");
+        return 1;}
+    printf("Enter %d elements of the array:\n", N);
+    for (int i = 0; i < N; i++) {
+        printf("Element [%d]: ", i);
+        scanf("%d", (array + i));
+    }
+    while (1) {
+        printf("Enter two indices (0 <= index1, index2 < %d):\n", N);
+        printf("Index 1: ");
+        scanf("%d", &index1);
+        printf("Index 2: ");
+        scanf("%d", &index2);
+
+        if (index1 >= 0 && index1 < N && index2 >= 0 && index2 < N) {
+            break; // Valid indices, exit loop
+        } else {
+            printf("Invalid indices. Please try again.\n"); }
+    }
+    int sum = *(array + index1) + *(array + index2);
+    printf("The sum of elements at indices %d and %d is: %d\n", index1, index2, sum);
+    free(array);
+ return 0;
+}

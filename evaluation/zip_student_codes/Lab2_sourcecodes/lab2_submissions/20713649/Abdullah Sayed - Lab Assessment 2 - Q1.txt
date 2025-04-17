@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <stdbool.h>
+
+int array_size;
+int index1;
+int index2;
+
+int main()
+{
+    do {
+        printf("Please enter size of the array N (N>=5): ");
+        scanf("%d", &array_size);
+     
+        if (((array_size >= 5) == false)) {
+            printf("\nInvalid array size. Please try again.\n");
+        }
+    } while ((array_size >= 5) == false);
+    
+    int* ptr;
+    
+    ptr = (int*)malloc(array_size * sizeof(int));
+    
+    int Numbers[array_size];    
+    
+    for (int count=0; count<array_size; count++){
+        
+        printf("\nPlease enter value of Element %d: ", count);
+        scanf("%d", &Numbers[count]);
+    }
+    
+
+    
+    do{
+        printf("Please enter the indices of the 2 elements (0 <= index1, index2 < %d): ", array_size);
+        scanf("%d %d", &index1, &index2);
+        
+        if (index1>array_size || 0>index1 || index2>array_size || 0>index2) {
+            printf("\nError: Indices must be within range of array elements. Please try again.\n");
+        }
+    } while (index1>=array_size || 0>index1 || index2>=array_size || 0>index2);
+    
+    int sum;
+    sum = Numbers[index1] + Numbers[index2];
+    
+    printf("\nThe sum of the two values at indices %d and %d is: %d", index1, index2, sum);
+    
+    return 0;
+}

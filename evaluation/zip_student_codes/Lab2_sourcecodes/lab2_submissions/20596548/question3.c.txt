@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+#define MIN_BIDS 2
+#define MIN_BID_AMOUNT 100000
+
+float findHighestBid(float bids[], int count);
+void getValidBids(float bids[], int count);
+
+int main(void) {
+    int N;
+    printf("Enter the number of bids: ");
+    scanf("%d", &N);
+
+    while (N < MIN_BIDS) {
+        printf("Error: Number of bids must be at least %d. Please try again: ", MIN_BIDS);
+        scanf("%d", &N);
+    }
+
+    float bids[N];
+    getValidBids(bids, N);
+
+    float highest_bid = findHighestBid(bids, N);
+    printf("The highest bid is: $%.2f\n", highest_bid);
+    return 0;
+}
+
+void getValidBids(float bids[], int count) {
+    for (int i = 0; i < count; i++) {
+        printf("Enter bid %d (must be at least $%d): ", i + 1, MIN_BID_AMOUNT);
+        scanf("%f", &bids[i]);
+
+        while (bids[i] < MIN_BID_AMOUNT) {
+            printf("Error: Bid must be at least $%d. Please try again: ", MIN_BID_AMOUNT);
+            scanf("%f", &bids[i]);
+        }
+    }
+}
+
+float findHighestBid(float bids[], int count) {
+    float highest_bid = bids[0];
+    for (int i = 1; i < count; i++) {
+        if (bids[i] > highest_bid) {
+            highest_bid = bids[i];
+        }
+    }
+    return highest_bid;
+}

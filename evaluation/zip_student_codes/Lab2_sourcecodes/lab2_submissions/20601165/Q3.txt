@@ -1,0 +1,45 @@
+#include <stdio.h>
+// void function to get values of bids
+void getBids(int bids[], int N) {
+    for (int i = 0; i < N; i++) {
+        do {   // do while loop to make sure value >= 100000
+            printf("Bid %d: ", i + 1);
+            scanf("%d", &bids[i]);
+            if (bids[i] < 100000) {
+                printf("Error: Bid must be at least $100000. Please try again.\n");
+            }
+        } while (bids[i] < 100000);
+    }
+}
+
+int main() {
+    // Declare number of bids as N
+    int N;
+
+    // Prompt number of bids with do while loop to make sure N >= 2
+    do {
+        printf("Enter the number of bids: ");
+        scanf("%d", &N);
+        if (N < 2) {   // Print error
+            printf("Error: Number of bids must be at least 2. Please try again.\n");
+        }
+    } while (N < 2);
+
+    // void function getBids() to get the value of the bids
+    int bids[N];
+    printf("Enter the bids (must be at least $100000):\n");
+    getBids(bids, N);
+
+    // Find the highest bid
+    int highestBid = bids[0]; // Assume the first bid is the highest
+    for (int i = 1; i < N; i++) {
+        if (bids[i] > highestBid) {
+            highestBid = bids[i]; // Update the highest bid if a larger value is found
+        }
+    }
+
+    // Step 4: Display the highest bid
+    printf("The highest bid is: $%d\n", highestBid);
+
+    return 0;
+}

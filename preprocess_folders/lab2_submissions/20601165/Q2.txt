@@ -1,0 +1,42 @@
+#include <stdio.h>
+#define NAME_LENGTH 50   // Max length of 1 name
+#define STUDENT_COUNT 3   // Student count
+
+// Float function to count average marks
+float calculateAverage(const float marks[], int count) {
+    float sum = 0.0;
+    for (int i = 0; i < count; i++) {
+        sum += marks[i];   // Add each mark to the total sum
+    }
+    return sum / count;   // Return the average
+}
+
+// Function to display student data and the average mark
+void displayStudentData(char names[][NAME_LENGTH], const float marks[], int count, float average) {
+    printf("\nStudent Names and Marks:\n");
+    for (int i = 0; i < count; i++) {
+        printf("%s: %.2f\n", names[i], marks[i]);   // Print name and mark of each student
+    }
+    printf("\nAverage Mark: %.2f\n", average);   // Print the average mark
+}
+
+int main() {
+    char names[STUDENT_COUNT][NAME_LENGTH];   // Array to store student names
+    float marks[STUDENT_COUNT];   // Array to store student marks
+
+    // Loop to get input for each student
+    for (int i = 0; i < STUDENT_COUNT; i++) {
+        printf("Enter the name of student %d: ", i + 1);
+        scanf(" %[^\n]", names[i]);   // Read the student's name
+        printf("Enter the mark of student %d: ", i + 1);
+        scanf("%f", &marks[i]);   // Read the student's mark
+    }
+
+    // Call float function
+    float average = calculateAverage(marks, STUDENT_COUNT);
+
+    // Call void function
+    displayStudentData(names, marks, STUDENT_COUNT, average);
+
+    return 0;
+}

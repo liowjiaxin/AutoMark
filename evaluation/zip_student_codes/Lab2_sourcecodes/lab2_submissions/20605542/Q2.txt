@@ -1,0 +1,48 @@
+#include <stdio.h>
+
+#define NUM_STUDENTS 3
+#define NAME_LENGTH 50
+
+//function protptypes
+float calculateAverage(const float marks[], int count);
+void displayStudentData(const char names[][NAME_LENGTH], const float marks[], int count);
+
+int main()
+{
+	char names[NUM_STUDENTS][NAME_LENGTH];
+	float marks[NUM_STUDENTS];
+
+	//prompt the user to enter student names and marks
+	for(int i = 0; i < NUM_STUDENTS; i++) {
+		printf("Enter the name of student %d: ", i + 1);
+		scanf(" %[^\n]", names[i]); // Read full name including spaces
+		printf("Enter the mark of student %d: ", i + 1);
+		scanf("%f", &marks[i]);
+	}
+	//caluculate the average marks
+	float average = calculateAverage(marks, NUM_STUDENTS);
+
+	// Display student names, marks, and the average mark
+	displayStudentData(names, marks, NUM_STUDENTS);
+	printf("The average mark is: %.2f\n", average);
+
+	return 0;
+}
+
+//functioon to caluculate the average mark
+float calculateAverage(const float marks[], int count) {
+	float sum = 0.0;
+	for ( int i=0; i < count; i ++) {
+		sum += marks[i];
+	}
+	float average = sum/count;
+	return average;
+}
+
+//function to display student names, marks, and the average mark
+void displayStudentData(const char names[][NAME_LENGTH], const float marks[], int count) {
+	printf("\nStudent Names and Maeks: \n");
+	for (int i=0; i<count; i ++) {
+		printf("%s: %.2f\n",names[i], marks[i]);
+	}
+}

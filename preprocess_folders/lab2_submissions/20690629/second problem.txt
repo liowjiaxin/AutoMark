@@ -1,0 +1,39 @@
+#include <stdio.h>
+
+#define STUDENT_COUNT 3
+
+int main() {
+    char names[STUDENT_COUNT][50]; // Array to store student names
+    int marks[STUDENT_COUNT];       // Array to store student marks
+    int sum = 0;                    // Variable to accumulate the sum of marks
+    float average;                  // Variable to store the average of marks
+
+    // Loop through the students to collect their names and marks
+    for (int i = 0; i < STUDENT_COUNT; i++) {
+        // Input student's name
+        printf("Enter the name of student %d: ", i + 1);
+        scanf(" %[^\n]", names[i]);
+
+        printf("Enter the marks for student %d (0 - 100): ", i + 1);
+        scanf("%d", &marks[i]);
+
+        // Validate marks (must be between 0 and 100)
+        if (marks[i] < 0 || marks[i] > 100) {
+            printf("Invalid marks! Please enter marks between 0 and 100.\n");
+            i--; // Prompt the current student to re-enter their marks if invalid
+        } else {
+            sum += marks[i]; // Add valid marks to the total sum
+        }
+    }
+
+    average = (float)sum / STUDENT_COUNT;
+
+    printf("\nStudent information and marks:\n");
+    for (int i = 0; i < STUDENT_COUNT; i++) {
+        printf("Name: %s, Marks: %d\n", names[i], marks[i]);
+    }
+
+    printf("\nAverage marks: %.2f\n", average);
+
+    return 0;
+}

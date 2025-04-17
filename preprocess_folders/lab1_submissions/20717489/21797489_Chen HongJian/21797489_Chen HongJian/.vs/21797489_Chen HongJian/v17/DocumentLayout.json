@@ -1,0 +1,69 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\17390\\Desktop\\21797489_Chen HongJian\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{034DFC63-3D4E-45BD-A57C-5714169DE9F1}|21797489_Chen HongJian\\21797489_Chen HongJian.vcxproj|C:\\Users\\17390\\Desktop\\21797489_Chen HongJian\\21797489_Chen HongJian\\q2.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{034DFC63-3D4E-45BD-A57C-5714169DE9F1}|21797489_Chen HongJian\\21797489_Chen HongJian.vcxproj|solutionrelative:21797489_Chen HongJian\\q2.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{034DFC63-3D4E-45BD-A57C-5714169DE9F1}|21797489_Chen HongJian\\21797489_Chen HongJian.vcxproj|C:\\Users\\17390\\Desktop\\21797489_Chen HongJian\\21797489_Chen HongJian\\q1.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{034DFC63-3D4E-45BD-A57C-5714169DE9F1}|21797489_Chen HongJian\\21797489_Chen HongJian.vcxproj|solutionrelative:21797489_Chen HongJian\\q1.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{034DFC63-3D4E-45BD-A57C-5714169DE9F1}|21797489_Chen HongJian\\21797489_Chen HongJian.vcxproj|C:\\Users\\17390\\Desktop\\21797489_Chen HongJian\\21797489_Chen HongJian\\q3.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{034DFC63-3D4E-45BD-A57C-5714169DE9F1}|21797489_Chen HongJian\\21797489_Chen HongJian.vcxproj|solutionrelative:21797489_Chen HongJian\\q3.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "q3.c",
+              "DocumentMoniker": "C:\\Users\\17390\\Desktop\\21797489_Chen HongJian\\21797489_Chen HongJian\\q3.c",
+              "RelativeDocumentMoniker": "21797489_Chen HongJian\\q3.c",
+              "ToolTip": "C:\\Users\\17390\\Desktop\\21797489_Chen HongJian\\21797489_Chen HongJian\\q3.c",
+              "RelativeToolTip": "21797489_Chen HongJian\\q3.c",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2024-10-29T03:07:12.856Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "q2.c",
+              "DocumentMoniker": "C:\\Users\\17390\\Desktop\\21797489_Chen HongJian\\21797489_Chen HongJian\\q2.c",
+              "RelativeDocumentMoniker": "21797489_Chen HongJian\\q2.c",
+              "ToolTip": "C:\\Users\\17390\\Desktop\\21797489_Chen HongJian\\21797489_Chen HongJian\\q2.c",
+              "RelativeToolTip": "21797489_Chen HongJian\\q2.c",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2024-10-29T03:07:03.771Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "q1.c",
+              "DocumentMoniker": "C:\\Users\\17390\\Desktop\\21797489_Chen HongJian\\21797489_Chen HongJian\\q1.c",
+              "RelativeDocumentMoniker": "21797489_Chen HongJian\\q1.c",
+              "ToolTip": "C:\\Users\\17390\\Desktop\\21797489_Chen HongJian\\21797489_Chen HongJian\\q1.c",
+              "RelativeToolTip": "21797489_Chen HongJian\\q1.c",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2024-10-29T03:06:15.94Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+#include <stdio.h>
+
+#define MAX_BIDS 100 
+
+int main() {
+    int N; 
+    int i; 
+    int bids[MAX_BIDS]; 
+    int highestBid = 0; 
+    int currentBid;
+
+    //ask user to enter number of bids and validate if n is greater than or equal to 2
+    do {
+        printf("Enter the number of bids (N >= 2): ");
+        scanf("%d", &N);
+        if (N < 2) {
+            printf("There must be at least 2 bids to determine the highest bid.\n");
+        }
+    } while (N < 2);
+
+    //ask user to enter each bid and validate that it is at least $100,000
+    for (i = 0; i < N; i++) {
+        do {
+            printf("Enter bid %d (must be at least $100,000): ", i + 1);
+            scanf("%d", &bids[i]);
+
+            if (bids[i] < 100000) {
+                printf("Bid must be at least $100,000. Please enter a valid bid.\n");
+            }
+        } while (bids[i] < 100000); //make sure bid is at least $100,000
+    }
+
+    //determine the highest bid
+    highestBid = bids[0]; //start with the first bid as the highest
+    for (i = 1; i < N; i++) {
+        if (bids[i] > highestBid) {
+            highestBid = bids[i];
+        }
+    }
+
+    printf("The highest bid is: $%d\n", highestBid);
+
+    return 0;
+}

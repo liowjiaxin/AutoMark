@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define num_students 3
+#define name_length 50
+
+float calculate_average(const float marks[],int count);
+void displayStudentData(const char names[][name_length], const float marks[]);
+    
+int main()
+{
+    char names[num_students][name_length];
+    float marks[num_students];
+    
+    for(int i = 0;i<num_students;i++){
+        printf("Enter the name of student %d: ",i+1);
+        scanf(" %[^\n]",names[i]);
+        printf("Enter the mark of student %d: ",i+1);
+        scanf("%f",&marks[i]);
+    }
+    
+    float average = calculate_average(marks,3);
+    displayStudentData(names,marks);
+    
+    printf("\nAverage mark: %.2f",average);
+}
+
+float calculate_average(const float marks[],int count){
+    float sum = 0;
+    for(int k = 0;k<num_students;k++){
+        sum+=marks[k];
+    }
+    float average =  sum/num_students;
+    return average;
+}
+
+void displayStudentData(const char names[][name_length], const float marks[]){
+    printf("\nStudent Names and Marks:\n");
+    
+    for(int j = 0;j<3;j++){
+        printf(" %s: %.2f\n",names[j],marks[j]);
+    }
+}

@@ -1,0 +1,64 @@
+#include <stdio.h>
+
+int main() {
+    int productcode;
+    float totalcost = 0;
+    float discount;
+    float finalcost;
+    while (1) {
+        printf("Enter the product code (1 for fruits, 2 for vegetables, 3 for dairy products, 4 for canned goods, 0 to exit): ");
+        scanf("%d", &productcode);
+        if (productcode == 0) {
+            printf("Thank you for using the program\n");
+            break;
+        }
+        switch (productcode) {
+            case 1: {
+                float weight, price_per_kg;
+                printf("Enter the weight of fruits in kg: ");
+                scanf("%f", &weight);
+                printf("Enter price per kg: ");
+                scanf("%f", &price_per_kg);
+                totalcost += weight * price_per_kg;
+                break;
+            }
+            case 2: {
+                float weight, price_per_kg;
+                printf("Enter the weight of vegetables in kg: ");
+                scanf("%f", &weight);
+                printf("Enter price per kg: ");
+                scanf("%f", &price_per_kg);
+                totalcost += weight * price_per_kg;
+                break;
+            }
+            case 3: {
+                float number_of_items, price_per_item;
+                printf("Enter the number of items: ");
+                scanf("%f", &number_of_items);
+                printf("Enter price per item: ");
+                scanf("%f", &price_per_item);
+                totalcost += number_of_items * price_per_item;
+                break;
+            }
+            case 4: {
+                float number_of_items, price_per_item;
+                printf("Enter the number of items: ");
+                scanf("%f", &number_of_items);
+                printf("Enter price per item: ");
+                scanf("%f", &price_per_item);
+                totalcost += number_of_items * price_per_item;
+                break;
+            }
+            default:
+                printf("Invalid product type, please enter a valid type\n");
+                break;
+        }
+    }
+
+    printf("Enter discount percentage (or zero if no discount): ");
+    scanf("%f", &discount);
+    finalcost = totalcost * (1 - discount / 100);
+    printf("The total cost is: %.2f\n", totalcost);
+    printf("The final cost after applying discount is: %.2f\n", finalcost);
+    return 0;
+}

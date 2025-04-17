@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void)
+{
+    int N;
+    printf("enter the size of the array (N>=5): ");
+    scanf("%d", &N);
+    
+    while (N < 5) {
+        printf("error, N must be at least 5: ");
+        scanf("%d", &N);
+    }
+
+    int *array = (int *)malloc(N * sizeof(int));
+    if (array == NULL) {
+        printf("Memory allocation failed.\n");
+        return 1;
+    }
+
+    printf("enter the array elements:\n");
+    for (int i = 0; i < N; i++) {
+        printf("element %d: ", i);
+        scanf("%d", &array[i]);
+    }
+
+    int index1, index2;
+
+    printf("enter the indices of the two elements (0 to %d): ", N - 1);
+    scanf("%d %d", &index1, &index2);
+
+    while (index1 < 0 || index1 >= N || index2 < 0 || index2 >= N) {
+        printf("Error: Invalid indices. Enter again (0 to %d): ", N - 1);
+        scanf("%d %d", &index1, &index2);
+    }
+
+    int sum = array[index1] + array[index2];
+    printf("The sum of the values at indices %d and %d is: %d\n", index1, index2, sum);
+
+    free(array);
+    
+    return 0;
+}

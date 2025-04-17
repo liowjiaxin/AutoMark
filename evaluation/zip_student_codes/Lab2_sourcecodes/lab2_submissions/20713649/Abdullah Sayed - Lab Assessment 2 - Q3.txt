@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <stdbool.h>
+
+int bidsNum;
+
+int main()
+{
+    do{
+        printf("Please enter number of bids: ");
+        scanf("%d", &bidsNum);
+        
+        if((bidsNum >= 2) == false) {
+            printf("\nError: Number of bids must be at least 2. Please try again\n");
+        }
+    } while ((bidsNum >= 2) == false);
+    
+    int Bids[bidsNum];
+    
+    for (int count=1; count<=bidsNum; count++){
+        do {
+            printf("\nPlease enter value of bid %d: ", count);
+            scanf("%d", &Bids[count]);
+         
+            if ((Bids[count] >= 100000) == false) {
+                printf("\nError: Bid must be at least $100,000. Please try again\n");
+            }
+        } while ((Bids[count] >= 100000) == false);
+    }
+    
+    bool swapped;
+    int temp;
+    
+    for (int i = 0; i < bidsNum ; i++) {
+        swapped = false;
+        for (int j = 0; j < bidsNum ; j++) {
+            if (Bids[j] < Bids[j + 1]) {
+                temp = Bids[j];
+                Bids[j] = Bids[j + 1];
+                Bids[j + 1] = temp;
+                swapped = true;
+            }
+        }
+      
+        // If no two elements were swapped, then break
+        if (!swapped)
+            break;
+    }
+    
+    int highestBid = Bids[0];
+    printf("The highest bid is: %d", highestBid);
+    
+
+    return 0;
+}

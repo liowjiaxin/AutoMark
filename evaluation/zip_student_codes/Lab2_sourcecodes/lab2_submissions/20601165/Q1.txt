@@ -1,0 +1,42 @@
+#include <stdio.h>
+int main() {
+    // Declare variables
+    int N, x, y;
+
+    // Prompt to get array size then check if N is >= 5, do while loop to loop if N < 5
+    do {
+        printf("Enter the size of the array (N >= 5): ");
+        scanf("%d", &N);
+        if (N < 5) {
+            printf("Error: Size of the array must be at least 5. Please try again.\n");
+        }
+    } while (N < 5);
+
+
+    // Declare array with user inputted size
+    int array[N];
+
+    // Prompt the user to enter elements of the array
+    printf("Enter the array elements:\n");
+    for (int i = 0; i < N; i++) {
+        printf("Element %d: ", i);
+        scanf("%d", &array[i]);
+    }
+
+    // Prompt the user to enter the indices
+    do {
+        printf("Enter the indices of the two elements (0 <= x, y < %d): ", N);
+        scanf("%d %d", &x, &y);
+        if (x < 0 || x >= N || y < 0 || y >= N) {   // Checks if x and y are in range
+            printf("Error: Indices must be within the range of the array elements. Please try again.\n");
+        }
+    } while (x < 0 || x >= N || y < 0 || y >= N);   // While x and y are in range
+
+    // Find the sum
+    int sum = array[x] + array[y];
+
+    // Print the result
+    printf("The sum of the values at indices %d and %d is: %d\n", x, y, sum);
+
+    return 0;
+}

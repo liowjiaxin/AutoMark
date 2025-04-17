@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int N, index1, index2;
+
+    // Step 1: Input the size of the array and validate it
+    printf("Enter the size of the array (N >= 5): ");
+    scanf("%d", &N);
+    while (N < 5) {
+        printf("Error: Array size must be at least 5. Please try again.\n");
+        printf("Enter the size of the array (N >= 5): ");
+        scanf("%d", &N);
+    }
+
+    // Step 2: Dynamically allocate memory for the array
+    int *array = (int *)malloc(N * sizeof(int));
+    if (array == NULL) {
+        printf("Error: Memory allocation failed.\n");
+        return 1; // Exit the program if memory allocation fails
+    }
+
+    // Step 3: Input the elements of the array
+    printf("Enter the array elements:\n");
+    for (int i = 0; i < N; i++) {
+        printf("Element %d: ", i);
+        scanf("%d", &array[i]);
+    }
+
+    // Step 4: Input the indices and validate them
+    printf("Enter the indices of the two elements (0 <= index1, index2 < %d): ", N);
+    scanf("%d %d", &index1, &index2);
+    while (index1 < 0 || index1 >= N || index2 < 0 || index2 >= N) {
+        printf("Error: Indices must be within the range [0, %d). Please try again.\n", N);
+        printf("Enter the indices of the two elements (0 <= index1, index2 < %d): ", N);
+        scanf("%d %d", &index1, &index2);
+    }
+
+    // Step 5: Use pointers to calculate the sum of the two elements
+    int sum = *(array + index1) + *(array + index2);
+
+    // Step 6: Print the result
+    printf("The sum of the values at indices %d and %d is: %d\n", index1, index2, sum);
+
+    // Step 7: Free the allocated memory
+    free(array);
+
+    return 0;
+}

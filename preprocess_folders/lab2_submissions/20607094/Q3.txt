@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int N;
+
+    // enter the number of bids
+    do {
+        printf("Enter the number of bids: ");
+        scanf("%d", &N);
+        if (N < 2) {
+            printf("Error: Number of bids must be at least 2. Please try again: ");
+        }
+    } while (N < 2);
+
+    float *bids = (float *)malloc(N * sizeof(float));
+    if (!bids) {
+        printf("Memory allocation failed.\n");
+        return 1;
+    }
+
+    // enter the bids
+    printf("Enter the bids (must be at least $100000):\n");
+    for (int i = 0; i < N; i++) {
+        do {
+            printf("Bid %d: ", i + 1);
+            scanf("%f", &bids[i]);
+            if (bids[i] < 100000) {
+                printf("Error: Bid must be at least $100000. Please try again: ");
+            }
+        } while (bids[i] < 100000);
+    }
+
+    float highestBid = bids[0];
+    for (int i = 1; i < N; i++) {
+        if (bids[i] > highestBid) {
+            highestBid = bids[i];
+        }
+    }
+
+    printf("The highest bid is: $%.0f\n", highestBid);
+
+    free(bids);
+    return 0;
+}

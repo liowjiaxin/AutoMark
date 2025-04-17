@@ -1,0 +1,4 @@
+question 1 : we use a the first for loop to take in input for the number of rows that need to be inputed and the second nested for loop for the number of columns that need to be unputed and printed
+question 2 : we use multiple if else statments to see which number is the smallest and another if else statement to see which number is the largest 
+
+question 3 : we used a while loop to keep showing the menu to choose from then a nested if loop within to exit the while loop menu if the exit number is entered then we used a switch break loop 4 times for the 4 different menu entries possible for the 4 different items

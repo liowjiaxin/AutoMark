@@ -1,0 +1,52 @@
+//Q3
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int bid_num;
+    printf("Enter the number of bids: ");
+    scanf("%d",&bid_num);
+    
+    while(bid_num<2){
+        printf("Error: Number of the bids must be at least 2. Please try again: ");
+        scanf("%d",&bid_num);
+    }
+    
+    printf("Enter the bids (must be at least $100000): \n");
+    
+    int bids[bid_num];
+    int *ptr;
+    int i = 0;
+    
+    for(ptr=bids;i<bid_num;ptr++){
+        printf("Bid %d: ",i+1);
+        scanf("%d",ptr);
+        while(bids[i]<100000){
+            printf("\nError: Bid must be at least $100000. PLease try again: ");
+            scanf("%d",ptr);
+        }
+        i++;
+    }
+    
+    int biggest = 0;
+    int temp;
+    
+    for(int j=0;j<bid_num;j++){
+        if(bids[j]>bids[j+1]){
+            temp=bids[j];
+        } else {
+            temp=bids[j+1];
+        }    
+        
+        if(temp>biggest){
+            biggest=temp;
+        }   else {
+            temp=0;
+        }
+    }
+    
+    printf("The highest bid is: $%d",biggest);
+    
+    return 0;
+}

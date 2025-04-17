@@ -1,0 +1,5 @@
+Q1: iteration control structure. because the code in the program are being repeated until a specific end result is achieved using nested for loop.
+
+Q2: sequential control structure. because the program has line-by-line execution by which statements are executed sequentially, in the same order in which they appear in the program. 
+
+Q3: selection control structure. because the program requires us to be able to select between two or more alternate paths using switch statement.

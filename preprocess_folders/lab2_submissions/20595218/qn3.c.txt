@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Functions
+int getNumberOfBids();
+void inputBids(float bids[], int count);
+float findHighestBid(const float bids[], int count);
+
+int main() {
+    int N; 
+    float *bids; 
+    N = getNumberOfBids();
+
+    if (N < 2) {
+        printf("Error: At least two valid bids are required to determine the highest bid\n");
+        return 0;
+    }
+
+    bids = (float *)malloc(N * sizeof(float));
+    if (bids == NULL) {
+        printf("Error: Memory allocation failed!\n");
+        return 1;
+    }
+
+    // Input the bids
+    inputBids(bids, N);
+
+    float highestBid = findHighestBid(bids, N);
+
+    printf("The highest bid is: $%.2f\n", highestBid);
+
+    free(bids);
+
+    return 0;
+}
+
+int getNumberOfBids() {
+    int N;
+    do {
+        printf("Enter the number of bids (N ≥ 2): ");
+        scanf("%d", &N);
+        if (N < 2) {
+            printf("Error: You must enter at least 2 bids.\n");
+        }
+    } while (N < 2);
+    return N;
+}
+
+void inputBids(float bids[], int count) {
+    for (int i = 0; i < count; i++) {
+        do {
+            printf("Enter bid %d (minimum $100,000): ", i + 1);
+            scanf("%f", &bids[i]);
+            if (bids[i] < 100000.0) {
+                printf("Error: Bid must be at least $100,000.\n");
+            }
+        } while (bids[i] < 100000.0);
+    }
+}
+
+// highest bid
+float findHighestBid(const float bids[], int count) {
+    float highest = bids[0];
+    for (int i = 1; i < count; i++) {
+        if (bids[i] > highest) {
+            highest = bids[i];
+        }
+    }
+    return highest;
+}

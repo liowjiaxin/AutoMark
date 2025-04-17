@@ -1,0 +1,33 @@
+Question 2
+#include <stdio.h>
+int main() {
+int num1,num2,num3;
+int sum,product;
+float average;
+int smallest,largest;
+printf("please enter 3 integers seperated by spaces :");
+scanf("%d %d %d",&num1,&num2,&num3);
+sum = num1+num2+num3;
+average= sum/3;
+product= num1*num2*num3;
+printf("sum :%d\n",sum);
+printf("average :%.2f\n",average);
+printf("product : %d\n",product);
+
+if (num1<num2 && num1<num3){
+    printf("smallest is : %d\n",num1);
+} else if (num2 <num1 && num2<num3){
+    printf("smallest is : %d\n",num2);
+}else {
+    printf("smallest is :%d\n",num3);
+}
+if (num1<num2 && num1>num3){
+    printf("largest is :%d",num1);
+}else if ( num2>num1&&num2>num3){
+    printf("largest is :%d",num2);
+}else {
+    printf("largest is :%d",num3);
+}
+    
+    return 0;
+}

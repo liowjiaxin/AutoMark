@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\whnt\\Desktop\\\u65B0\u5EFA\u6587\u4EF6\u5939 (7)\\Q3\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0F3C3FBB-9AA6-4236-8F41-CB50D1E63A7B}|Q3\\Q3.vcxproj|C:\\Users\\whnt\\Desktop\\\u65B0\u5EFA\u6587\u4EF6\u5939 (7)\\Q3\\Q3\\Q3.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{0F3C3FBB-9AA6-4236-8F41-CB50D1E63A7B}|Q3\\Q3.vcxproj|solutionrelative:Q3\\Q3.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Q3.c",
+              "DocumentMoniker": "C:\\Users\\whnt\\Desktop\\\u65B0\u5EFA\u6587\u4EF6\u5939 (7)\\Q3\\Q3\\Q3.c",
+              "RelativeDocumentMoniker": "Q3\\Q3.c",
+              "ToolTip": "C:\\Users\\whnt\\Desktop\\\u65B0\u5EFA\u6587\u4EF6\u5939 (7)\\Q3\\Q3\\Q3.c",
+              "RelativeToolTip": "Q3\\Q3.c",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2024-11-26T04:46:34.942Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

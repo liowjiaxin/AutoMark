@@ -1,0 +1,5 @@
+The main program control structure adopted in Q1 is iteration control structure using for loop to loop to completion.
+
+The main program control structure adopted in Q2 is selection control structure by taking user input to make selection using if else statement.
+
+The main program control structure adopted in Q3 is selection control structure by taking user input to make selection using if and switch case.

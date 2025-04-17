@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int N;
+    printf("Enter the size of the array (N >= 5): ");
+    scanf("%d",&N);
+    
+    if(N<=4){
+        printf("Error: Please enter array aize >= 5.\n");
+        main();
+    } else {
+        printf("\n");
+    }
+    
+    int array[N];
+    int *ptr = array;
+    printf("Enter the array elements: ");
+    for(int i=0;i<N;i++){
+        printf("\nElement %d: ",i);
+        scanf("%d",ptr);
+        ptr++;
+    }
+    
+    int valid = 0;
+    N++;
+    int index1;
+    int index2;
+    int *in1 = &index1;
+    int *in2 = &index2;
+    
+    while (valid==0){
+        printf("Enter the indices of the two elements (o <= index1, index2 < %d): ",N);
+        scanf("%d",in1);
+        scanf("%d",in2);
+        if(index1>=0 && index2 < N){
+            valid=1;
+        } else {
+            printf("Error: Indices must be within the range of the array elements. PLease try again.");
+            valid=0;
+        }
+    }
+    
+    int sum;
+    sum = array[index1] + array[index2];
+    printf("The sum of the values at indices %d and %d is: %d",index1,index2,sum);
+    
+    return 0;
+}

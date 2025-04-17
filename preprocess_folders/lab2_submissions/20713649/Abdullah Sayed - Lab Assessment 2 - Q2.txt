@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <stdbool.h>
+
+#define NAME_MAX_LENGTH 50
+
+struct Students{
+    float mark;
+    char name[NAME_MAX_LENGTH];
+};
+
+int main()
+{
+    struct Students s1;
+    
+    printf("Please enter student name: ");
+    scanf("%s", s1.name);
+    printf("\nPlease enter student mark: ");
+    scanf("%f", &s1.mark);
+    
+    struct Students s2;
+    
+    printf("\nPlease enter student name: ");
+    scanf("%s", s2.name);
+    printf("\nPlease enter student mark: ");
+    scanf("%f", &s2.mark);
+    
+    struct Students s3;
+    
+    printf("\nPlease enter student name: ");
+    scanf("%s", s3.name);
+    printf("\nPlease enter student mark: ");
+    scanf("%f", &s3.mark);
+    
+    float sum;
+    sum = s1.mark + s2.mark + s3.mark;
+    float Average;
+    Average = sum/3;
+
+    printf("\nStudent names and marks: ");
+    printf("\n%s: %.2f", s1.name, s1.mark);
+    printf("\n%s: %.2f", s2.name, s2.mark);
+    printf("\n%s: %.2f\n", s3.name, s3.mark);
+    
+    printf("\nAverage mark: %.2f", Average);
+
+    return 0;
+}

@@ -1,0 +1,5 @@
+1) for question 1 i used 2 nested for loops to be able to print the rows and columns because if they wernt nested the columns would be only printed for 1 row
+
+2) for question 2 i used if and if else loops to fin the argest and smallest number in the 3 given intigers
+
+3) for question 3 i used a switch case to decide multiple cases from 1-4 insted of an if else loop

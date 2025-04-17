@@ -1,0 +1,17 @@
+Question 1
+ #include <stdio.h>
+int main() {
+int rows;
+int columns;
+printf("enter the number of rows : ");
+scanf("%d",&rows);
+printf("enter the number of columns : ");
+scanf("%d",&columns);
+for( int i=0;i<rows;i++){
+    for(int i=0;i<columns;i++){
+        printf("*");
+    } printf("\n");
+}
+
+    return 0;
+}

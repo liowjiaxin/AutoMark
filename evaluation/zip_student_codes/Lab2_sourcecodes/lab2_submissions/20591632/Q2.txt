@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <string.h> 
+#define SIZE 3
+#define NAME_LENGTH 50
+
+void displayStudentData(const char names[][NAME_LENGTH], const float marks[]);
+float calculateAverage(const float marks[], int count);
+
+int main(void) {
+    char student[SIZE][NAME_LENGTH]; 
+    float marks[SIZE]; 
+
+    for (int i = 0; i < SIZE; i++) {
+        printf("Enter the full name of student %d: ", i + 1);
+        fgets(student[i], sizeof(student[i]), stdin); // Read full name
+
+        // Remove newline character to avoid buffer overflow 
+        student[i][strcspn(student[i], "\n")] = '\0'; 
+
+        printf("Enter the mark of student %d: ", i + 1);
+        scanf("%f", &marks[i]);
+        while (getchar() != '\n'); // Avoid newline buffer overflow
+    }
+
+    displayStudentData(student, marks); 
+    float average = calculateAverage(marks, SIZE); // Calculate average
+    printf("\nAverage Marks: %.2f\n", average); // Display average
+
+    return 0;
+}
+
+void displayStudentData(const char names[][NAME_LENGTH], const float marks[]) {
+    printf("\nStudent Names and Marks:\n");
+    for (int i = 0; i < SIZE; i++) {
+        printf("%s: %.2f \n", names[i], marks[i]); 
+    }
+}
+
+float calculateAverage(const float marks[], int count) {
+    float sum_marks = 0.0; // Initialize sum
+    for (int i = 0; i < count; i++) {
+        sum_marks += marks[i]; // Calculate sum of marks
+    }
+    float average = sum_marks / count; // Calculate average
+    return average; // Return the average
+}
